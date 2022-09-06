@@ -1,2 +1,2 @@
 # StudySapphire
-ENGR 195 Senior Design Project
+CMPE 195 Senior Design Project
