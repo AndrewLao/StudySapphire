@@ -1,0 +1,19 @@
+
+.login {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    overscroll-behavior: contain;
+    position: re;
+}
+.login .leftSide {
+    z-index: 1;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left:15%;
+    -ms-transform: translate(25%, 50%);
+    transform: translate(-25%, -50%);
+}
+.login .rightSide {
+    z-index: 0;
+}

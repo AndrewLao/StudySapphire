@@ -1,0 +1,17 @@
+.loginHeader
+{
+    color: #0054BA;
+    font-weight: bold;
+    display:grid;
+    grid-template-rows: 8em 8em;
+    justify-items: center;
+    margin-top:2em;
+}
+.loginHeader img
+{
+    height:8em;
+}
+.loginHeader p {
+    margin:1%;
+    font-size: 40px;
+}

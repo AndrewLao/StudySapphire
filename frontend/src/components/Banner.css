@@ -1,0 +1,10 @@
+.banner {
+    background-color: #23466E;
+    width: 100%;
+    padding:1% 0;
+    color: white;
+}
+.banner img {
+    height:4rem;
+    margin-left:1%;
+}
