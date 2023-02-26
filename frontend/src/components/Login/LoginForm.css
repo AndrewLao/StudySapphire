@@ -1,0 +1,68 @@
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+}
+.typeIn {
+    height: 3em;
+    width: 35em;
+    border-radius: 0.3vw;
+    border: 2px solid #CCCCCC;
+}
+
+.submitLogin {
+    height: 3.5em;
+    width: 20em;
+    background-color: #0B59D6;
+    color: white;
+    font-weight: bold;
+    font-size: 1.3rem;
+    border-style: none;
+    
+}
+.submitLogin:hover {
+    transition: background-color .2s;
+    background-color: #08089b;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.7rem;
+}
+
+.forgotPassword {
+    background-color: #FFFFFF;
+    border-radius: 0%;
+    border-style: none;
+    color: #0054BA;
+    font-size: 1.3rem;
+}
+
+.forgotPassword:hover {
+    text-decoration: underline;
+}
+
+.register {
+    align-self: center;
+    margin-top: 2rem;
+    height: 3.5em;
+    width: 20em;
+    background-color: #7CC0D9;
+    color: white;
+    font-weight: bold;
+    font-size: 1.3rem;
+    border-style: none;
+}
+
+.register:hover {
+    transition: background-color .2s;
+    background-color: #5294ac;
+}
