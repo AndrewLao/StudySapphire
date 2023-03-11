@@ -1,6 +1,6 @@
 .loginHeader
 {
-    color: #0054BA;
+    color: #000000;
     font-weight: bold;
     display:grid;
     grid-template-rows: 8em 8em;
@@ -12,6 +12,7 @@
     height:8em;
 }
 .loginHeader p {
+    padding-top: 3rem;
     margin:1%;
-    font-size: 40px;
+    font-size: 2em;
 }

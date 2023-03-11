@@ -1,7 +1,12 @@
+html, body, #app, #app>div {
+  min-height: 100%;
+  height: 100%;
+}
+
 body {
   margin:0;
   background-color: #FAFCFF;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Nunito', sans-serif;
   /* remove overflow here later when routing is implemented */
   overflow: hidden;
 }

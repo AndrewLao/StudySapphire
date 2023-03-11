@@ -1,19 +1,27 @@
-
 .login {
-    display: grid;
-    grid-template-columns: 40% 60%;
-    overscroll-behavior: contain;
-    position: re;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 4rem;
 }
+
 .login .leftSide {
     z-index: 1;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left:15%;
-    -ms-transform: translate(25%, 50%);
-    transform: translate(-25%, -50%);
 }
+
 .login .rightSide {
+    z-index: 1;
+}
+
+.footer-wave {
     z-index: 0;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    bottom: 0%;
+}
+
+.wave {
+    width: 100%;
+    vertical-align: bottom;
 }

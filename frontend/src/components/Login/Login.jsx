@@ -8,15 +8,18 @@ export default function Login(props) {
     let bannerHeight = props.bannerHeight;
 
     return (<>
-        <div className="noscroll">
+        <div className="login-container">
             <div className="login">
                 <div className="leftSide">
                     <LoginHeader />
                     <LoginForm />
                 </div>
                 <div className="rightSide">
-                    <LoginInfo bannerHeight={bannerHeight}/>
+                    <LoginInfo/>
                 </div>
+            </div>
+            <div className="footer-wave">
+                <img className="wave" src="/src/components/Login/assets/wave.svg"></img>
             </div>
         </div>
     </>)

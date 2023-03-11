@@ -15,10 +15,8 @@ function App() {
     <>
       <div className="App">
         <div className="Banner" ref={banner}>
-          <Banner/>
         </div>
-        <Login bannerHeight={bannerHeight} />
-        <p>{console.log(bannerHeight)}</p>
+        <Login />
       </div>
     </>
   )
