@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
-import "./LoginForm.css"
+import "./RegisterForm.css"
 
-export default function LoginForm() {
+export default function RegisterForm() {
     const { register, handleSubmit } = useForm();
 
     const onSubmit = data => {
@@ -16,15 +16,11 @@ export default function LoginForm() {
         <>
             <form onSubmit={handleSubmit(onSubmit)} >
                 <input className="typeIn" placeholder="Email" {...register("email")} />
+                <input className="typeIn" placeholder="Username" {...register("username")} />
                 <input className="typeIn" placeholder="Password" type="password" {...register("password")} />
-                <input className = "submitLogin" type="submit" value="Login"/>
-            </form>
-            <div className="buttonContainer">
-                <button className="forgotPassword">Forgot Password?</button>
-                <button className="register">Register New Account</button>
-            </div>
-            
-            
+                <input className="typeIn" placeholder="Confirm Password" type="password" {...register("password")} />
+                <input className = "submitRegister" type="submit" value="Register"/>
+            </form> 
         </>
         
     );

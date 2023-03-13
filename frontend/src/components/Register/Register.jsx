@@ -1,17 +1,19 @@
 import { useContext } from "react";
-import LoginForm from "./LoginForm";
-import LoginHeader from "./LoginHeader";
-import LoginInfo from "./LoginInfo";
-import "./Login.css"
+import RegisterForm from "./RegisterForm";
+import RegisterHeader from "./RegisterHeader";
+import LoginInfo from "../Login/LoginInfo";
+import "../Login/Login.css"
 
-export default function Login(props) {
+// Uses the same CSS as Login except for RegisterHeader
+
+export default function Register(props) {
 
     return (<>
         <div className="login-container">
             <div className="login">
                 <div className="leftSide">
-                    <LoginHeader />
-                    <LoginForm />
+                    <RegisterHeader />
+                    <RegisterForm />
                 </div>
                 <div className="rightSide">
                     <LoginInfo/>

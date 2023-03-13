@@ -5,9 +5,9 @@ export default function LoginInfo(props) {
         
         <div className="loginInfo">
             <div className="imageContainer">
-                <img src="src/components/Login/assets/calendar.svg"></img>
-                <img src="src/components/Login/assets/library.svg"></img>
-                <img src="src/components/Login/assets/vector.svg"></img>
+                <img src="src/components/assets/calendar.svg"></img>
+                <img src="src/components/assets/library.svg"></img>
+                <img src="src/components/assets/vector.svg"></img>
             </div>
             <div className="textContainer">
                 <p>Manage your daily schedule</p>

@@ -1,22 +1,22 @@
-import { useState, useRef, useEffect} from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Banner from './components/Banner';
 import Login from './components/Login/Login';
+import Home from './components/Agenda/Home';
+import Register from './components/Register/Register';
 import './App.css';
 
 
 function App() {
-  const [bannerHeight, setBannerHeight] = useState(0)
-  const banner = useRef(null);
-
-  useEffect(() => {
-    setBannerHeight(banner.current.clientHeight)
-  }, [])
+  
   return (
     <>
       <div className="App">
-        <div className="Banner" ref={banner}>
-        </div>
-        <Login />
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={ <Register /> } />
+          <Route path="/home" element={<Home />} />
+        </Routes>
       </div>
     </>
   )
