@@ -1,10 +1,51 @@
 .banner {
+    display: flex;
+    position: fixed;
     background-color: #0054BA;
     width: 100%;
-    padding:1% 0;
     color: white;
+    justify-content: space-between;
+    top: 0;
+    overflow: hidden;
 }
-.banner img {
-    height:4rem;
-    margin-left:1%;
+
+.bannerLeftSide {
+    display: flex;
+    margin-left: 5%;
+    gap: 1rem;
+    align-items: center;
+}
+
+.bannerLeftSide img{
+    height: 2.5rem;
+}
+
+.bannerLeftSide button {
+    font-size: 2rem;
+    font-family: 'Fredoka', sans-serif;
+    background-color: #0054ba00;
+    color: #ffffff;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.bannerRightSide{
+    display: flex;
+    margin-right: 5%;
+    align-items: center;
+}
+
+.bannerRightSide img{
+    height: 2.5rem;
+}
+
+.bannerRightSide p {
+    font-size: 1.5rem;
+}
+
+.bannerMiddle {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }

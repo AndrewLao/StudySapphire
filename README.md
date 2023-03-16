@@ -12,3 +12,5 @@ Navigate to the sapphire folder in your terminal
 ### For development
 
 Use `npm install` or `npm i` first if the project was recently updated. This avoids errors with packages not existing.
+
+Check the imports within App.jsx for the main components used
