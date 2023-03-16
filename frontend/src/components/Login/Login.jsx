@@ -18,7 +18,7 @@ export default function Login(props) {
                 </div>
             </div>
             <div className="footer-wave">
-                <img className="wave" src="/src/components/assets/wave.svg"></img>
+                <img className="wave" src="/wave.svg"></img>
             </div>
         </div>
     </>)

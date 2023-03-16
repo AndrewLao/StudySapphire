@@ -1,8 +1,12 @@
+import "./Home.css";
+
 
 export default function Home() {
     return (
         <>
-            <p>Home Page</p>
+            <div className="homeContainer">
+                <p>Home Page</p>
+            </div>
         </>
     )
 };

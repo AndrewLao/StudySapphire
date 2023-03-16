@@ -1,8 +1,14 @@
+// packages
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+
+// styles
 import "./LoginForm.css"
 
 export default function LoginForm() {
     const { register, handleSubmit } = useForm();
+    
+    const navigate = useNavigate();
 
     const onSubmit = data => {
         console.log(data);
@@ -10,6 +16,10 @@ export default function LoginForm() {
     
     const onRegister = data => {
         console.log(data);
+    }
+
+    function registerOnClick() {
+        navigate("/register");
     }
 
     return (
@@ -21,7 +31,7 @@ export default function LoginForm() {
             </form>
             <div className="buttonContainer">
                 <button className="forgotPassword">Forgot Password?</button>
-                <button className="register">Register New Account</button>
+                <button onClick={ registerOnClick } className="register">Register New Account</button>
             </div>
             
             

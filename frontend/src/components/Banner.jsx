@@ -25,7 +25,7 @@ export default function Banner() {
                     
                 </div>
                 <div className="bannerRightSide">
-                    <img src="src/components/assets/coin.svg"></img>
+                    <img src="/coin.svg"></img>
                     <p>100 Coins</p>
                 </div>
             </div>
