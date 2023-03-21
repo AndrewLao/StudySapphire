@@ -1,0 +1,10 @@
+.fullCalendar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.calendarViewport {
+    display: flex;
+    border-style: solid;
+}

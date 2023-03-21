@@ -1,0 +1,11 @@
+.fullTaskview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.taskViewport {
+    display: flex;
+    scroll-behavior: smooth;
+    border-style: solid;
+}
