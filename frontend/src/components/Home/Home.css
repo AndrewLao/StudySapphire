@@ -1,5 +1,6 @@
 .homeContainer {
     display: flex;
     padding-top: 5rem;
+    justify-content: space-around;
 }
 

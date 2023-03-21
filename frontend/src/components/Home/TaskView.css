@@ -1,10 +1,11 @@
-.fullCalendar {
+.fullTaskview {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.calendarViewport {
+.taskViewport {
     display: flex;
+    scroll-behavior: smooth;
     border-style: solid;
 }
