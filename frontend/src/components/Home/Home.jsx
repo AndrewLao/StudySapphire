@@ -1,5 +1,6 @@
 import TaskView from "./TaskView";
 import Calendar from "./Calendar";
+import Sidebar from "../Sidebar"
 
 import "./Home.css";
 
@@ -10,6 +11,7 @@ export default function Home() {
             <div className="homeContainer">
                 <Calendar />
                 <TaskView />
+                <Sidebar />
             </div>
         </>
     )
