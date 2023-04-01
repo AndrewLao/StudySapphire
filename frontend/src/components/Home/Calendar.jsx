@@ -1,16 +1,25 @@
 import "./Calendar.css";
 import CalendarHeader from "./CalendarHeader";
 
-export default function Calendar() {
+import { useState } from "react";
+
+function getMonthName(month)
+{
+    return (["January","February","March","April","May","June","July","August","September","October","November","December"])[month];
+}
+
+function Calendar() {
+    const date = new Date()
+    const [shownDate, setShownDate] = useState(new Date());
+
     return (
-        <>
             <div className="fullCalendar">
-                <CalendarHeader />
+            <CalendarHeader date={ date } shownDate = {shownDate} setShownDate={ setShownDate } />
                 <div className="calendarViewport">
-                    <h1>Calendar Here</h1>
+                    <p>Today is {shownDate.toString()} </p>
                 </div>
             </div>
-            
-        </>
     );
 }
+
+export default Calendar

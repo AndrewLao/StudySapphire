@@ -1,5 +1,7 @@
 .homeContainer {
-    display: flex;
+    display: grid;
+    width:100%;
+    grid-template-columns: 50% 30% 20%;
     padding-top: 5rem;
     justify-content: space-between;
 }
