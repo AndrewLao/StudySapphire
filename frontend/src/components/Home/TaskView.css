@@ -7,6 +7,7 @@
 .taskViewport {
     display: flex;
     overflow: scroll;
+    overflow-x: hidden;
     scroll-behavior: smooth;
     border-style: solid;
     height: 70vh;
