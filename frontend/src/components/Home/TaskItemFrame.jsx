@@ -17,9 +17,9 @@ export default function TaskItemFrame(props) {
                     { title }
                 </div>
                 <div className="taskItemWrapper">
-                    {itemList.map((item, key) => {
+                    {/* {itemList.map((item, key) => {
                         
-                    }) }
+                    }) } */}
                 </div>
             </div>
         </>
