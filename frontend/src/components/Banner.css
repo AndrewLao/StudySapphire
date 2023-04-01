@@ -13,12 +13,16 @@
 .bannerLeftSide {
     display: flex;
     margin-left: 5%;
-    gap: 1rem;
+    gap: 0rem;
     align-items: center;
 }
 
 .bannerLeftSide img{
     height: 2.5rem;
+}
+
+.bannerLeftSide button{
+    padding:0;
 }
 
 .bannerLeftSide button {
