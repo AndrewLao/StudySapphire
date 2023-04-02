@@ -22,16 +22,20 @@ export default function LoginForm() {
         navigate("/register");
     }
 
+    const loginOnClick = () => {
+        navigate("/home");
+    }
+
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)} >
                 <input className="typeIn" placeholder="Email" {...register("email")} />
                 <input className="typeIn" placeholder="Password" type="password" {...register("password")} />
-                <input className = "submitLogin" type="submit" value="Login"/>
+                <input className = "submitLogin" type="submit" value="Login" onClick={ loginOnClick }/>
             </form>
             <div className="buttonContainer">
                 <button className="forgotPassword">Forgot Password?</button>
-                <button onClick={ registerOnClick } className="register">Register New Account</button>
+                <button onClick={ registerOnClick } className="registerButton">Register New Account</button>
             </div>
             
             

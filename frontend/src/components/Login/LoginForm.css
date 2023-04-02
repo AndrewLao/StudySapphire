@@ -52,7 +52,7 @@ form {
     cursor: pointer;
 }
 
-.register {
+.registerButton {
     align-self: center;
     margin-top: 2rem;
     height: 3.5em;
@@ -63,7 +63,7 @@ form {
     border-style: none;
 }
 
-.register:hover {
+.registerButton:hover {
     transition: background-color .2s;
     background-color: #5294ac;
     cursor: pointer;
