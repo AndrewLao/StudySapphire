@@ -18,11 +18,7 @@ export default function Banner() {
                 </div>
                 {/* paragraph tags temporary until navigation links are sorted in design */}
                 <div className="bannerMiddle">
-                    <p>adfd</p>
-                    <p>adfd</p>
-                    <p>adfd</p>
-                    <p>adfd</p>
-                    
+                    {/* Add Middle Items Here if needed */}
                 </div>
                 <div className="bannerRightSide">
                     <img src="/coin.svg"></img>

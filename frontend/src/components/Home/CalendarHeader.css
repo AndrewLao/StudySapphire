@@ -1,4 +1,27 @@
-.calendarDates {
-    display: flex;
-    
+.calendarHeader {
+    background-color: black;
+    display:grid;
+    color:white;
+    padding:1%;
+    align-items: center;
+    grid-template-columns: 10% 80% 10%;
+    width:100%;
+}
+.calendarHeader img {
+    height:50%;
+    margin:auto;
+    cursor: pointer;
+}
+
+.calendarHeader img:hover{
+    border-bottom: 0.2rem solid;
+}
+
+.calendarHeader p {
+    margin:auto;
+    margin-top:2%;
+    margin-bottom:2%;
+    font-size:1.5rem;
+    font-family: 'Roboto', sans-serif;
+
 }

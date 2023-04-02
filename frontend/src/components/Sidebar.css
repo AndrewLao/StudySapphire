@@ -1,0 +1,43 @@
+.Sidebar {
+    display: block;
+    background-color: #1D1D1D;
+    width:100%;
+    height: 100vh;
+    
+}
+
+.Sidebar button {
+    text-align: left;
+    color: #f9fcff;
+    background-color: #0E1111;
+    width:100%;
+    display:flex;
+    gap:1em;
+    font-size: 1rem;
+    font-family: 'Fredoka', sans-serif;
+    cursor: pointer;
+    /* transition: background-color 0.2s ease-in-out; */
+    
+}
+
+.Sidebar .SignOut {
+    color:#C62525;
+    height:3.5em;
+}
+
+.Sidebar .SignOut p {
+    margin-left: 0.3em;
+}
+
+.Sidebar button img {
+    width:3em;
+}
+
+.Sidebar button:hover {
+    background-color: #1E2121; /*Dummy value, let jessabelle decide this i guess */
+}
+
+.Sidebar button:active {
+    background-color: #303030;
+}
+
