@@ -12,13 +12,14 @@
 
 .bannerLeftSide {
     display: flex;
-    margin-left: 5%;
+    margin-left: 2%;
     gap: 0rem;
     align-items: center;
 }
 
 .bannerLeftSide img{
-    height: 2.5rem;
+    height: 4rem;
+    margin-right:2%;
 }
 
 .bannerLeftSide button{
@@ -37,7 +38,7 @@
 
 .bannerRightSide{
     display: flex;
-    margin-right: 5%;
+    margin-right: 2%;
     align-items: center;
 }
 

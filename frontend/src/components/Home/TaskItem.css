@@ -1,0 +1,33 @@
+.taskCard {
+    display: grid;
+    grid-template-columns: 10% 60% 30%;
+    background-color: white;
+    border-radius: 0.75em;
+}
+
+.taskAccentColorDiv {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(-180deg);
+    color: white;
+    text-align: center;
+    border-radius: 0;
+}
+
+.taskMiddleDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    padding: 1em 0em 1em 1em;
+    justify-content: center;
+    overflow-wrap: break-word;
+}
+
+.taskEditButtonDiv {
+    padding: 1em;
+    margin-left: auto;
+    margin-right: 0;
+}
+

@@ -16,13 +16,12 @@ export default function Banner() {
                     <img src="/icon_crystal.svg" alt="Sapphire Icon"></img>
                     <button onClick={ logoOnClick }>sapphire</button>
                 </div>
-                {/* paragraph tags temporary until navigation links are sorted in design */}
                 <div className="bannerMiddle">
                     {/* Add Middle Items Here if needed */}
                 </div>
                 <div className="bannerRightSide">
                     <img src="/coin.svg"></img>
-                    <p>100 Coins</p>
+                    <p>100 Tokens</p>
                 </div>
             </div>
         </>

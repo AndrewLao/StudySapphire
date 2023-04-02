@@ -1,6 +1,6 @@
 import "./Calendar.css";
 import CalendarHeader from "./CalendarHeader";
-
+import Days from "./Days";
 import { useState } from "react";
 
 function getMonthName(month)
@@ -16,7 +16,10 @@ function Calendar() {
             <div className="fullCalendar">
             <CalendarHeader date={ date } shownDate = {shownDate} setShownDate={ setShownDate } />
                 <div className="calendarViewport">
-                    <p>Today is {shownDate.toString()} </p>
+                    <div></div>
+                    <Days />
+                    <div>12:00</div>
+                    <div>schedule</div>
                 </div>
             </div>
     );

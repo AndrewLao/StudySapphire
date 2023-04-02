@@ -1,12 +1,11 @@
 .fullCalendar {
-    min-width:20em;
+    width:100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
-
-
 .calendarViewport {
-    display: flex;
+    display: grid;
+    grid-template-columns: 8% 92%;
+    grid-template-rows: 8% 92%;
 }

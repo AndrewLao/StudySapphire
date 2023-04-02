@@ -1,16 +1,35 @@
 .fullTaskview {
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .taskViewport {
     display: flex;
+    flex-direction: column;
     overflow: scroll;
     overflow-x: hidden;
-    scroll-behavior: smooth;
     border-style: solid;
     height: 70vh;
     min-width: 90%;
     border: none;
+}
+
+/* scrollbar width */
+.taskViewport::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* track */
+.taskViewport::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+/* handle */
+.taskViewport::-webkit-scrollbar-thumb {
+    background: #737373;
+}
+
+/* Handle on hover */
+.taskViewport::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
