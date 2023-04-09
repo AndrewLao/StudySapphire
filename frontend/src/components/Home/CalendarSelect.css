@@ -3,30 +3,8 @@
     display:grid;
     grid-template-columns: repeat(7, 1fr);
     column-gap: 2px;
-    overflow: scroll;
-    overflow-x: hidden;
 }
 
 .CalendarGap {
     height:2px;
-}
-
-/* scrollbar width */
-.CalendarSelect::-webkit-scrollbar {
-    width: 10px;
-}
-
-/* track */
-.CalendarSelect::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
-}
-
-/* handle */
-.CalendarSelect::-webkit-scrollbar-thumb {
-    background: #737373;
-}
-
-/* Handle on hover */
-.CalendarSelect::-webkit-scrollbar-thumb:hover {
-    background: #555;
 }

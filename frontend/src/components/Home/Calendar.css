@@ -7,9 +7,11 @@
 .calendarViewport {
     display: grid;
     grid-template-columns: 8% 92%;
-    grid-template-rows: 6% 96%;
+    grid-template-rows: 10% 90%;
     width: 100%;
     margin-top: 1%;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 .timeSideRef {
@@ -19,3 +21,22 @@
     margin-right: 10%;
 }
 
+/* scrollbar width */
+.calendarViewport::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* track */
+.calendarViewport::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+/* handle */
+.calendarViewport::-webkit-scrollbar-thumb {
+    background: #737373;
+}
+
+/* Handle on hover */
+.calendarViewport::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
