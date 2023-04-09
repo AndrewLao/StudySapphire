@@ -1,0 +1,19 @@
+.CalendarTile {
+    width:100%;
+    height:1em;
+    font-size: 12px;
+    text-align: center;
+    user-select: none;
+}
+
+.CalendarTileUnselected {
+    background-color: lightblue;
+}
+
+.CalendarTileSelected {
+    background-color: lightcoral;
+}
+
+.CalendarTileHighlighted {
+    background-color: lightgreen;
+}
