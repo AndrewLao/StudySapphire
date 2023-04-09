@@ -31,7 +31,7 @@ export default function RegisterForm() {
                 <input className="typeIn" placeholder="Username" {...register("username")} />
                 <input className="typeIn" placeholder="Password" type="password" {...register("password")} />
                 <input className="typeIn" placeholder="Confirm Password" type="password" {...register("password")} />
-                <input className="submitRegister" type="submit" value="Register" />
+                <input className="submitRegister" type="submit" value="Register" onClick={registerOnClick}/>
                 <button className="accountExisting" onClick={accountExistOnClick}>Already Have an Account?</button>
             </form>
             
