@@ -10,8 +10,6 @@
     grid-template-rows: 6% 96%;
     width: 100%;
     margin-top: 1%;
-    overflow: scroll;
-    overflow-x: hidden;
 }
 
 .timeSideRef {
@@ -20,3 +18,4 @@
     text-align: right;
     margin-right: 10%;
 }
+

@@ -28,25 +28,3 @@
     font-family: 'Roboto', sans-serif;
 
 }
-
-
-
-/* scrollbar width */
-.calendarViewport::-webkit-scrollbar {
-    width: 10px;
-}
-
-/* track */
-.calendarViewport::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
-}
-
-/* handle */
-.calendarViewport::-webkit-scrollbar-thumb {
-    background: #737373;
-}
-
-/* Handle on hover */
-.calendarViewport::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
