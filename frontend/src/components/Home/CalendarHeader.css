@@ -2,12 +2,12 @@
     background-color: black;
     display:grid;
     color:white;
-    padding-top: 1em;
-    padding-bottom: 1em;
+    padding-top: 2%;
+    padding-bottom: 2%;
     align-items: center;
     grid-template-columns: 10% 80% 10%;
     width:calc(92% - 10px);
-    margin-left:calc(8%);
+    margin-left:8%;
 }
 .calendarHeader img {
     height:50%;
@@ -29,13 +29,7 @@
 
 }
 
-.calendarViewport {
-    height: 75%;
-    width: 100%;
-    margin-top: 1%;
-    overflow: scroll;
-    overflow-x: hidden;
-}
+
 
 /* scrollbar width */
 .calendarViewport::-webkit-scrollbar {

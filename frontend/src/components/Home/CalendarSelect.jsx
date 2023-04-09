@@ -99,6 +99,11 @@ function CalendarRow(props) {
         <div className = "CalendarRow">
             {
             day.map((d, index) => {
+                let gapClass = ""
+                if (index % 4 == 0 && index != 0)
+                {
+                    gapClass = "CalendarGap"
+                }
                 let selection;
                 if (d == 2)
                     selection = "Selected"
@@ -107,6 +112,8 @@ function CalendarRow(props) {
                 else
                     selection = "Unselected"
                 return (
+                    <>
+                    <div className={gapClass}></div>
                     <CalendarTile key = {index} title={"placeholder"} 
                     tileType= {selection} yPos = {index}
                     xPos = {props.xPos}
@@ -116,6 +123,7 @@ function CalendarRow(props) {
                     mouseX = {props.mouseX} setMouseX = {props.setMouseX}
                     setIsAdding = {props.setIsAdding}
                     confirmAlter = {props.confirmAlter} />
+                    </>
                     )
                 })
             }

@@ -48,7 +48,7 @@ export default function CalendarTile(props) {
                 props.confirmAlter()
             }}
             >
-            {title + " " + yPos}
+            
         </div>
     )
 }
