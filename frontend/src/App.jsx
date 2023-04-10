@@ -1,6 +1,7 @@
 // packages
 import { useState, useRef, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import axios from "axios";
 
 // components
 import Banner from './components/Banner';
@@ -12,7 +13,24 @@ import NotFound from './NotFound';
 // styles
 import './App.css';
 
+// temporary
+const api = axios.create({
+baseURL: `http://localhost:3001`
+})
+
 function App() {
+
+  // test api post
+  // api.post("/dummyWrite", {
+  //   test: "hello world",
+  //   body: "this is a sample body"
+  // }).then((res) => {
+  //   console.log(res);
+  // })
+
+  api.get("/dummyRead", { params: {fname: "test.json"} }).then(res => {
+    console.log(res);
+  })
 
   // function to add navBar to pages
   // Needed to make sure that the login and register pages does not have a navBar

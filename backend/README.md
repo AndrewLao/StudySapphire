@@ -10,4 +10,4 @@ Run either `node ./server.js` or `nodemon ./server.js`
 
 Use `ctrl + c` to terminate the server
 
-Nodemon is installed on this project to offer extra debug information
+Note that if you want to use nodemon, you must first install nodemon globally on your computer.
