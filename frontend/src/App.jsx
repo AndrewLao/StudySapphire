@@ -1,5 +1,5 @@
 // packages
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, createContext, useContext } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 
@@ -18,19 +18,27 @@ const api = axios.create({
 baseURL: `http://localhost:3001`
 })
 
+const [userData, setUserData] = useState({})
+
 function App() {
 
-  // test api post
-  // api.post("/dummyWrite", {
-  //   test: "hello world",
-  //   body: "this is a sample body"
-  // }).then((res) => {
-  //   console.log(res);
-  // })
 
-  api.get("/dummyRead", { params: {fname: "test.json"} }).then(res => {
-    console.log(res);
-  })
+  useEffect(() => {
+    api.post("/dummyWrite", userData
+    ).then((res) => {
+      console.log(res);
+    })
+  }, [userData])
+  
+  function getUserData() {
+    api.get("/dummyRead", { params: {fname: "test.json"} }).then(res => {
+      if (res.status == 500)
+        console.log("uh oh!! pull from db didnt work :((")
+      else
+        setUserData(res)
+    })
+  }
+  
 
   // function to add navBar to pages
   // Needed to make sure that the login and register pages does not have a navBar
@@ -43,8 +51,11 @@ function App() {
     )
   }
   
+
+
   return (
     <>
+
       <div className="App">
         <Routes>
           <Route path="/" element={<Login />} />
@@ -53,7 +64,6 @@ function App() {
           <Route path="/home" element={wrapNavbar(<Home />)} />
           <Route path="*" element={<NotFound />}></Route>
           <Route path="/*" element={ <NotFound /> }></Route>
-          
           
         </Routes>
       </div>
