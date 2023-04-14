@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect, createContext} from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
+import sampleData from "./SampleTasks.json";
 
 // components
 import Banner from './components/Banner';
@@ -18,20 +19,20 @@ const api = axios.create({
 baseURL: `http://localhost:3001`
 })
 
-const [userData, setUserData] = useState({})
 
-// context global states
-const UserContext = createContext();
 
 function App() {
+  const [userData, setUserData] = useState({})
 
+  // context global states
+  const UserContext = createContext();
 
-  useEffect(() => {
+  function postUserData() {
     api.post("/dummyWrite", userData
     ).then((res) => {
-      console.log(res);
+      // console.log(res);
     })
-  }, [userData])
+  }
   
   function getUserData() {
     api.get("/dummyRead", { params: {fname: "test.json"} }).then(res => {
@@ -41,6 +42,12 @@ function App() {
         setUserData(res)
     })
   }
+  useEffect(() => {
+    postUserData(sampleData)
+    console.log("USER DATA:")
+    getUserData()
+    console.log(userData)
+  }, [])
   
 
   // function to add navBar to pages

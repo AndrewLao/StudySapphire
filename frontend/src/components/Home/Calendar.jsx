@@ -9,11 +9,18 @@ function getMonthName(month)
     return (["January","February","March","April","May","June","July","August","September","October","November","December"])[month];
 }
 
-function Calendar() {
+function Calendar(props) {
     const date = new Date()
     const [shownDate, setShownDate] = useState(new Date());
     const [calendarSize, setCalendarSize] = useState('70%')
     const calendarRef = useRef();
+    const schedulingMode = props.schedulingMode
+    const setSchedulingMode = props.setSchedulingMode
+    const selectedTask = props.selectedTask
+
+    useEffect(() => {
+        console.log("Scheduled task is now task " + selectedTask)
+    }, [selectedTask])
 
     window.addEventListener('resize', () => {
         resizeAll();  
