@@ -1,5 +1,5 @@
 // packages
-import { useState, useRef, useEffect, createContext, useContext } from 'react';
+import { useState, useRef, useEffect, createContext} from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 
@@ -19,6 +19,9 @@ baseURL: `http://localhost:3001`
 })
 
 const [userData, setUserData] = useState({})
+
+// context global states
+const UserContext = createContext();
 
 function App() {
 
@@ -57,15 +60,17 @@ function App() {
     <>
 
       <div className="App">
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={ <Register /> } />
-          <Route path="/home" element={wrapNavbar(<Home />)} />
-          <Route path="*" element={<NotFound />}></Route>
-          <Route path="/*" element={ <NotFound /> }></Route>
-          
-        </Routes>
+        <UserContext.Provider value={userData}>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={ <Register /> } />
+            <Route path="/home" element={wrapNavbar(<Home />)} />
+            <Route path="*" element={<NotFound />}></Route>
+            <Route path="/*" element={ <NotFound /> }></Route>
+          </Routes> 
+        </UserContext.Provider>
+        
       </div>
     </>
   )
