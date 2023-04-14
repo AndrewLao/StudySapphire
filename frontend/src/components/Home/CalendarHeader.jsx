@@ -37,16 +37,23 @@ export default function CalendarHeader(props) {
     let date = props.date;
     let shownDate = props.shownDate;
     let setShownDate = props.setShownDate;
+    const setSchedulingMode = props.setSchedulingMode
+    let schedulingMode = props.schedulingMode
     
     useEffect(() => {
         setShownDate(getWeek(date, 0))
     }, []);
-    
+    function schedulingModeText() {
+        if (schedulingMode)
+            return "Save Schedule"
+        return "Edit Schedule"
+    }
     return (
         <>
             <div className="calendarHeader">
                 <img src="./public/calendar/leftArrow.svg" alt="Last Week" onClick={() => {setShownDate(getWeek(shownDate, - 1))}}></img>
                 { displayCalendarHeader(shownDate) }
+                <button onClick={() => {setSchedulingMode(!schedulingMode)}}>{schedulingModeText()}</button>
                 <img src="./public/calendar/rightArrow.svg" alt="Last Week" onClick={() => {setShownDate(getWeek(shownDate, 1))}}></img>
             </div>
         </>

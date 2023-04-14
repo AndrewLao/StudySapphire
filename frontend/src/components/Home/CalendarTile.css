@@ -5,6 +5,7 @@
     text-align: center;
     -webkit-user-select: none;
     user-select: none;
+    color:white
 }
 
 .CalendarTileUnselected {
@@ -12,7 +13,7 @@
 }
 
 .CalendarTileSelected {
-    background-color: lightgreen;
+    background-color: lightblue;
 }
 
 .CalendarTileHighlighted {

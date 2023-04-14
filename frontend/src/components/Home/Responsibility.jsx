@@ -7,14 +7,14 @@ import "./Responsibility.css"
 // Component for the frame containing task items
 // Uses TaskItem as a reusable component
 
-function showTasks(responsibility, tasks, setSelectedTask) {
+function showTasks(responsibility, tasks, setSelectedTask, selectedTask) {
     if (responsibility.TASKS.length == 0) {
         return noTasks()
     }
     return (
         responsibility.TASKS.map((t) => {
         return (
-            <TaskItem task={tasks[t]} key={t} color={responsibility.COLOR} setSelectedTask = {setSelectedTask} taskID = {t}/>
+            <TaskItem task={tasks[t]} key={t} color={responsibility.COLOR} selectedTask = {selectedTask} setSelectedTask = {setSelectedTask} taskID = {t}/>
             )
         })
     )
@@ -32,6 +32,7 @@ export default function TaskItemFrame(props) {
     const tasks = props.tasks;
     const schedulingMode = props.schedulingMode;
     const setSelectedTask = props.setSelectedTask;
+    const selectedTask = props.selectedTask
     return (
         <>
             <div className="taskItemFrame">
@@ -40,7 +41,7 @@ export default function TaskItemFrame(props) {
                 </div>
                 <div className="taskItemWrapper">
         
-                    {showTasks(responsibility, tasks, setSelectedTask)}
+                    {showTasks(responsibility, tasks, setSelectedTask, selectedTask)}
                 </div>
             </div>
         </>

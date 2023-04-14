@@ -17,10 +17,15 @@ function Calendar(props) {
     const schedulingMode = props.schedulingMode
     const setSchedulingMode = props.setSchedulingMode
     const selectedTask = props.selectedTask
+    const userData = props.userData
 
     useEffect(() => {
         console.log("Scheduled task is now task " + selectedTask)
     }, [selectedTask])
+
+    useEffect(() => {
+        console.log("Scheduling Mode is " + schedulingMode)
+    }, [schedulingMode])
 
     window.addEventListener('resize', () => {
         resizeAll();  
@@ -44,7 +49,7 @@ function Calendar(props) {
                  "12am", "1am", "2am", "3am", "4am"]
     return (
             <div className="fullCalendar">
-            <CalendarHeader date={ date } shownDate = {shownDate} setShownDate={ setShownDate } />
+            <CalendarHeader date={ date } shownDate = {shownDate} setShownDate={ setShownDate } schedulingMode = {schedulingMode} setSchedulingMode = { setSchedulingMode }/>
                 <div className="calendarViewport" ref={calendarRef} style={{height: calendarSize}}>
                     <div></div>
                     <Days />
@@ -58,7 +63,7 @@ function Calendar(props) {
                             })
                         }
                     </div>
-                    <CalendarSelect/>
+                    <CalendarSelect schedulingMode = {schedulingMode} selectedTask = {selectedTask} userData = {userData}/>
                 </div>
             </div>
     );

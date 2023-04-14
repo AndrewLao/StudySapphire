@@ -13,6 +13,9 @@ export default function CalendarSelect(props) {
     const [isScheduling, setIsScheduling] = useState(false)
     const [mouseX, setMouseX] = useState(0)
     const [isAdding, setIsAdding] = useState(true)
+    const selectedTask = props.selectedTask
+    const schedulingMode = props.schedulingMode
+    const userData = props.userData
 
     useEffect(() => {
         let week = []
@@ -29,11 +32,11 @@ export default function CalendarSelect(props) {
     }, []);
 
     useEffect(() => {
-        alterSelections(mouseX, startY, endY, false, isAdding, selections, setSelections)
+        alterSelections(mouseX, startY, endY, false, isAdding, selections, setSelections, selectedTask)
     }, [startY, endY])
 
     const confirmAlter = () => {
-        alterSelections(mouseX, startY, endY, true, isAdding, selections, setSelections)
+        alterSelections(mouseX, startY, endY, true, isAdding, selections, setSelections, selectedTask)
     }
 
     // useEffect(() => {
@@ -56,7 +59,7 @@ export default function CalendarSelect(props) {
                 setStartY = {setStartY} setEndY = {setEndY} 
                 isScheduling = {isScheduling} setIsScheduling = {setIsScheduling} 
                 mouseX = {mouseX} setMouseX = {setMouseX} isAdding = {isAdding} setIsAdding = {setIsAdding}
-                confirmAlter = {confirmAlter}/>
+                confirmAlter = {confirmAlter} userData = {userData} />
             })
             }
         </div>
@@ -65,7 +68,7 @@ export default function CalendarSelect(props) {
 }
 
 
-function alterSelections(newDay, start, end, confirm, isAdding, selections, setSelections)
+function alterSelections(newDay, start, end, confirm, isAdding, selections, setSelections, selectedTask)
 {
     if (selections.length != 7)
         return
@@ -83,17 +86,19 @@ function alterSelections(newDay, start, end, confirm, isAdding, selections, setS
     let newVal = 1
     if (confirm)
         if (isAdding)
-            newVal = 2
+            newVal = selectedTask
         else
             newVal = 0
     for (let i = Math.min(start, end); i <= Math.max(start, end); ++i)
     {
+        if (newSelections[newDay][i] == 0 || newSelections[newDay][i] == selectedTask)
         newSelections[newDay][i] = newVal
     }
     setSelections(newSelections)
 }
 
 function CalendarRow(props) {
+    let userData = props.userData
     let day = props.day
     return (
         <div className = "CalendarRow">
@@ -104,9 +109,16 @@ function CalendarRow(props) {
                 {
                     gapClass = "CalendarGap"
                 }
+                let taskInfo = null
                 let selection;
-                if (d == 2)
-                    selection = "Selected"
+                if (d >= 100)
+                {
+                    selection = "Set"
+                    taskInfo = {
+                        title: userData.TASKS[d].NAME,
+                        color: userData.RESPONSIBILITIES[userData.TASKS[d].RESPONSIBILITY].COLOR
+                    }
+                }
                 else if (d == 1 && props.isAdding)
                     selection = "Selected"
                 else
@@ -122,7 +134,8 @@ function CalendarRow(props) {
                     setStartY = {props.setStartY} setEndY = {props.setEndY}
                     mouseX = {props.mouseX} setMouseX = {props.setMouseX}
                     setIsAdding = {props.setIsAdding}
-                    confirmAlter = {props.confirmAlter} />
+                    confirmAlter = {props.confirmAlter}
+                    taskInfo = {taskInfo}/>
                     </>
                     )
                 })

@@ -5,7 +5,7 @@
     padding-top: 2%;
     padding-bottom: 2%;
     align-items: center;
-    grid-template-columns: 10% 80% 10%;
+    grid-template-columns: 10% 50% 30% 10%;
     width:calc(92% - 10px);
     margin-left:8%;
 }
@@ -14,6 +14,19 @@
     margin:auto;
     cursor: pointer;
     transition: filter 0.12s ease-in-out
+}
+
+.calendarHeader button {
+    height:75%;
+    width:60%;
+    margin-left:10%;
+    border:none;
+    background-color: #0054BA;
+    color:white;
+}
+
+.calendarHeader button:active {
+    filter:brightness(70%)
 }
 
 .calendarHeader img:hover{
