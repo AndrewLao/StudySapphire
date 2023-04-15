@@ -1,7 +1,8 @@
-import "./CalendarSelect.css"
-import CalendarTile from "./CalendarTile"
-import { useState, useEffect, useRef } from "react"
-
+import "./CalendarSelect.css";
+import CalendarTile from "./CalendarTile";
+import { useState, useEffect, useRef } from "react";
+import { useContext } from "react";
+import { UserContext } from '../../App';
 
 
 
@@ -15,7 +16,8 @@ export default function CalendarSelect(props) {
     const [isAdding, setIsAdding] = useState(true)
     const selectedTask = props.selectedTask
     const schedulingMode = props.schedulingMode
-    const userData = props.userData
+    const { userData, setUserData } = useContext(UserContext);
+    
 
     useEffect(() => {
         let week = []

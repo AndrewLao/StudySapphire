@@ -1,8 +1,8 @@
 // packages
-import { useState, useRef, useEffect, createContext} from 'react';
+import { useState, useRef, useEffect, useContext, createContext} from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
-import sampleData from "./SampleTasks.json";
+// import sampleData from "./SampleTasks.json";
 
 // components
 import Banner from './components/Banner';
@@ -19,13 +19,10 @@ const api = axios.create({
 baseURL: `http://localhost:3001`
 })
 
-
+export const UserContext = createContext();
 
 function App() {
-  const [userData, setUserData] = useState(sampleData)
-
-  // context global states
-  const UserContext = createContext();
+  const [userData, setUserData] = useState({});
 
   // function postUserData() {
   //   api.post("/dummyWrite", userData
@@ -34,20 +31,24 @@ function App() {
   //   })
   // }
   
-  // function getUserData() {
-  //   api.get("/dummyRead", { params: {fname: "test.json"} }).then(res => {
-  //     if (res.status == 500)
-  //       console.log("uh oh!! pull from db didnt work :((")
-  //     else
-  //       setUserData(res)
-  //   })
-  // }
-  // useEffect(() => {
-  //   postUserData(sampleData)
-  //   console.log("USER DATA:")
-  //   getUserData()
-  //   console.log(userData)
-  // }, [])
+  const getUserData = () => {
+    api.get("/dummyRead", { params: {fname: "test.json"} }).then(res => {
+      if (res.status == 500) {
+        console.log("uh oh!! pull from db didnt work :((")
+      }
+      else {
+        console.log(res.data);
+        setUserData(res.data);
+      }
+    })
+  }
+
+  useEffect(() => {
+    // postUserData(sampleData)
+    // console.log("USER DATA:")
+    getUserData();
+    // console.log(userData);
+  }, []);
   
 
   // function to add navBar to pages
@@ -60,19 +61,15 @@ function App() {
       </>
     )
   }
-  
-
-
   return (
     <>
-
       <div className="App">
-        <UserContext.Provider value={userData}>
+        <UserContext.Provider value={{userData, setUserData}}>
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={ <Register /> } />
-            <Route path="/home" element={wrapNavbar(<Home userData = {userData} setUserData = {setUserData}/>)} />
+            <Route path="/home" element={wrapNavbar(<Home />)} />
             <Route path="*" element={<NotFound />}></Route>
             <Route path="/*" element={ <NotFound /> }></Route>
           </Routes> 

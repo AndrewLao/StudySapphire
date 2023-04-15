@@ -12,6 +12,7 @@ export default function Home(props) {
     const [schedulingMode, setSchedulingMode] = useState(false)
     const [selectedTask, setSelectedTask] = useState(0)
 
+
     return (
         <>
             <div className="homeContainer">

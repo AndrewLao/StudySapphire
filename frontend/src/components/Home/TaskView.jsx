@@ -1,4 +1,6 @@
 // libraries
+import { useContext } from "react";
+import { UserContext } from '../../App';
 // temporary json import until backend is implemented
 
 // components
@@ -11,7 +13,7 @@ import "./TaskView.css";
 
 // uses TaskItemFrame as a reusable component
 export default function TaskView(props) {
-    const data = props.userData
+    const { userData, setUserData } = useContext(UserContext);
     const schedulingMode = props.schedulingMode
     const setSelectedTask = props.setSelectedTask
     const selectedTask = props.selectedTask
@@ -21,9 +23,9 @@ export default function TaskView(props) {
                 <div className="timer">Timer Goes Here</div>
                 <TaskHeader />
                 <div className="taskViewport">
-                    {data.RESPONSIBILITYORDER.map((r) => {
+                    {userData.RESPONSIBILITYORDER.map((r, key) => {
                         return (
-                            <Responsibility responsibility = {data.RESPONSIBILITIES[r]} tasks = {data.TASKS} key = {r} 
+                            <Responsibility responsibility = {userData.RESPONSIBILITIES[r]} tasks = {userData.TASKS} key = {key} 
                             selectedTask = {selectedTask} setSelectedTask = {setSelectedTask} schedulingMode = {schedulingMode} />
                         )
                     })}
