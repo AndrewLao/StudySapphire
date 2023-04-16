@@ -2,7 +2,7 @@
 import { useState, useRef, useEffect, useContext, createContext} from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
-// import sampleData from "./SampleTasks.json";
+import sampleData from "./SampleTasks.json";
 
 // components
 import Banner from './components/Banner';
@@ -22,14 +22,25 @@ baseURL: `http://localhost:3001`
 export const UserContext = createContext();
 
 function App() {
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState(undefined);
 
-  // function postUserData() {
-  //   api.post("/dummyWrite", userData
-  //   ).then((res) => {
-  //     // console.log(res);
-  //   })
-  // }
+  function postUserData() {
+    if (userData)
+    {
+        api.post("/dummyWrite", userData
+      ).then((res) => {
+        // console.log(res);
+      })
+    }
+      
+    
+  }
+
+  useEffect(() => {
+    postUserData()
+    console.log("saved user data as")
+    console.log(userData)
+  }, [userData])
   
   const getUserData = () => {
     api.get("/dummyRead", { params: {fname: "test.json"} }).then(res => {
@@ -69,7 +80,7 @@ function App() {
             <Route path="/" element={<Login />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={ <Register /> } />
-            <Route path="/home" element={wrapNavbar(<Home />)} />
+            <Route path="/home" element={wrapNavbar(<Home getUserData = {getUserData} postUserData = {postUserData} />)} />
             <Route path="*" element={<NotFound />}></Route>
             <Route path="/*" element={ <NotFound /> }></Route>
           </Routes> 
