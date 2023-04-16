@@ -17,9 +17,12 @@ export default function CalendarSelect(props) {
     const selectedTask = props.selectedTask
     const schedulingMode = props.schedulingMode
     const { userData, setUserData } = useContext(UserContext);
+    const shownDate = props.shownDate
     
 
     useEffect(() => {
+        let tempDate = new Date(shownDate)
+        let scheduledTimes = userData.SCHEDULEDTIME
         let week = []
         for (let i = 0; i < 7; ++i)
         {
@@ -28,10 +31,23 @@ export default function CalendarSelect(props) {
             {
                 day.push(0)
             }
+            let dateStr = tempDate.getFullYear() + "-" + 
+                (tempDate.getMonth() + 1).toString().padStart(2, "0") + "-" + 
+                tempDate.getDate().toString().padStart(2, "0")
+            tempDate.setDate(tempDate.getDate() + 1)
+            console.log(dateStr)
+            let prescheduled = scheduledTimes[dateStr]
+            if (prescheduled)
+            {
+                prescheduled.forEach((timeSlot) => {
+                    for (let i = timeSlot[0]; i <= timeSlot[1]; ++i)
+                        day[i] = timeSlot[2]
+                })
+            }
             week.push(day)
         }
         setSelections(week)
-    }, []);
+    }, [shownDate]);
 
     useEffect(() => {
         alterSelections(mouseX, startY, endY, false, isAdding, selections, setSelections, selectedTask)

@@ -52,7 +52,7 @@ function Calendar(props) {
             <CalendarHeader date={ date } shownDate = {shownDate} setShownDate={ setShownDate } schedulingMode = {schedulingMode} setSchedulingMode = { setSchedulingMode }/>
                 <div className="calendarViewport" ref={calendarRef} style={{height: calendarSize}}>
                     <div></div>
-                    <Days />
+                    <Days shownDate = {shownDate}/>
                     
                     <div className="timeSideRef">
                         {
@@ -63,7 +63,7 @@ function Calendar(props) {
                             })
                         }
                     </div>
-                    <CalendarSelect schedulingMode = {schedulingMode} selectedTask = {selectedTask} userData = {userData}/>
+                    <CalendarSelect shownDate = {shownDate} schedulingMode = {schedulingMode} selectedTask = {selectedTask} userData = {userData}/>
                 </div>
             </div>
     );
