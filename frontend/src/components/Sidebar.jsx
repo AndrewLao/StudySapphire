@@ -1,13 +1,24 @@
 import "./Sidebar.css"
+import {useContext} from "react";
+import {usernameContext} from "../usernameContext.jsx";
 
 export default function Sidebar() {
+
+    const { username, setUsername } = useContext(usernameContext);
+
+    function logOut() {
+        setUsername("");
+
+        console.log(username)
+    }
+
     return (
         <div className="Sidebar">
             {generateButton("Task Scheduler", "calendar", null)}
             {generateButton("My Town", "town", null)}
             {generateButton("Profile", "profile", null)}
             {generateButton("Account Settings", "settings", null)}
-            <button className="SignOut"><p>Sign Out</p></button>
+            <button className="SignOut" onClick={logOut}><p>Sign Out</p></button>
         </div>
     )
     
