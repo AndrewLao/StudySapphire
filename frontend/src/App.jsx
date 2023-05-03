@@ -1,5 +1,5 @@
 // packages
-import { useState, useRef, useEffect, useContext, createContext} from 'react';
+import { useState, useRef, useEffect, createContext, useMemo } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 // import sampleData from "./SampleTasks.json";
@@ -10,6 +10,7 @@ import Login from './components/Login/Login';
 import Home from './components/Home/Home';
 import Register from './components/Register/Register';
 import NotFound from './NotFound';
+import { usernameContext } from "./usernameContext.jsx";
 
 // styles
 import './App.css';
@@ -51,6 +52,12 @@ function App() {
   }, []);
   
 
+  const [username, setUsername] = useState("");
+  const contextValue = useMemo(
+      () => ( {username, setUsername}),
+      [username]
+  );
+
   // function to add navBar to pages
   // Needed to make sure that the login and register pages does not have a navBar
   const wrapNavbar = (item) => {
@@ -64,7 +71,7 @@ function App() {
   return (
     <>
       <div className="App">
-        <UserContext.Provider value={{userData, setUserData}}>
+        <usernameContext.Provider value={ contextValue }>
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/login" element={<Login />} />
@@ -72,9 +79,9 @@ function App() {
             <Route path="/home" element={wrapNavbar(<Home />)} />
             <Route path="*" element={<NotFound />}></Route>
             <Route path="/*" element={ <NotFound /> }></Route>
-          </Routes> 
-        </UserContext.Provider>
-        
+
+          </Routes>
+        </usernameContext.Provider>
       </div>
     </>
   )
