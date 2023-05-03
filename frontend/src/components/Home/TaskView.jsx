@@ -13,7 +13,8 @@ import "./TaskView.css";
 
 // uses TaskItemFrame as a reusable component
 export default function TaskView(props) {
-    const { userData, setUserData } = useContext(UserContext);
+    const userData = props.userData;
+    const setUserData = props.setUserData;
     const schedulingMode = props.schedulingMode
     const setSelectedTask = props.setSelectedTask
     const selectedTask = props.selectedTask

@@ -2,7 +2,7 @@
 import { useState, useRef, useEffect, createContext, useMemo } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
-// import sampleData from "./SampleTasks.json";
+import sampleData from "./SampleTasks.json";
 
 // components
 import Banner from './components/Banner';
@@ -23,40 +23,46 @@ baseURL: `http://localhost:3001`
 export const UserContext = createContext();
 
 function App() {
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState(undefined);
+  const [username, setUsername] = useState("");
 
-  // function postUserData() {
-  //   api.post("/dummyWrite", userData
-  //   ).then((res) => {
-  //     // console.log(res);
-  //   })
-  // }
+  const contextValue = useMemo(
+      () => ( {username, setUsername}),
+      [username]
+  );
+
+  function postUserData() {
+    if (userData)
+    {
+        api.post("/dummyWrite", userData
+      ).then((res) => {
+        // console.log(res);
+      })
+    }
+    
+  }
   
   const getUserData = () => {
-    api.get("/dummyRead", { params: {fname: "test.json"} }).then(res => {
+    api.get("/dummyRead", { params: { fname: "test.json" } }).then(res => {
       if (res.status == 500) {
         console.log("uh oh!! pull from db didnt work :((")
       }
       else {
-        console.log(res.data);
         setUserData(res.data);
       }
     })
   }
 
-  useEffect(() => {
-    // postUserData(sampleData)
-    // console.log("USER DATA:")
-    getUserData();
-    // console.log(userData);
-  }, []);
+  // useEffect(() => {
+  //   getUserData();
+  // }, []);
   
-
-  const [username, setUsername] = useState("");
-  const contextValue = useMemo(
-      () => ( {username, setUsername}),
-      [username]
-  );
+  // test if this useEffect causes data to be set to undefined
+  // useEffect(() => {
+  //   postUserData()
+  //   console.log("saved user data as")
+  //   console.log(userData)
+  // }, [userData])
 
   // function to add navBar to pages
   // Needed to make sure that the login and register pages does not have a navBar
@@ -71,17 +77,20 @@ function App() {
   return (
     <>
       <div className="App">
-        <usernameContext.Provider value={ contextValue }>
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={ <Register /> } />
-            <Route path="/home" element={wrapNavbar(<Home />)} />
-            <Route path="*" element={<NotFound />}></Route>
-            <Route path="/*" element={ <NotFound /> }></Route>
+        <UserContext.Provider value={{userData, setUserData} }>
+          <usernameContext.Provider value={contextValue}>
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={ <Register /> } />
+              <Route path="/home" element={wrapNavbar(<Home getUserData = {getUserData} postUserData = {postUserData} />)} />
+              <Route path="*" element={<NotFound />}></Route>
+              <Route path="/*" element={ <NotFound /> }></Route>
 
-          </Routes>
-        </usernameContext.Provider>
+            </Routes>
+          </usernameContext.Provider>
+        </UserContext.Provider>
+        
       </div>
     </>
   )

@@ -9,7 +9,6 @@ export default function TaskItem(props) {
     const [selectedStyle, setSelectedStyle] = useState({})
 
     useEffect(() => {
-        console.log(taskID, selectedTask)
         if (taskID == selectedTask)
         {
             setSelectedStyle({color: "#ff0000"})
@@ -18,9 +17,9 @@ export default function TaskItem(props) {
             setSelectedStyle({})
     }, [selectedTask])
 
-    useEffect(() => {
-        console.log(selectedStyle)
-    }, [selectedStyle])
+    // useEffect(() => {
+    //     console.log(selectedStyle)
+    // }, [selectedStyle])
     return (
             <div className="taskCard" onClick = {() => {setSelectedTask(taskID)}}style = {selectedStyle}>
                 <div className="taskAccentColorDiv" style={ accentStyle }>

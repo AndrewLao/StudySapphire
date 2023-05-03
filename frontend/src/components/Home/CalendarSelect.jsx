@@ -9,6 +9,7 @@ import { UserContext } from '../../App';
 
 export default function CalendarSelect(props) {
     const [selections, setSelections] = useState([[]])
+    const [dates, setDates] = useState([])
     const [startY, setStartY] = useState(0)
     const [endY, setEndY] = useState(0)
     const [isScheduling, setIsScheduling] = useState(false)
@@ -17,10 +18,14 @@ export default function CalendarSelect(props) {
     const selectedTask = props.selectedTask
     const schedulingMode = props.schedulingMode
     const { userData, setUserData } = useContext(UserContext);
+    const shownDate = props.shownDate
     
 
     useEffect(() => {
+        let tempDate = new Date(shownDate)
+        let scheduledTimes = userData.SCHEDULEDTIME
         let week = []
+        let weeksDates = []
         for (let i = 0; i < 7; ++i)
         {
             let day = []
@@ -28,22 +33,33 @@ export default function CalendarSelect(props) {
             {
                 day.push(0)
             }
+            let dateStr = tempDate.getFullYear() + "-" + 
+                (tempDate.getMonth() + 1).toString().padStart(2, "0") + "-" + 
+                tempDate.getDate().toString().padStart(2, "0")
+            tempDate.setDate(tempDate.getDate() + 1)
+            let prescheduled = scheduledTimes[dateStr]
+            if (prescheduled)
+            {
+                prescheduled.forEach((timeSlot) => {
+                    for (let i = timeSlot[0]; i <= timeSlot[1]; ++i)
+                        day[i] = timeSlot[2]
+                })
+            }
             week.push(day)
+            weeksDates.push(dateStr)
         }
         setSelections(week)
-    }, []);
+        setDates(weeksDates)
+    }, [shownDate]);
 
     useEffect(() => {
         alterSelections(mouseX, startY, endY, false, isAdding, selections, setSelections, selectedTask)
     }, [startY, endY])
 
     const confirmAlter = () => {
-        alterSelections(mouseX, startY, endY, true, isAdding, selections, setSelections, selectedTask)
+        alterSelections(mouseX, startY, endY, true, isAdding, selections, 
+            setSelections, selectedTask, dates, userData, setUserData)
     }
-
-    // useEffect(() => {
-    //     console.log(selections);
-    // }, [selections])
     let rows = []
     for (let i = 0; i < 7; ++i)
     {
@@ -69,8 +85,35 @@ export default function CalendarSelect(props) {
     )
 }
 
+function writeDay(date, userData, timeSlots, setUserData)
+{
+    console.log(date)
+    console.log(timeSlots)
+    let cur = 0
+    let intervals = []
+    let start = -1
+    let end = -1
+    timeSlots.forEach((task, i) => {
+        if (task == cur)
+            return
+        if (cur != 0 && start != -1)
+        {
+            end = i - 1
+            intervals.push([start, end, cur])
+        }
+        start = i
+        cur = task
+    })
+    if (cur != 0)
+        intervals.push([start, 95, cur])
+    let userCopy = JSON.parse(JSON.stringify(userData))
+    userCopy.SCHEDULEDTIME[date] = intervals
+    setUserData(userCopy)
 
-function alterSelections(newDay, start, end, confirm, isAdding, selections, setSelections, selectedTask)
+}
+
+function alterSelections(newDay, start, end, confirm, isAdding, selections, setSelections, 
+    selectedTask, dates, userData, setUserData)
 {
     if (selections.length != 7)
         return
@@ -97,6 +140,10 @@ function alterSelections(newDay, start, end, confirm, isAdding, selections, setS
         newSelections[newDay][i] = newVal
     }
     setSelections(newSelections)
+    if (confirm)
+    {
+        writeDay(dates[newDay], userData, newSelections[newDay], setUserData)
+    }
 }
 
 function CalendarRow(props) {

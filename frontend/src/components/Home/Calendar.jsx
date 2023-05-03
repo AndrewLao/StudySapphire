@@ -17,7 +17,8 @@ function Calendar(props) {
     const schedulingMode = props.schedulingMode
     const setSchedulingMode = props.setSchedulingMode
     const selectedTask = props.selectedTask
-    const userData = props.userData
+    const userData = props.userData;
+    const setUserData = props.setUserData;
 
     useEffect(() => {
         console.log("Scheduled task is now task " + selectedTask)
@@ -52,7 +53,7 @@ function Calendar(props) {
             <CalendarHeader date={ date } shownDate = {shownDate} setShownDate={ setShownDate } schedulingMode = {schedulingMode} setSchedulingMode = { setSchedulingMode }/>
                 <div className="calendarViewport" ref={calendarRef} style={{height: calendarSize}}>
                     <div></div>
-                    <Days />
+                    <Days shownDate = {shownDate}/>
                     
                     <div className="timeSideRef">
                         {
@@ -63,7 +64,7 @@ function Calendar(props) {
                             })
                         }
                     </div>
-                    <CalendarSelect schedulingMode = {schedulingMode} selectedTask = {selectedTask} userData = {userData}/>
+                    <CalendarSelect shownDate = {shownDate} schedulingMode = {schedulingMode} selectedTask = {selectedTask} userData = {userData}/>
                 </div>
             </div>
     );
