@@ -53,9 +53,9 @@ function App() {
     })
   }
 
-  // useEffect(() => {
-  //   getUserData();
-  // }, []);
+  useEffect(() => {
+    getUserData();
+  }, []);
   
   // test if this useEffect causes data to be set to undefined
   // useEffect(() => {
