@@ -24,7 +24,7 @@ export const UserContext = createContext();
 
 function App() {
   const [userData, setUserData] = useState(undefined);
-  const [username, setUsername] = useState((data) => {localStorage.getItem("username") === null ? localStorage.getItem("username") : ""});
+  const [username, setUsername] = useState(localStorage.getItem("username") == "undefined" ? undefined : "");
 
   useEffect(() => {
         localStorage.setItem("username", username);
