@@ -1,13 +1,15 @@
 import "./Sidebar.css"
 import {useContext} from "react";
-import {usernameContext} from "../usernameContext.jsx";
+import {logout} from "./Auth/Authorization.jsx";
+import {useNavigate} from "react-router-dom";
 
 export default function Sidebar() {
 
-    const { username, setUsername } = useContext(usernameContext);
+    const navigate = useNavigate();
 
-    function logOut() {
-        setUsername("");
+    function logOut(){
+        logout();
+        navigate("/login");
     }
 
     return (

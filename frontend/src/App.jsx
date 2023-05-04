@@ -8,27 +8,11 @@ import Login from './components/Login/Login';
 import Home from './components/Home/Home';
 import Register from './components/Register/Register';
 import NotFound from './NotFound';
-import { usernameContext } from "./usernameContext.jsx";
 
 // styles
 import './App.css';
 
 function App() {
-
-  const [username, setUsername] = useState(localStorage.getItem("username"));
-
-  useEffect(() => {
-        localStorage.setItem("username", username);
-        console.log("Local Storage: ", localStorage.getItem("username"));
-      }
-  )
-
-  const contextValue = useMemo(
-      () => ( {username, setUsername}),
-      [username]
-  );
-
-
 
   // function to add navBar to pages
   // Needed to make sure that the login and register pages does not have a navBar
@@ -44,7 +28,6 @@ function App() {
   return (
     <>
       <div className="App">
-        <usernameContext.Provider value={ contextValue }>
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/login" element={<Login />} />
@@ -54,7 +37,6 @@ function App() {
             <Route path="/*" element={ <NotFound /> }></Route>
 
           </Routes>
-        </usernameContext.Provider>
       </div>
     </>
   )

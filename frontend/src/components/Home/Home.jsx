@@ -4,22 +4,19 @@ import Sidebar from "../Sidebar"
 
 import "./Home.css";
 import {useContext, useEffect} from "react";
-import {usernameContext} from "../../usernameContext.jsx";
 import {useNavigate} from "react-router-dom";
+import UserPool from "../Auth/UserPool.jsx";
+import {checkSession} from "../Auth/Authorization.jsx";
 
 
 export default function Home() {
 
-    const { username, setUsername } = useContext(usernameContext);
-
     const navigate = useNavigate();
 
-
     useEffect(() => {
-        console.log("Current User: ", username);
-        if ( username === "" ){
+        checkSession().catch((err) => {
             navigate("/login");
-        }
+        })
     })
 
     return (
