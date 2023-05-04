@@ -24,7 +24,13 @@ export const UserContext = createContext();
 
 function App() {
   const [userData, setUserData] = useState(undefined);
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState((data) => {localStorage.getItem("username") === null ? localStorage.getItem("username") : ""});
+
+  useEffect(() => {
+        localStorage.setItem("username", username);
+        console.log("Local Storage: ", localStorage.getItem("username"));
+      }
+  )
 
   const contextValue = useMemo(
       () => ( {username, setUsername}),

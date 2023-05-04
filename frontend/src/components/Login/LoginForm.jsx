@@ -42,11 +42,15 @@ export default function LoginForm() {
         user.authenticateUser(authDetails, {
             onSuccess: (data) => {
                 console.log("Successfully Logged in");
-                setUsername(userName)
+                setUsername(userName);
                 navigate("/home");
             },
             onFailure: (err) => {
-                console.log("ur piss baby: ", err);
+                if ( err.name === "UserNotConfirmedException"){
+                    setUsername(userName);
+                    navigate("/home");
+                }
+                console.log("Error: ", err);
                 setMessage(err.message);
             }
         });

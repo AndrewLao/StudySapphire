@@ -71,7 +71,7 @@ export default function RegisterForm() {
             // ayy you logged in and arent a complete disgrace to humanity
             console.log(data);
 
-            setUsername("It Worked!");
+            setUsername(data.user.getUsername());
 
             navigate("/home");
 
