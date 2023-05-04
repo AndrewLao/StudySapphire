@@ -1,7 +1,7 @@
 // components
 import TaskView from "./TaskView";
 import Calendar from "./Calendar";
-import Sidebar from "../Sidebar"
+import Sidebar from "../Sidebar";
 
 // packages
 import { useEffect, useState} from "react";
