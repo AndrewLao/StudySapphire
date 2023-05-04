@@ -1,9 +1,13 @@
 import "./Sidebar.css";
 import { useContext } from "react";
 import { usernameContext } from "../usernameContext.jsx";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Sidebar() {
   const { username, setUsername } = useContext(usernameContext);
+
+  const navigate = useNavigate();
 
   function logOut() {
     setUsername("");
@@ -12,8 +16,8 @@ export default function Sidebar() {
 
   return (
     <div className="Sidebar">
-      {generateButton("Task Scheduler", "calendar", null)}
-      {generateButton("My Town", "town", null)}
+      {generateButton("Task Scheduler", "calendar", () => { navigate("/home") })}
+      {generateButton("My Town", "town", () => { navigate("/game") })}
       {generateButton("Profile", "profile", null)}
       {generateButton("Account Settings", "settings", null)}
       <button className="SignOut" onClick={logOut}>
@@ -25,9 +29,10 @@ export default function Sidebar() {
 
 function generateButton(title, icon, func) {
   return (
-    <button className="SidebarOption" onClick={func}>
+    <button className="SidebarOption" onClick={ func }>
       <img src={"../../public/sidebar/" + icon + ".svg"}></img>
       <p>{title}</p>
     </button>
   );
 }
+
