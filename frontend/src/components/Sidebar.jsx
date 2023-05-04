@@ -8,8 +8,6 @@ export default function Sidebar() {
 
     function logOut() {
         setUsername("");
-
-        console.log(username)
     }
 
     return (

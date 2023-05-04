@@ -15,11 +15,20 @@ import './App.css';
 
 function App() {
 
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(localStorage.getItem("username"));
+
+  useEffect(() => {
+        localStorage.setItem("username", username);
+        console.log("Local Storage: ", localStorage.getItem("username"));
+      }
+  )
+
   const contextValue = useMemo(
       () => ( {username, setUsername}),
       [username]
   );
+
+
 
   // function to add navBar to pages
   // Needed to make sure that the login and register pages does not have a navBar
