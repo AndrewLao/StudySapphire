@@ -24,13 +24,12 @@ export const UserContext = createContext();
 
 function App() {
   const [userData, setUserData] = useState(undefined);
-  const [username, setUsername] = useState(localStorage.getItem("username") == "undefined" ? undefined : "");
+  const [username, setUsername] = useState(localStorage.getItem("username") == null ? null : localStorage.getItem("username"));
 
   useEffect(() => {
         localStorage.setItem("username", username);
         console.log("Local Storage: ", localStorage.getItem("username"));
-      }
-  )
+      }, [username])
 
   const contextValue = useMemo(
       () => ( {username, setUsername}),
@@ -45,7 +44,6 @@ function App() {
         // console.log(res);
       })
     }
-    
   }
   
   const getUserData = () => {
