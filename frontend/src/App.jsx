@@ -11,6 +11,7 @@ import Home from './components/Home/Home';
 import Register from './components/Register/Register';
 import NotFound from './NotFound';
 import { usernameContext } from "./usernameContext.jsx";
+import Game from './components/Game/Game';
 
 // styles
 import './App.css';
@@ -24,13 +25,13 @@ export const UserContext = createContext();
 
 function App() {
   const [userData, setUserData] = useState(undefined);
-  const [username, setUsername] = useState(localStorage.getItem("username") == null ? null : localStorage.getItem("username"));
+  const [username, setUsername] = useState(localStorage.getItem("username") === null ? "" : localStorage.getItem("username"));
 
   useEffect(() => {
-        localStorage.setItem("username", username);
-        console.log("Local Storage: ", localStorage.getItem("username"));
-      }, [username])
-
+    localStorage.setItem("username", username);
+    console.log("Local Storage: ", localStorage.getItem("username"));
+  }, [username]);
+  
   const contextValue = useMemo(
       () => ( {username, setUsername}),
       [username]
@@ -88,9 +89,10 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={ <Register /> } />
               <Route path="/home" element={wrapNavbar(<Home getUserData = {getUserData} postUserData = {postUserData} />)} />
+              <Route path="/game" element={ <Game />} />
               <Route path="*" element={<NotFound />}></Route>
               <Route path="/*" element={ <NotFound /> }></Route>
-
+              
             </Routes>
           </usernameContext.Provider>
         </UserContext.Provider>

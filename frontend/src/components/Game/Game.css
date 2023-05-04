@@ -1,0 +1,24 @@
+.game-wrapper-div {
+    position: relative;
+    background-color: grey;
+}
+
+.game-flex-wrapper-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.main-game-background-image {
+    
+}
+
+.game-items {
+    border-style: solid;
+    border-width: 1px;
+    height: 50%;
+    width: 25%
+}
