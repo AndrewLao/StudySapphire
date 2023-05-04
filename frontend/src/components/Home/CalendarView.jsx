@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import "./CalendarView.css";
+import { UserContext } from "../../App";
+import { useContext } from "react";
+
 export default function CalendarView(props) {
     const [schedule, setSchedule] = useState([])
-    let userData = props.userData;
+    const {userData, setUserData} = useContext(UserContext); 
     const shownDate = props.shownDate;
-    console.log(props);
+    const inMenu = props.inMenu;
     useEffect(() => {
         let tempDate = new Date(shownDate);
         let scheduledTimes = userData.SCHEDULEDTIME;
@@ -29,7 +32,7 @@ export default function CalendarView(props) {
         weeksDates.push(dateStr);
         }
         setSchedule(week)
-    }, [shownDate])
+    }, [shownDate, userData])
 
     function scheduleChunker(day)
     {
@@ -52,13 +55,8 @@ export default function CalendarView(props) {
                     return
                 }
             }
-                    
-
             if (slot == cur)
-            {
                 len += 1
-                
-            }
             else
             {
                 chunks.push([cur, len, hoursPast])
@@ -66,7 +64,6 @@ export default function CalendarView(props) {
                 len = 1
                 cur = slot
             }
-
         })
         chunks.push([cur, len, hoursPast])
         return chunks
@@ -85,19 +82,18 @@ export default function CalendarView(props) {
     return <div className="calendarView">
         {schedule.map((day, ind) => {
             let chunks = scheduleChunker(day)
-            console.log(chunkToStr(chunks))
             return (
                 <div className="calendarViewDay">
                     {chunks.map((chunk, ind2) => {
                         
-                        return (<CalendarChunk key={ind2} userData={userData} task={chunk[0]} size={chunk[1]} hoursPast = {chunk[2]}/>)}    
+                        return (<CalendarChunk key={ind2} userData={userData} task={chunk[0]} size={chunk[1]} hoursPast = {chunk[2]} inMenu={inMenu}/>)}    
             )}
             </div>
         )})}
     </div>;
 }
 
-function CalendarChunk({userData, task, size, hoursPast})
+function CalendarChunk({userData, task, size, hoursPast, inMenu})
 {
     let taskData = 0
     let taskColor = "#dddddd"
@@ -106,11 +102,15 @@ function CalendarChunk({userData, task, size, hoursPast})
     if (task >= 100)
     {
         taskData = userData.TASKS[task]
-        taskColor = userData.RESPONSIBILITIES[taskData.RESPONSIBILITY].COLOR
-        taskName = taskData.NAME
-        borderRadius = "5px"
+        if (taskData)
+        {
+            taskColor = userData.RESPONSIBILITIES[taskData.RESPONSIBILITY].COLOR
+            taskName = taskData.NAME
+            borderRadius = "5px"
+        }
+        
     }
-    let divSize = (size * 12) + (hoursPast * 2) - 1
+    let divSize = (size * 12) + (hoursPast * 2) - 2
 
 
     
@@ -123,8 +123,8 @@ function CalendarChunk({userData, task, size, hoursPast})
                 <div>
                     {taskName}
                 </div>
-                {task >= 100 &&
-                <span class="tooltiptext">{taskName}</span>}
+                {task >= 100 && !inMenu &&
+                <span className="tooltiptext">{taskName}</span>}
             </div>
     )
 }

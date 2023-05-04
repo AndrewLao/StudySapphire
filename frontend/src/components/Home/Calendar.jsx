@@ -32,6 +32,7 @@ function Calendar(props) {
   const selectedTask = props.selectedTask;
   const userData = props.userData;
   const setUserData = props.setUserData;
+  const inMenu = props.inMenu;
 
   useEffect(() => {
     console.log("Scheduled task is now task " + selectedTask);
@@ -111,7 +112,7 @@ function Calendar(props) {
           />
         )}
         {!schedulingMode && (
-          <CalendarView shownDate={shownDate} userData={userData} />
+          <CalendarView shownDate={shownDate} userData={userData} inMenu={inMenu}/>
         )}
       </div>
     </div>

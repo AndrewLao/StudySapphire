@@ -1,5 +1,6 @@
 // components
-import TaskItem from "./TaskItem";
+import EditTaskItem from "./EditTaskItem";
+import ViewTaskItem from "./ViewTaskItem";
 
 // styles
 import "./Responsibility.css"
@@ -7,14 +8,23 @@ import "./Responsibility.css"
 // Component for the frame containing task items
 // Uses TaskItem as a reusable component
 
-function showTasks(responsibility, tasks, setSelectedTask, selectedTask) {
+function showTasks(responsibility, tasks, setSelectedTask, selectedTask, schedulingMode) {
     if (responsibility.TASKS.length == 0) {
         return noTasks()
     }
+    if (!schedulingMode)
+    {
+        return (
+        responsibility.TASKS.map((t) => {
+            return (
+                <ViewTaskItem task={tasks[t]} key={t} color={responsibility.COLOR} selectedTask = {selectedTask} setSelectedTask = {setSelectedTask} taskID = {t}/>
+                )
+            })
+    )}
     return (
         responsibility.TASKS.map((t) => {
         return (
-            <TaskItem task={tasks[t]} key={t} color={responsibility.COLOR} selectedTask = {selectedTask} setSelectedTask = {setSelectedTask} taskID = {t}/>
+            <EditTaskItem task={tasks[t]} key={t} color={responsibility.COLOR} selectedTask = {selectedTask} setSelectedTask = {setSelectedTask} taskID = {t}/>
             )
         })
     )
@@ -41,7 +51,8 @@ export default function TaskItemFrame(props) {
                 </div>
                 <div className="taskItemWrapper">
         
-                    {showTasks(responsibility, tasks, setSelectedTask, selectedTask)}
+                    {schedulingMode && showTasks(responsibility, tasks, setSelectedTask, selectedTask, true)}
+                    {!schedulingMode && showTasks(responsibility, tasks, setSelectedTask, selectedTask, false)}
                 </div>
             </div>
         </>

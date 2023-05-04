@@ -14,6 +14,7 @@ import {usernameContext} from "../../usernameContext.jsx";
 
 // styles
 import "./Home.css";
+import AddTask from "./AddTask";
 
 export default function Home(props) {
     const getUserData = props.getUserData
@@ -22,6 +23,7 @@ export default function Home(props) {
     
     const [schedulingMode, setSchedulingMode] = useState(false)
     const [selectedTask, setSelectedTask] = useState(0)
+    const [inMenu, setInMenu] = useState(false);
 
     const { username, setUsername } = useContext(usernameContext);
     const navigate = useNavigate();
@@ -50,9 +52,15 @@ export default function Home(props) {
         return (
             <>
                 <div className="homeContainer">
-                    <Calendar schedulingMode = {schedulingMode}  setSchedulingMode = {setSchedulingMode} selectedTask = {selectedTask} userData = {userData} setUserData = {setUserData} />
-                    <TaskView schedulingMode = {schedulingMode} selectedTask = {selectedTask} setSelectedTask = {setSelectedTask} userData = {userData} setUserData = {setUserData}/>
+                    <Calendar 
+                    schedulingMode = {schedulingMode}  setSchedulingMode = {setSchedulingMode} selectedTask = {selectedTask} 
+                    userData = {userData} setUserData = {setUserData} inMenu={inMenu}/>
+                    <TaskView 
+                    schedulingMode = {schedulingMode} selectedTask = {selectedTask} 
+                    setSelectedTask = {setSelectedTask} userData = {userData} setUserData = {setUserData} inMenu={inMenu} setInMenu={setInMenu}
+                    />
                     <Sidebar />
+                    {inMenu && <AddTask inMenu={inMenu} setInMenu={setInMenu}/>}
                 </div>
             </>
         )

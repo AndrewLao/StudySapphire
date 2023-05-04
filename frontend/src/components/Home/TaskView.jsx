@@ -15,14 +15,16 @@ import "./TaskView.css";
 export default function TaskView(props) {
     const userData = props.userData;
     const setUserData = props.setUserData;
-    const schedulingMode = props.schedulingMode
-    const setSelectedTask = props.setSelectedTask
-    const selectedTask = props.selectedTask
+    const schedulingMode = props.schedulingMode;
+    const setSelectedTask = props.setSelectedTask;
+    const selectedTask = props.selectedTask;
+    const inMenu = props.inMenu;
+    const setInMenu = props.setInMenu;
     return (
         <>
             <div className="fullTaskview">
                 <div className="timer">Timer Goes Here</div>
-                <TaskHeader />
+                <TaskHeader inMenu={inMenu} setInMenu={setInMenu}/>
                 <div className="taskViewport">
                     {userData.RESPONSIBILITYORDER.map((r, key) => {
                         return (

@@ -1,4 +1,4 @@
-import "./TaskItem.css";
+import "./EditTaskItem.css";
 import { useState, useEffect } from "react";
 export default function TaskItem(props) {
     const accentStyle = { backgroundColor: props.color }
@@ -11,7 +11,7 @@ export default function TaskItem(props) {
     useEffect(() => {
         if (taskID == selectedTask)
         {
-            setSelectedStyle({color: "#ff0000"})
+            setSelectedStyle({fontWeight: "bold", backgroundColor: "#dddddd"})
         }
         else
             setSelectedStyle({})
@@ -28,9 +28,6 @@ export default function TaskItem(props) {
                     
                     <div className="taskName">{task.NAME}</div>
                     <div className="taskDueDate">Due {task.DUEDATE}</div>
-                </div>
-                <div className="taskEditButtonDiv">
-                    <img src="/calendar/mdi_pencil.svg"></img>
                 </div>
             </div>
     );

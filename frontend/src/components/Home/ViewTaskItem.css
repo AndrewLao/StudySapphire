@@ -1,0 +1,54 @@
+.viewTaskCard {
+    display: grid;
+    grid-template-columns: 10% 60% 30%;
+    background-color: white;
+    border-radius: 0.75em;
+}
+
+.taskAccentColorDiv {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    color: white;
+    display:flex;
+}
+
+/* .taskAccentColorDiv button {
+    border:none;
+    height:25%;
+    aspect-ratio: 1 / 1;
+    margin-right: 12%;
+    
+} */
+
+.taskMiddleDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    padding: 1em 0em 1em 1em;
+    justify-content: center;
+    overflow-wrap: break-word;
+}
+
+.taskEditButtonDiv {
+    padding: 1em;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.checkBox {
+    box-sizing: border-box;
+    width:50%;
+    
+    aspect-ratio: 1/1;
+    border-radius: 3px;
+    background-color: white;
+    margin: auto;
+}
+
+.checkBox:hover {
+    background-color: #dddddd;
+}
+
+.checkBox:active {
+    background-color: #bbbbbb;
+}
