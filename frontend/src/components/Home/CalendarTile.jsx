@@ -53,6 +53,7 @@ export default function CalendarTile(props) {
             onMouseLeave={() => setVisibleTile(tileType)}
 
             onMouseDown={() => {
+                console.log(taskInfo)
                 setVisibleTile(tileType)
                 props.setIsScheduling(true)
                 props.setStartY(yPos)

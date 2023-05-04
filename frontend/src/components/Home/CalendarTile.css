@@ -5,7 +5,9 @@
     text-align: center;
     -webkit-user-select: none;
     user-select: none;
-    color:white
+    color:white;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .CalendarTileUnselected {
