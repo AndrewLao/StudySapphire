@@ -49,6 +49,7 @@ function Calendar(props) {
   useEffect(() => {
     if (calendarRef.current == undefined) setCalendarSize("70%");
     else setCalendarSize(window.innerHeight - calendarRef.current.offsetTop);
+    calendarRef.current.scrollTop = 250
   }, [calendarRef]);
 
   function resizeAll() {
@@ -56,30 +57,8 @@ function Calendar(props) {
     else setCalendarSize(window.innerHeight - calendarRef.current.offsetTop);
   }
   let times = [
-    "12am",
-    "1am",
-    "2am",
-    "3am",
-    "4am",
-    "5am",
-    "6am",
-    "7am",
-    "8am",
-    "9am",
-    "10am",
-    "11am",
-    "12pm",
-    "1pm",
-    "2pm",
-    "3pm",
-    "4pm",
-    "5pm",
-    "6pm",
-    "7pm",
-    "8pm",
-    "9pm",
-    "10pm",
-    "11pm",
+    "12am", "1am", "2am", "3am", "4am", "5am", "6am", "7am", "8am", "9am", "10am", "11am",
+    "12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm", "9pm", "10pm", "11pm",
   ];
   return (
     <div className="fullCalendar">

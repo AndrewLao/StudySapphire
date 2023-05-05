@@ -1,6 +1,6 @@
 // components
-import TaskView from "./TaskView";
-import Calendar from "./Calendar";
+import TaskView from "./Taskbar/TaskView";
+import Calendar from "./Calendar/Calendar";
 import Sidebar from "../Sidebar";
 
 // packages
@@ -14,7 +14,7 @@ import {usernameContext} from "../../usernameContext.jsx";
 
 // styles
 import "./Home.css";
-import AddTask from "./AddTask";
+import AddTask from "./Taskbar/AddTask";
 
 export default function Home(props) {
     const getUserData = props.getUserData

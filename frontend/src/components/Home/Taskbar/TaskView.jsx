@@ -1,6 +1,6 @@
 // libraries
 import { useContext } from "react";
-import { UserContext } from '../../App';
+import { UserContext } from '../../../App';
 // temporary json import until backend is implemented
 
 // components
@@ -23,8 +23,10 @@ export default function TaskView(props) {
     return (
         <>
             <div className="fullTaskview">
-                <div className="timer">Timer Goes Here</div>
+                {!schedulingMode && <div>Timer Goes Here</div>}
+                {schedulingMode && <div>Schedule Health Goes Here</div>}
                 <TaskHeader inMenu={inMenu} setInMenu={setInMenu}/>
+                {schedulingMode && <div>Edit availability Goes Here</div>}
                 <div className="taskViewport">
                     {userData.RESPONSIBILITYORDER.map((r, key) => {
                         return (

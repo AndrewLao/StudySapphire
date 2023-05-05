@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import "./CalendarView.css";
-import { UserContext } from "../../App";
+import { UserContext } from "../../../App";
 import { useContext } from "react";
 
 export default function CalendarView(props) {

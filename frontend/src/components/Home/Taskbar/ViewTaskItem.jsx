@@ -1,6 +1,6 @@
 import "./ViewTaskItem.css"
 import { useEffect, useState } from "react";
-import { UserContext } from "../../App";
+import { UserContext } from "../../../App";
 import { useContext } from "react";
 export default function ViewTaskItem(props)
 {
@@ -35,8 +35,6 @@ function deleteTask(taskID, userData, setUserData, selectedTask, setSelectedTask
 {
     
     let userCopy = JSON.parse(JSON.stringify(userData));
-    console.log(taskID)
-    console.log(userCopy);
     let responsibilityID = userCopy.TASKS[taskID].RESPONSIBILITY;
     let respTasks = userCopy.RESPONSIBILITIES[responsibilityID].TASKS
     respTasks.splice(respTasks.indexOf(taskID), 1)
@@ -50,7 +48,4 @@ function deleteTask(taskID, userData, setUserData, selectedTask, setSelectedTask
     if (selectedTask == taskID)
         setSelectedTask(0)
     setUserData(userCopy)
-    
-
-
 }
