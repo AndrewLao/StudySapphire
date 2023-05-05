@@ -6,6 +6,7 @@
 }
 
 .calendarChunk {
+    opacity: 0;
     text-overflow: ellipsis;
     overflow: hidden;
     margin-bottom: 2px;
@@ -17,25 +18,20 @@
 
 
 
+
   
-  .calendarChunk .tooltiptext {
+  .tooltiptext {
     margin-left:0;
     font-size: 16px;
-    max-height: 0;
-    opacity: 0;
+    opacity: 1;
     width: 150px;
     background-color: #dddddd;
     color:black;
     text-align: center;
     border-radius: 6px;
     padding: 5px 0;
-    position:absolute;
+    position:fixed;
     /* Position the tooltip */
     z-index: 1;
-  }
-  
-  .calendarChunk:hover .tooltiptext {
-    margin-left:5%;
-    opacity: 0.95;
-    max-height: 50%;
+    user-select: none;
   }

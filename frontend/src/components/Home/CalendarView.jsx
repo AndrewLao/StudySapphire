@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./CalendarView.css";
 import { UserContext } from "../../App";
 import { useContext } from "react";
@@ -95,10 +95,29 @@ export default function CalendarView(props) {
 
 function CalendarChunk({userData, task, size, hoursPast, inMenu})
 {
+    let [hovering, setHovering] = useState(false)
+    let [showPopup, setShowPopup] = useState(false)
+    const timerRef = useRef;
     let taskData = 0
     let taskColor = "#dddddd"
     let taskName = ""
     let borderRadius = "0px"
+    let [mouseY, setMouseY] = useState(0)
+
+
+    const [mousePos, setMousePos] = useState({});
+
+    function handleHover(event) {
+        if (task >= 100)
+        {
+            setHovering(true)
+            setMouseY(event.clientY)
+        }
+            
+    }
+
+
+
     if (task >= 100)
     {
         taskData = userData.TASKS[task]
@@ -113,18 +132,41 @@ function CalendarChunk({userData, task, size, hoursPast, inMenu})
     let divSize = (size * 12) + (hoursPast * 2) - 2
 
 
+    useEffect(() => {
+        if (hovering)
+        {
+            timerRef.current = setTimeout(() => {
+                setShowPopup(true)
+            }, 800)   
+        }
+        else
+        {
+            clearTimeout(timerRef.current);
+            setShowPopup(false);
+        }
+    }, [hovering])
+
+
     
 
     return (
+        <div onMouseEnter={handleHover}
+                
+        onMouseLeave={() => {
+                setHovering(false)
+                }}>
         <div className="calendarChunk" style={{
             textOverflow: "ellipsis", opacity: 1, backgroundColor: taskColor, 
             height: divSize, borderRadius: borderRadius,
             fontSize: Math.min(divSize - 2, 16)}}>
+            
                 <div>
                     {taskName}
                 </div>
-                {task >= 100 && !inMenu &&
-                <span className="tooltiptext">{taskName}</span>}
+                
             </div>
+            {showPopup && hovering && <span className="tooltiptext" style={{top: mouseY}}>{taskName}</span>}
+            </div>
+           
     )
 }
