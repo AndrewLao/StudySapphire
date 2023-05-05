@@ -90,13 +90,15 @@ function Calendar(props) {
         schedulingMode={schedulingMode}
         setSchedulingMode={setSchedulingMode}
       />
+      <div className="calendarDays">
+        <div></div>
+        <Days shownDate={shownDate} />
+      </div>
       <div
         className="calendarViewport"
         ref={calendarRef}
         style={{ height: calendarSize }}
       >
-        <div></div>
-        <Days shownDate={shownDate} />
 
         <div className="timeSideRef">
           {times.map((time) => {
