@@ -2,7 +2,7 @@ import "./Banner.css"
 import { useNavigate } from "react-router-dom";
 
 export default function Banner(props) {
-    
+    const tokens = props.tokens;
     const navigate = useNavigate();
 
     function logoOnClick() {
@@ -12,7 +12,7 @@ export default function Banner(props) {
     function navigateHome() {
         navigate("/home");
     }
-
+    
     return (
         <>
             <div className="banner">
@@ -29,7 +29,7 @@ export default function Banner(props) {
 
                 <div className="bannerRightSide">
                     <img src="/coin.svg"></img>
-                    <p>100 Tokens</p>
+                    <p>{tokens} Tokens</p>
                 </div>
             </div>
         </>

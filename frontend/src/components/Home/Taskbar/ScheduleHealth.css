@@ -1,0 +1,35 @@
+.scheduleHealth {
+    margin-top:1em;
+    margin-bottom:1em;
+    color: white;
+    background-color: #373737;
+    padding:2%;
+    border-radius: 10px;
+    max-height: 20vh;
+    overflow-y: scroll;
+}
+.healthScore {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    font-size: 20px;
+}
+
+.scheduleProblem {
+    display:grid;
+    grid-template-columns: 5% 95%;
+    margin-bottom:0.2em
+}
+
+.pointsDeduced {
+    font-weight: bold;
+}
+
+.healthExplain {
+    color: #dddddd;
+    padding-left:5em;
+    padding-right:5em;
+    margin-top:1em;
+    text-align: center;
+    font-size: 14px;
+}

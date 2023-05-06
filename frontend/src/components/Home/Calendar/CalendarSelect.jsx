@@ -10,8 +10,8 @@ import { UserContext } from '../../../App';
 export default function CalendarSelect(props) {
     const [selections, setSelections] = useState([[]])
     const [dates, setDates] = useState([])
-    const [startY, setStartY] = useState(0)
-    const [endY, setEndY] = useState(0)
+    const [startY, setStartY] = useState(-1)
+    const [endY, setEndY] = useState(-1)
     const [isScheduling, setIsScheduling] = useState(false)
     const [mouseX, setMouseX] = useState(0)
     const [isAdding, setIsAdding] = useState(true)
@@ -63,7 +63,8 @@ export default function CalendarSelect(props) {
     }, [shownDate]);
 
     useEffect(() => {
-        alterSelections(mouseX, startY, endY, false, isAdding, selections, setSelections, selectedTask)
+        if (startY != -1)
+            alterSelections(mouseX, startY, endY, false, isAdding, selections, setSelections, selectedTask)
     }, [startY, endY])
 
     const confirmAlter = () => {
@@ -97,8 +98,6 @@ export default function CalendarSelect(props) {
 
 function writeDay(date, userData, timeSlots, setUserData, dayOfWeek, editingAvailability)
 {
-    console.log(date)
-    console.log(timeSlots)
     let cur = 0
     let intervals = []
     let availability = []
@@ -121,10 +120,8 @@ function writeDay(date, userData, timeSlots, setUserData, dayOfWeek, editingAvai
         intervals.push([start, 95, cur])
     let userCopy = JSON.parse(JSON.stringify(userData))
     userCopy.SCHEDULEDTIME[date] = intervals
-    console.log(editingAvailability)
     if (editingAvailability)
     {
-        console.log("hello!!")
         userCopy.AVAILABILITY["" + dayOfWeek] = availability
     }
     Object.keys(userCopy.SCHEDULEDTIME).forEach((day) => {

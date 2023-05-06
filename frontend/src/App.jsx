@@ -74,7 +74,7 @@ function App() {
   const wrapNavbar = (item) => {
     return (
       <>
-        <Banner includeMenu={ false }/>
+        <Banner includeMenu={ false } tokens={userData ? userData.TOKENS : 100}/>
         { item }
       </>
     )
@@ -90,7 +90,7 @@ function App() {
               <Route path="/" element={<Login />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={ <Register /> } />
-              <Route path="/home" element={wrapNavbar(<Home getUserData = {getUserData} postUserData = {postUserData} />)} />
+              <Route path="/home" element={wrapNavbar(<Home getUserData = {getUserData} postUserData = {postUserData}/>)} />
               <Route path="/game" element={<Game />} />
               <Route path="*" element={<NotFound />}></Route>
               <Route path="/*" element={ <NotFound /> }></Route>

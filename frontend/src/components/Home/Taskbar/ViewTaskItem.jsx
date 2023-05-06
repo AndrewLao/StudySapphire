@@ -44,7 +44,10 @@ function deleteTask(taskID, userData, setUserData, selectedTask, setSelectedTask
         
         userCopy.SCHEDULEDTIME[day] = times.filter(time => time[2] != taskID)
     })
-    console.log(userCopy)
+    Object.keys(userCopy.SCHEDULEDTIME).forEach((day) => {
+        if (userCopy.SCHEDULEDTIME[day].length == 0)
+            delete userCopy.SCHEDULEDTIME[day]
+    })
     if (selectedTask == taskID)
         setSelectedTask(0)
     setUserData(userCopy)

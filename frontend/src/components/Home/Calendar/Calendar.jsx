@@ -34,14 +34,15 @@ function Calendar(props) {
   const setUserData = props.setUserData;
   const inMenu = props.inMenu;
   const editingAvailability = props.editingAvailability
+  const getHealthiness = props.getHealthiness
 
-  useEffect(() => {
-    console.log("Scheduled task is now task " + selectedTask);
-  }, [selectedTask]);
+  // useEffect(() => {
+  //   console.log("Scheduled task is now task " + selectedTask);
+  // }, [selectedTask]);
 
-  useEffect(() => {
-    console.log("Scheduling Mode is " + schedulingMode);
-  }, [schedulingMode]);
+  // useEffect(() => {
+  //   console.log("Scheduling Mode is " + schedulingMode);
+  // }, [schedulingMode]);
 
   window.addEventListener("resize", () => {
     resizeAll();
@@ -92,6 +93,7 @@ function Calendar(props) {
             selectedTask={selectedTask}
             userData={userData}
             editingAvailability = {editingAvailability}
+            getHealthiness={getHealthiness}
           />
         )}
         {!schedulingMode && (
