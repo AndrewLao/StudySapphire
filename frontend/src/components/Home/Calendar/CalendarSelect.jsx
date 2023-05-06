@@ -19,6 +19,7 @@ export default function CalendarSelect(props) {
     const schedulingMode = props.schedulingMode
     const { userData, setUserData } = useContext(UserContext);
     const shownDate = props.shownDate
+    const editingAvailability = props.editingAvailability
     
 
     useEffect(() => {
@@ -33,6 +34,8 @@ export default function CalendarSelect(props) {
             {
                 day.push(0)
             }
+            
+
             let dateStr = tempDate.getFullYear() + "-" + 
                 (tempDate.getMonth() + 1).toString().padStart(2, "0") + "-" + 
                 tempDate.getDate().toString().padStart(2, "0")
@@ -44,6 +47,13 @@ export default function CalendarSelect(props) {
                     for (let i = timeSlot[0]; i <= timeSlot[1]; ++i)
                         day[i] = timeSlot[2]
                 })
+            }
+            else {
+                let availability = userData.AVAILABILITY["" + i]
+                availability.forEach((chunk) => {
+                    for (let j = chunk[0]; j <= chunk[1]; ++j)
+                        day[j] = 3;
+            })
             }
             week.push(day)
             weeksDates.push(dateStr)
@@ -58,7 +68,7 @@ export default function CalendarSelect(props) {
 
     const confirmAlter = () => {
         alterSelections(mouseX, startY, endY, true, isAdding, selections, 
-            setSelections, selectedTask, dates, userData, setUserData)
+            setSelections, selectedTask, dates, userData, setUserData, editingAvailability)
     }
     let rows = []
     for (let i = 0; i < 7; ++i)
@@ -85,12 +95,13 @@ export default function CalendarSelect(props) {
     )
 }
 
-function writeDay(date, userData, timeSlots, setUserData)
+function writeDay(date, userData, timeSlots, setUserData, dayOfWeek, editingAvailability)
 {
     console.log(date)
     console.log(timeSlots)
     let cur = 0
     let intervals = []
+    let availability = []
     let start = -1
     let end = -1
     timeSlots.forEach((task, i) => {
@@ -100,6 +111,8 @@ function writeDay(date, userData, timeSlots, setUserData)
         {
             end = i - 1
             intervals.push([start, end, cur])
+            if (cur == 3)
+                availability.push([start, end])
         }
         start = i
         cur = task
@@ -108,12 +121,25 @@ function writeDay(date, userData, timeSlots, setUserData)
         intervals.push([start, 95, cur])
     let userCopy = JSON.parse(JSON.stringify(userData))
     userCopy.SCHEDULEDTIME[date] = intervals
+    console.log(editingAvailability)
+    if (editingAvailability)
+    {
+        console.log("hello!!")
+        userCopy.AVAILABILITY["" + dayOfWeek] = availability
+    }
+    Object.keys(userCopy.SCHEDULEDTIME).forEach((day) => {
+        if (userCopy.SCHEDULEDTIME[day].length == 0)
+            delete userCopy.SCHEDULEDTIME[day]
+    })
+
+        
     setUserData(userCopy)
+    
 
 }
 
 function alterSelections(newDay, start, end, confirm, isAdding, selections, setSelections, 
-    selectedTask, dates, userData, setUserData)
+    selectedTask, dates, userData, setUserData, editingAvailability)
 {
     if (selections.length != 7)
         return
@@ -142,7 +168,7 @@ function alterSelections(newDay, start, end, confirm, isAdding, selections, setS
     setSelections(newSelections)
     if (confirm)
     {
-        writeDay(dates[newDay], userData, newSelections[newDay], setUserData)
+        writeDay(dates[newDay], userData, newSelections[newDay], setUserData, newDay, editingAvailability)
     }
 }
 
@@ -168,6 +194,14 @@ function CalendarRow(props) {
                         color: userData.RESPONSIBILITIES[userData.TASKS[d].RESPONSIBILITY].COLOR
                     }
                 }
+                else if (d == 3)
+                {
+                    selection = "Set"
+                    taskInfo = {
+                        title: "",
+                        color: "#666666"
+                    }
+                }
                 else if (d == 1 && props.isAdding)
                     selection = "Selected"
                 else
@@ -175,7 +209,7 @@ function CalendarRow(props) {
                 return (
                     <>
                     <div className={gapClass}></div>
-                    <CalendarTile key = {index} title={"placeholder"} 
+                    <CalendarTile key = {index}
                     tileType= {selection} yPos = {index}
                     xPos = {props.xPos}
                     isScheduling = {props.isScheduling}

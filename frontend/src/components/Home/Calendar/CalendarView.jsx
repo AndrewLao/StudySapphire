@@ -28,6 +28,14 @@ export default function CalendarView(props) {
             for (let i = timeSlot[0]; i <= timeSlot[1]; ++i) day[i] = timeSlot[2];
             });
         }
+        else {
+            let availability = userData.AVAILABILITY["" + i]
+            availability.forEach((chunk) => {
+                for (let j = chunk[0]; j <= chunk[1]; ++j)
+                    day[j] = 3;
+        })
+        }
+        
         week.push(day);
         weeksDates.push(dateStr);
         }
@@ -128,6 +136,12 @@ function CalendarChunk({userData, task, size, hoursPast, inMenu})
             borderRadius = "5px"
         }
         
+    }
+    if (task == 3)
+    {
+        taskColor = "#666666"
+        borderRadius = "5px"
+        taskName = "Busy"
     }
     let divSize = (size * 12) + (hoursPast * 2) - 2
 

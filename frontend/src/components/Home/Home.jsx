@@ -24,13 +24,14 @@ export default function Home(props) {
     const [schedulingMode, setSchedulingMode] = useState(false)
     const [selectedTask, setSelectedTask] = useState(0)
     const [inMenu, setInMenu] = useState(false);
+    const [editingAvailability, setEditingAvailability] = useState(true)
 
     const { username, setUsername } = useContext(usernameContext);
     const navigate = useNavigate();
 
     // comment this useEffect out if you want to test without a users
     useEffect(() => {
-        console.log("Current User: ", username);
+        // console.log("Current User: ", username);
         if (username === "") {
             navigate("/login");
         }
@@ -54,10 +55,11 @@ export default function Home(props) {
                 <div className="homeContainer">
                     <Calendar 
                     schedulingMode = {schedulingMode}  setSchedulingMode = {setSchedulingMode} selectedTask = {selectedTask} 
-                    userData = {userData} setUserData = {setUserData} inMenu={inMenu}/>
+                    userData = {userData} setUserData = {setUserData} inMenu={inMenu} editingAvailability={editingAvailability}/>
                     <TaskView 
                     schedulingMode = {schedulingMode} selectedTask = {selectedTask} 
-                    setSelectedTask = {setSelectedTask} userData = {userData} setUserData = {setUserData} inMenu={inMenu} setInMenu={setInMenu}
+                    setSelectedTask = {setSelectedTask} userData = {userData} setUserData = {setUserData} inMenu={inMenu} 
+                    setInMenu={setInMenu} editingAvailability={editingAvailability} setEditingAvailability={setEditingAvailability}
                     />
                     <Sidebar />
                     {inMenu && <AddTask inMenu={inMenu} setInMenu={setInMenu}/>}

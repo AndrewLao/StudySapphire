@@ -9,6 +9,7 @@ import Responsibility from "./Responsibility";
 
 // styles
 import "./TaskView.css";
+import EditAvailability from "./EditAvailability";
 
 
 // uses TaskItemFrame as a reusable component
@@ -26,12 +27,15 @@ export default function TaskView(props) {
                 {!schedulingMode && <div>Timer Goes Here</div>}
                 {schedulingMode && <div>Schedule Health Goes Here</div>}
                 <TaskHeader inMenu={inMenu} setInMenu={setInMenu}/>
-                {schedulingMode && <div>Edit availability Goes Here</div>}
+               
                 <div className="taskViewport">
+                {schedulingMode && <EditAvailability task={selectedTask} setTask={setSelectedTask} 
+                editingAvailability={props.editingAvailability} setEditingAvailability={props.setEditingAvailability} />}
                     {userData.RESPONSIBILITYORDER.map((r, key) => {
                         return (
                             <Responsibility responsibility = {userData.RESPONSIBILITIES[r]} tasks = {userData.TASKS} key = {key} 
-                            selectedTask = {selectedTask} setSelectedTask = {setSelectedTask} schedulingMode = {schedulingMode} />
+                            selectedTask = {selectedTask} setSelectedTask = {setSelectedTask} schedulingMode = {schedulingMode} 
+                            setEditingAvailability={props.setEditingAvailability}/>
                         )
                     })}
                 </div>

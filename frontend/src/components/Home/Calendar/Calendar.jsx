@@ -33,6 +33,7 @@ function Calendar(props) {
   const userData = props.userData;
   const setUserData = props.setUserData;
   const inMenu = props.inMenu;
+  const editingAvailability = props.editingAvailability
 
   useEffect(() => {
     console.log("Scheduled task is now task " + selectedTask);
@@ -90,6 +91,7 @@ function Calendar(props) {
             schedulingMode={schedulingMode}
             selectedTask={selectedTask}
             userData={userData}
+            editingAvailability = {editingAvailability}
           />
         )}
         {!schedulingMode && (
