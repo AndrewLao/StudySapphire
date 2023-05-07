@@ -1,9 +1,8 @@
 .DaysList {
-    width:100%;
+    width: calc(100%);
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     column-gap: 0.1em;
-    height:100%;
 }
 
 .DayHeader {
@@ -16,4 +15,5 @@
     color: #FFFFFF;
     font-size:1.5em;
     padding-top:15%;
+    padding-bottom:5%
 }

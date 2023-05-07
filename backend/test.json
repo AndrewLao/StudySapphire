@@ -1,0 +1,24 @@
+{
+  "TOKENS": 456.53,
+  "AVAILABILITY": {
+    "0": [],
+    "1": [],
+    "2": [],
+    "3": [],
+    "4": [],
+    "5": [],
+    "6": []
+  },
+  "RESPONSIBILITYORDER": [
+    "100"
+  ],
+  "RESPONSIBILITIES": {
+    "100": {
+      "NAME": "Miscellaneous",
+      "COLOR": "#999999",
+      "TASKS": []
+    }
+  },
+  "TASKS": {},
+  "SCHEDULEDTIME": {}
+}

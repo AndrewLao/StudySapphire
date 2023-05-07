@@ -1,0 +1,10 @@
+.CalendarSelect {
+    background-color: #eeeeee;
+    display:grid;
+    grid-template-columns: repeat(7, 1fr);
+    column-gap: 2px;
+}
+
+.CalendarGap {
+    height:2px;
+}

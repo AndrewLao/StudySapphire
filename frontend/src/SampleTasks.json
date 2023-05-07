@@ -1,64 +1,61 @@
 {
-    "RESPONSIBILITIES": [
-        {
-            "ID": 1,
+    "RESPONSIBILITYORDER": ["101", "102", "100"],
+    "RESPONSIBILITIES": {
+        "100":{
+            
+            "NAME": "Miscellaneous",
+            "COLOR": "#999999",
+            "TASKS": ["105"]
+        },
+        "101":{
+            
             "NAME": "BIO 10",
             "COLOR": "#39A451",
-            "TASKS": [
-                {
-                    "ID": 1,
-                    "NAME": "Homework #1",
-                    "DUE_DATE": "2012-04-26",
-                    "SCHEDULED_TIMES": [
-                        ["2012-04-23:12:15", "2012-04-23:12:45"],
-                        ["2012-04-24:21:00", "2012-04-24:22:15"]
-                    ],
-                    "DONE": false
-                },
-                {
-                    "ID": 2,
-                    "NAME": "Homework #2",
-                    "DUE_DATE": "2012-05-31",
-                    "SCHEDULED_TIMES": [
-                        ["2012-04-31:12:15", "2012-04-23:12:45"],
-                        ["2012-05-06:21:00", "2012-04-24:22:15"]
-                    ],
-                    "DONE": true
-                }
-            ]
+            "TASKS": ["101", "102"]
         },
-        {
-            "ID": 2,
+        "102":{
+            
             "NAME": "BIO 11",
             "COLOR": "#792451",
-            "TASKS": [
-                {
-                    "ID": 3,
-                    "NAME": "Homework #1",
-                    "DUE_DATE": "2012-05-20",
-                    "SCHEDULED_TIMES": [
-                        ["2012-04-23:12:15", "2012-04-23:12:45"],
-                        ["2012-04-24:21:00", "2012-04-24:22:15"]
-                    ]
-                },
-                {
-                    "ID": 4,
-                    "NAME": "Homework #2",
-                    "DUE_DATE": "2012-06-25",
-                    "SCHEDULED_TIMES": [
-                        ["2012-04-31:12:15", "2012-04-23:12:45"],
-                        ["2012-05-06:21:00", "2012-04-24:22:15"]
-                    ]
-                }
-            ]
-        },
-        {
-            "ID": 3,
-            "NAME": "Miscellaneous",
-            "COLOR": "#7dce95",
-            "TASKS": [
- 
-            ]
+            "TASKS": ["103", "104"]
         }
-    ]
+    },
+    "TASKS": {
+        "101": {
+            "NAME": "Homework 1",
+            "DUEDATE": "2023-04-23",
+            "RESPONSIBILITY": "101"
+        },
+        "102": {
+            "NAME": "Homework 2",
+            "DUEDATE": "2023-04-25",
+            "RESPONSIBILITY": "101"
+        },
+        "103": {
+            "NAME": "Homework 3",
+            "DUEDATE": "2023-04-28",
+            "RESPONSIBILITY": "102"
+        },
+        "104": {
+            "NAME": "Homework 4",
+            "DUEDATE": "2023-04-29",
+            "RESPONSIBILITY": "102"
+        },
+        "105": {
+            "NAME": "Homework 5",
+            "DUEDATE": "2023-04-29",
+            "RESPONSIBILITY": "100"
+        } 
+    },
+    "SCHEDULEDTIME": {
+        "2023-04-14": [
+            [12, 24, 101],
+            [30, 46, 101]
+        ],
+        "2023-04-13": [
+            [16, 28, 102],
+            [40, 50, 104]
+        ]
+    }
+
 }

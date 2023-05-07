@@ -7,7 +7,7 @@
     justify-content: space-between;
     top: 0;
     overflow: hidden;
-    height: 5rem;
+    height: 4rem;
 }
 
 .bannerLeftSide {
@@ -54,4 +54,19 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+}
+
+.bannerMiddle button {
+        font-size: 1.5rem;
+        font-family: 'Fredoka', sans-serif;
+        background-color: #0054ba00;
+        color: #ffffff;
+        border: none;
+        background: none;
+        cursor: pointer;
+}
+
+.bannerMiddle button:hover {
+    color: #ffffff96;
+    cursor: pointer;
 }

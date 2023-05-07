@@ -1,0 +1,38 @@
+.calendarView {
+    background-color: #eeeeee;
+    display:grid;
+    grid-template-columns: repeat(7, 1fr);
+    column-gap: 2px;
+}
+
+.calendarChunk {
+    opacity: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-bottom: 2px;
+    color:white;
+    text-align: center;
+    display:grid;
+    justify-content: center;
+    user-select: none;
+}
+
+
+
+
+  
+  .tooltiptext {
+    margin-left:0;
+    font-size: 16px;
+    opacity: 1;
+    width: 150px;
+    background-color: #dddddd;
+    color:black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position:fixed;
+    /* Position the tooltip */
+    z-index: 1;
+    user-select: none;
+  }

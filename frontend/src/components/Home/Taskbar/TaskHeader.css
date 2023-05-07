@@ -11,6 +11,12 @@
     color: #FFFFFF;
 }
 
+.addButtons {
+    display:flex;
+    gap:1em;
+    
+}
+
 .taskButtonContainer {
     display: flex;
     height: 1.5rem;
@@ -18,19 +24,12 @@
     padding: 0.5rem;
     background-color: #0054BA;
     color: #FFFFFF;
-    border: None;
+    border: none;
     cursor: pointer;
     justify-content: space-between;
     align-items: center;
     font-size: 1rem;
-    -webkit-user-select: none;
-        /* Safari */
-        -moz-user-select: none;
-        /* Firefox */
-        -ms-user-select: none;
-        /* IE10+/Edge */
-        user-select: none;
-        /* Standard */
+    user-select: none;
 }
 
 .taskButtonContainer:hover {
@@ -38,5 +37,28 @@
 }
 
 .taskButtonContainer:active {
+    background-color: #012e66;
+}
+
+.responsibilityButtonContainer {
+    display: flex;
+    height: 1.5rem;
+    width: 10rem;
+    padding: 0.5rem;
+    background-color: #0054BA;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    user-select: none;
+}
+
+.responsibilityButtonContainer:hover {
+    background-color: #004292;
+}
+
+.responsibilityButtonContainer:active {
     background-color: #012e66;
 }

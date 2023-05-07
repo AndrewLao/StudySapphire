@@ -1,9 +1,8 @@
 .homeContainer {
     display: grid;
     width:100%;
-    grid-template-columns: 50% 30% 20%;
+    grid-template-columns: 50% 35% 15%;
     column-gap: 0.5em;
-    padding-top: 5rem;
+    padding-top: 4.5rem;
     justify-content: space-between;
 }
-
