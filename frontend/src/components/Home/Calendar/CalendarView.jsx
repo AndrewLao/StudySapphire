@@ -105,7 +105,7 @@ function CalendarChunk({userData, task, size, hoursPast, inMenu})
 {
     let [hovering, setHovering] = useState(false)
     let [showPopup, setShowPopup] = useState(false)
-    const timerRef = useRef;
+    const timerRef = useRef();
     let taskData = 0
     let taskColor = "#dddddd"
     let taskName = ""
@@ -123,9 +123,6 @@ function CalendarChunk({userData, task, size, hoursPast, inMenu})
         }
             
     }
-
-
-
     if (task >= 100)
     {
         taskData = userData.TASKS[task]
@@ -144,8 +141,6 @@ function CalendarChunk({userData, task, size, hoursPast, inMenu})
         taskName = "Busy"
     }
     let divSize = (size * 12) + (hoursPast * 2) - 2
-
-
     useEffect(() => {
         if (hovering)
         {
@@ -159,10 +154,6 @@ function CalendarChunk({userData, task, size, hoursPast, inMenu})
             setShowPopup(false);
         }
     }, [hovering])
-
-
-    
-
     return (
         <div onMouseEnter={handleHover}
                 
@@ -179,7 +170,7 @@ function CalendarChunk({userData, task, size, hoursPast, inMenu})
                 </div>
                 
             </div>
-            {showPopup && hovering && <span className="tooltiptext" style={{top: mouseY}}>{taskName}</span>}
+            {inMenu == "NONE" && showPopup && hovering && <span className="tooltiptext" style={{top: mouseY}}>{taskName}</span>}
             </div>
            
     )

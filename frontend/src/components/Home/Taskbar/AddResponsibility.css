@@ -1,0 +1,88 @@
+.addResponsibility {
+    position: absolute;
+    left:40%;
+    top:25%;
+    min-height:50%;
+    width:20%;
+    background-color: #cccccc;;
+    filter: drop-shadow(4px 4px 10px #111111);
+    border-radius: 10px;
+    z-index: 99;
+}
+
+.addRespHeader {
+    background-color: #23466E;
+    height:10%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding-top:3%;
+    padding-left:3%;
+    color:white;
+    font-size: 30px;
+}
+
+.addRespName {
+    padding: 1em;
+    padding-bottom: 0;
+    
+}
+
+.addRespName input {
+    width: 80%;
+    height: 3em;
+    box-sizing: border-box;
+    padding:3%;
+    font-size:16px;
+}
+
+.colorGrid {
+    padding-left:1em;
+    display:grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    
+    width: 12vw;
+    aspect-ratio: 3/1;
+}
+
+.selectColor p {
+    padding-left: 1em;
+    margin-bottom:0;
+}
+
+.colorButton {
+    width: 75%;
+    aspect-ratio: 1/1;
+    border: 3px solid #555555;
+    border-radius: 8px;
+}
+
+.addRespFooterCenter {
+    display: grid;
+    align-items: center;
+}
+
+.addRespFooter {
+    padding:1em;
+    margin-top:10vh;
+    width: 90%;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10%;
+}
+
+.addRespFooter button {
+    width:8vw;
+    border:none;
+    height:5vh;
+    color: #eeeeee;
+    font-size: 20px;
+}
+
+.addRespAddButton {
+    background-color: #23466E;
+}
+
+.addRespCancelButton {
+    background-color: #7e0d05;
+}

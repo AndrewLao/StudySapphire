@@ -91,7 +91,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={ <Register /> } />
               <Route path="/home" element={wrapNavbar(<Home getUserData = {getUserData} postUserData = {postUserData}/>)} />
-              <Route path="/game" element={<Game />} />
+              <Route path="/game" element={<Game getUserData = {getUserData} postUserData = {postUserData}/>} />
               <Route path="*" element={<NotFound />}></Route>
               <Route path="/*" element={ <NotFound /> }></Route>
               

@@ -1,17 +1,21 @@
-.popup {
+.editPopup {
     position: absolute;
     
     left:35%;
     top:25%;
     min-height:55%;
     width:30%;
-    background-color: #cccccc;;
+    background-color: #cccccc;
     filter: drop-shadow(4px 4px 10px #111111);
     border-radius: 10px;
     z-index: 99;
 }
+/* 
+label {
+    font-weight: 100;
+} */
 
-.popupHeader {
+.editPopupHeader {
     background-color: #23466E;
     height:10%;
     border-top-left-radius: 10px;
@@ -22,54 +26,53 @@
     font-size: 30px;
 }
 
-.popupBody {
+.editPopupBody {
     display:grid;
     justify-content: center;
     grid-template-columns: 80%;
 }
 
-.addTaskForm div {
+.editTaskForm div {
     margin-top:5%;
 }
 
 
-.popupBody input {
+.editPopupBody input {
     box-sizing: border-box;
     padding:3%;
     width:100%;
 }
 
-.popupBody select {
+.editPopupBody select {
     box-sizing: border-box;
     padding:3%;
     width:100%;
 }
 
-.addTaskResponsibility select option {
+.editTaskResponsibility select option {
     height:5%;
     width:100%;
 }
 
-.addTaskDueDate input[type="date"] {
+.editTaskDueDate input[type="date"] {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.popupFooter {
+.editPopupFooter {
     width: 100%;
-    margin-top: 5%;
+    margin-top: 1em;
     display: grid;
     justify-content: center;
 }
 
-.popupButtons {
+.editPopupButtons {
     width: 80%;
     display:grid;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
 }
 
-.popupButtons button {
-    margin-top: 40%;
+.editPopupButtons button {
     width:8vw;
     border:none;
     height:5vh;
@@ -77,16 +80,34 @@
     font-size: 20px;
 }
 
-.popupButtons .saveButton {
+.editPopupButtons .saveButton {
     background-color: #23466E;
 }
 
-.popupButtons .cancelButton {
+.editPopupButtons .cancelButton {
     background-color: #7e0d05;
 }
 
-.addTaskError {
+.editTaskError {
     margin-top:5%;
     text-align: center;
     color:red;
 }
+
+.editPopupDelete {
+    margin-top:1em;
+    display:grid;
+    justify-content: center;
+}
+
+.editPopupDelete p {
+    text-align: center;
+    border:none;
+    color: #7e0d05;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.editPopupDelete p:hover {
+    text-decoration: underline;
+} 

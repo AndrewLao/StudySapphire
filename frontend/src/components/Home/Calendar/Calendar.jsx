@@ -71,6 +71,7 @@ function Calendar(props) {
         schedulingMode={schedulingMode}
         setSchedulingMode={setSchedulingMode}
       />
+      {/* <div className="scheduleMode">{schedulingMode ? "Scheduling" : "Viewing"}</div> */}
       <div className="calendarDays">
         <div></div>
         <Days shownDate={shownDate} />

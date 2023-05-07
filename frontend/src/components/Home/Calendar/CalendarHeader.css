@@ -16,13 +16,21 @@
     transition: filter 0.12s ease-in-out
 }
 
+.scheduleMode {
+    text-align: center;
+    padding-top:0.5em;
+    font-size:22px;
+}
+
 .calendarHeader button {
     height:75%;
     width:60%;
     margin-left:10%;
     border:none;
-    background-color: #0054BA;
+    background-color: #373737;
     color:white;
+    font-size:18px;
+    border-radius: 10px;
 }
 
 .calendarHeader button:active {

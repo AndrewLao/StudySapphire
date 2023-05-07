@@ -29,7 +29,7 @@ export default function Banner(props) {
 
                 <div className="bannerRightSide">
                     <img src="/coin.svg"></img>
-                    <p>{tokens} Tokens</p>
+                    <p>{tokens ? tokens.toFixed(0) : 100} Tokens</p>
                 </div>
             </div>
         </>

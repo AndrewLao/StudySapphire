@@ -1,6 +1,6 @@
 .viewTaskCard {
     display: grid;
-    grid-template-columns: 10% 60% 30%;
+    grid-template-columns: 10% 80% 20%;
     background-color: white;
     border-radius: 0.75em;
 }
@@ -51,4 +51,30 @@
 
 .checkBox:active {
     background-color: #bbbbbb;
+}
+
+.taskRightDiv {
+    padding: 1em;
+}
+
+.taskRightDiv img {
+    height:35%;
+}
+
+
+.earnedTokensPopup {
+    position:absolute;
+    height:8%;
+    width: 10%;
+    background-color: #00B0FF;
+    left:1%;
+    top:92%;
+    z-index: 99;
+    padding: 1em;
+    text-align: center;
+    color:white;
+}
+
+.earnedTokensPopupHidden {
+    top:100%;
 }

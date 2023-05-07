@@ -25,6 +25,8 @@ export default function TaskView(props) {
     const healthiness = props.healthiness
     const [vpSize, setVpSize] = useState(500)
     const viewportRef = useRef();
+    const [popupMessage, setPopupMessage] = useState("")
+    const popupTimerRef = useRef();
 
     function resizeAll()
     {
@@ -42,27 +44,31 @@ export default function TaskView(props) {
         resizeAll();
     }, [viewportRef, schedulingMode])
 
+    useEffect(() => {
+        clearTimeout(popupTimerRef.current)
+        popupTimerRef.current = setTimeout(() => {setPopupMessage("")}, 5000)
+    }, [popupMessage])
 
-    console.log(healthiness)
     return (
         <>
         
             <div className="fullTaskview">
                 
-                {!schedulingMode && <div>Timer Goes Here</div>}
-                {schedulingMode && <ScheduleHealth healthiness={healthiness}/>}
+                <ScheduleHealth healthiness={healthiness}/>
                 <TaskHeader inMenu={inMenu} setInMenu={setInMenu}/>
                 <div className="taskViewport" ref={viewportRef} style={{height: vpSize}}>
                     {schedulingMode && <EditAvailability task={selectedTask} setTask={setSelectedTask} 
                     editingAvailability={props.editingAvailability} setEditingAvailability={props.setEditingAvailability} />}
                         {userData.RESPONSIBILITYORDER.map((r, key) => {
                             return (
-                                <Responsibility responsibility = {userData.RESPONSIBILITIES[r]} tasks = {userData.TASKS} key = {key} 
+                                <Responsibility respID={r} responsibility = {userData.RESPONSIBILITIES[r]} tasks = {userData.TASKS} key = {key} 
                                 selectedTask = {selectedTask} setSelectedTask = {setSelectedTask} schedulingMode = {schedulingMode} 
-                                setEditingAvailability={props.setEditingAvailability}/>
+                                setEditingAvailability={props.setEditingAvailability} healthiness={healthiness} setInMenu={setInMenu} inMenu={inMenu}
+                                setPopupMessage={setPopupMessage}/>
                             )
                         })}
                 </div>
+                {(popupMessage != "" && <div className="earnedTokensPopup">{popupMessage}</div>)}
             </div>
             
         </>

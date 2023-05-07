@@ -1,5 +1,5 @@
 import "./AddTask.css"
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import { UserContext } from "../../../App";
 import { useContext, useState } from "react";
 export default function AddTask({inMenu, setInMenu})
@@ -9,7 +9,7 @@ export default function AddTask({inMenu, setInMenu})
     const dueDateRef = useRef(); 
     const {userData, setUserData} = useContext(UserContext);
     const [error, setError] = useState(false)
-    console.log(userData)
+
     return (
         <div className="popup">
             <div className="popupHeader">Add Task</div>
@@ -17,7 +17,7 @@ export default function AddTask({inMenu, setInMenu})
                 <div className="addTaskForm">
                     <div className="addTaskName">
                         <label for="addTaskName">Name:</label>
-                        <input type="text" id="addTaskName" placeholder="Homework" ref={nameRef}></input>
+                        <input autoFocus type="text" id="addTaskName" placeholder="Homework" ref={nameRef}></input>
                     </div>
                     <div className="addTaskResponsibility">
                         <label for="addTaskResponsibility">Responsibility:</label>
@@ -43,11 +43,13 @@ export default function AddTask({inMenu, setInMenu})
                         let taskName = nameRef.current.value
                         let taskResp = responsibilityRef.current.value
                         let taskDueDate = dueDateRef.current.value
-                        if (!taskName || !taskResp || !taskDueDate)
+                        if (!taskName || !taskResp)
                         {
                             setError(true)
                             return
                         }
+                        if (!taskDueDate)
+                            taskDueDate = null
                         let userCopy = JSON.parse(JSON.stringify(userData))
                         let taskIDs = Object.keys(userData.TASKS).map((task) => {
                             return parseInt(task, 10)
@@ -62,11 +64,11 @@ export default function AddTask({inMenu, setInMenu})
                         console.log("Saving...")
                         userCopy.TASKS[nextID] = newTask
                         setUserData(userCopy)
-                        setInMenu(false)
+                        setInMenu("NONE")
 
 
-                    }}>save</button>
-                    <button className="cancelButton" onClick={() => {setInMenu(false)}}>cancel</button>
+                    }}>Add</button>
+                    <button className="cancelButton" onClick={() => {setInMenu("NONE")}}>Cancel</button>
                 </div>
             </div>
             {error && <div className="addTaskError">Invalid Task!</div>}

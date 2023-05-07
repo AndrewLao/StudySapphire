@@ -15,6 +15,7 @@ import {usernameContext} from "../../usernameContext.jsx";
 // styles
 import "./Home.css";
 import AddTask from "./Taskbar/AddTask";
+import AddResponsibility from "./Taskbar/AddResponsibility";
 
 export default function Home(props) {
     const getUserData = props.getUserData
@@ -22,7 +23,7 @@ export default function Home(props) {
     const { userData, setUserData } = useContext(UserContext);
     const [schedulingMode, setSchedulingMode] = useState(false)
     const [selectedTask, setSelectedTask] = useState(0)
-    const [inMenu, setInMenu] = useState(false);
+    const [inMenu, setInMenu] = useState("NONE");
     const [editingAvailability, setEditingAvailability] = useState(true)
     const [healthiness, setHealthiness] = useState(null)
 
@@ -100,7 +101,8 @@ export default function Home(props) {
                     setInMenu={setInMenu} editingAvailability={editingAvailability} setEditingAvailability={setEditingAvailability}
                     healthiness={healthiness}/>
                     <Sidebar />
-                    {inMenu && <AddTask inMenu={inMenu} setInMenu={setInMenu}/>}
+                    {inMenu == "ADDTASK" && <AddTask inMenu={inMenu} setInMenu={setInMenu}/>}
+                    {inMenu == "ADDRESPONSIBILITY" && <AddResponsibility setInMenu={setInMenu} /> }
                 </div>
             </>
         )
