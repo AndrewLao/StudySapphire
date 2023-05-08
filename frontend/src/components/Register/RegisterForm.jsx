@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import {useContext, useEffect} from "react";
+import { useEffect} from "react";
 
 import "./RegisterForm.css"
 import {checkSession, signUp} from "../Auth/Authorization.jsx";
