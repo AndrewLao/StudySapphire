@@ -10,7 +10,6 @@ import {useNavigate} from "react-router-dom";
 
 // contexts
 import { UserContext } from '../../App';
-import {usernameContext} from "../../usernameContext.jsx";
 
 // styles
 import "./Home.css";
@@ -27,7 +26,6 @@ export default function Home(props) {
     const [editingAvailability, setEditingAvailability] = useState(true)
     const [healthiness, setHealthiness] = useState(null)
 
-    const { username, setUsername } = useContext(usernameContext);
     const navigate = useNavigate();
 
 
@@ -50,14 +48,6 @@ export default function Home(props) {
           ]
         })
       }
-    
-    // comment this useEffect out if you want to test without a users
-    useEffect(() => {
-        // console.log("Current User: ", username);
-        if (username === "") {
-            navigate("/login");
-        }
-    }, []);
 
     useEffect(() => {
         if (userData)

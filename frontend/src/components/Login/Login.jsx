@@ -3,11 +3,8 @@ import LoginForm from "./LoginForm";
 import LoginHeader from "./LoginHeader";
 import LoginInfo from "./LoginInfo";
 import "./Login.css"
-import {usernameContext} from "../../usernameContext.jsx";
 
 export default function Login(props) {
-
-    const { username, setUsername } = useContext(usernameContext);
 
     return (<>
         <div className="login-container">

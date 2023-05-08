@@ -1,32 +1,27 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import {CognitoUser, CognitoUserAttribute} from "amazon-cognito-identity-js";
-import {useContext, useEffect} from "react";
-
-import UserPool from '../UserPool.jsx';
+import { useEffect} from "react";
 
 import "./RegisterForm.css"
-import {usernameContext} from "../../usernameContext.jsx";
+import {checkSession, signUp} from "../Auth/Authorization.jsx";
 
 export default function RegisterForm() {
 
     const { register, handleSubmit } = useForm();
 
-    const { username, setUsername } = useContext(usernameContext);
-
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log("Current User: " + username);
-    })
+        checkSession().then( (data) => {
+            console.log(data);
+            navigate("/home");
+        });
+    }, [])
 
     function accountExistOnClick() {
         navigate("/login");
     }
 
-    function registerOnClick() {
-        navigate("/home");
-    }
 
     const onSubmit = data => {
 
@@ -36,47 +31,15 @@ export default function RegisterForm() {
             return;
         }
 
-        let attributeList = [];
-
-        attributeList.push(
-            new CognitoUserAttribute({
-                Name: "email",
-                Value: data.email,
+        signUp(data.username, data.password, data.email)
+            .then( (data) => {
+                navigate("/login");
             })
-        )
-
-        UserPool.signUp(data.username, data.password, attributeList, null, (err, data) => {
-            // ayy this mean you fucked up
-            if (err){
+            .catch( (err) => {
                 console.log(err);
-
-                switch(err.name){
-                    case "InvalidPasswordException":
-                        setMessage("Password does not fulfill requirements");
-                        break;
-                    case "InvalidParameterException":
-                        setMessage("Please enter a valid email address");
-                        break;
-                    case "UsernameExistsException":
-                        setMessage("Username already exists");
-                        break;
-                    default:
-                        setMessage("how tf did you get here");
-                        break;
-                }
-
-                return;
-            }
-
-            // ayy you logged in and arent a complete disgrace to humanity
-            console.log(data);
-
-            setUsername(data.user.getUsername());
-
-            navigate("/home");
-
-        });
-    };
+                setMessage(err);
+            } );
+    }
 
     function setMessage(msg){
         document.getElementById("msgField").innerHTML = msg;

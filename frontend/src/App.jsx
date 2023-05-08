@@ -10,7 +10,6 @@ import Login from './components/Login/Login';
 import Home from './components/Home/Home';
 import Register from './components/Register/Register';
 import NotFound from './NotFound';
-import { usernameContext } from "./usernameContext.jsx";
 import Game from './components/Game/Game';
 
 // styles
@@ -25,17 +24,8 @@ export const UserContext = createContext();
 
 function App() {
   const [userData, setUserData] = useState(undefined);
-  const [username, setUsername] = useState(localStorage.getItem("username") === null ? "" : localStorage.getItem("username"));
 
-  useEffect(() => {
-    localStorage.setItem("username", username);
-    console.log("Local Storage: ", localStorage.getItem("username"));
-  }, [username]);
-  
-  const contextValue = useMemo(
-      () => ( {username, setUsername}),
-      [username]
-  );
+
 
   function postUserData() {
     if (userData)
@@ -85,18 +75,16 @@ function App() {
     <>
       <div className="App">
         <UserContext.Provider value={{userData, setUserData} }>
-          <usernameContext.Provider value={contextValue}>
-            <Routes>
-              <Route path="/" element={<Login />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={ <Register /> } />
-              <Route path="/home" element={wrapNavbar(<Home getUserData = {getUserData} postUserData = {postUserData}/>)} />
-              <Route path="/game" element={<Game getUserData = {getUserData} postUserData = {postUserData}/>} />
-              <Route path="*" element={<NotFound />}></Route>
-              <Route path="/*" element={ <NotFound /> }></Route>
-              
-            </Routes>
-          </usernameContext.Provider>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={ <Register /> } />
+            <Route path="/home" element={wrapNavbar(<Home getUserData = {getUserData} postUserData = {postUserData}/>)} />
+            <Route path="/game" element={<Game getUserData = {getUserData} postUserData = {postUserData}/>} />
+            <Route path="*" element={<NotFound />}></Route>
+            <Route path="/*" element={ <NotFound /> }></Route>
+
+          </Routes>
         </UserContext.Provider>
         
       </div>

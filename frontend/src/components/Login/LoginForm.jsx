@@ -1,59 +1,37 @@
 // packages
-import { useForm } from "react-hook-form";
+import {set, useForm} from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import UserPool from "../UserPool.jsx";
+import UserPool from "../Auth/UserPool.jsx";
 
 import {CognitoUser, CognitoUserAttribute, AuthenticationDetails} from "amazon-cognito-identity-js";
 
 // styles
 import "./LoginForm.css"
 import {useContext, useEffect} from "react";
-import {usernameContext} from "../../usernameContext.jsx";
+import {checkSession, login} from "../Auth/Authorization.jsx";
 
 export default function LoginForm() {
     const { register, handleSubmit } = useForm();
     
     const navigate = useNavigate();
 
-    const { username, setUsername } = useContext(usernameContext);
-
     useEffect(() => {
-        console.log("Current User: ", username);
-        if ( !(username === "") ){
+        checkSession().then( (data) => {
+            console.log(data);
             navigate("/home");
-        }
-    })
+        });
+    }, [])
 
     const onSubmit = data => {
-        console.log(data);
-
-        const user = new CognitoUser({
-            Username: data.username,
-            Pool: UserPool,
-        });
-
-        const authDetails = new AuthenticationDetails({
-            Username: data.username,
-            Password: data.password,
-        });
-
-        const userName = data.username;
-
-        user.authenticateUser(authDetails, {
-            onSuccess: (data) => {
-                console.log("Successfully Logged in");
-                setUsername(userName);
+        login(data.username, data.password)
+            .then( (data) => {
+                console.log(data);
                 navigate("/home");
-            },
-            onFailure: (err) => {
-                if ( err.name === "UserNotConfirmedException"){
-                    setUsername(userName);
-                    navigate("/home");
-                }
-                console.log("Error: ", err);
+            })
+            .catch((err) => {
+                console.log(err);
                 setMessage(err.message);
-            }
-        });
+            })
     }
     
     const onRegister = data => {
