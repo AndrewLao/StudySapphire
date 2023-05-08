@@ -62,19 +62,3 @@
 }
 
 
-.earnedTokensPopup {
-    position:absolute;
-    height:8%;
-    width: 10%;
-    background-color: #00B0FF;
-    left:1%;
-    top:92%;
-    z-index: 99;
-    padding: 1em;
-    text-align: center;
-    color:white;
-}
-
-.earnedTokensPopupHidden {
-    top:100%;
-}

@@ -12,13 +12,14 @@
     padding-right: 5%;
 }
 
-.main-game-background-image {
-    
-}
-
 .game-items {
     border-style: solid;
     border-width: 1px;
     height: 50%;
     width: 25%
+}
+
+canvas {
+    margin-left: 1%;
+    margin-top:5em;
 }
