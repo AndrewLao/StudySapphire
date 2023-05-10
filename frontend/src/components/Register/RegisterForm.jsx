@@ -1,19 +1,22 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useEffect} from "react";
+import { useEffect, useContext } from "react";
+import { SapphireUserDataJSON } from "../SapphireUserData";
 
 import "./RegisterForm.css"
 import {checkSession, signUp} from "../Auth/Authorization.jsx";
+import { UserContext } from "../../App";
 
-export default function RegisterForm() {
+export default function RegisterForm(props) {
 
     const { register, handleSubmit } = useForm();
 
     const navigate = useNavigate();
 
+    const { userData, setUserData } = useContext(UserContext);
+
     useEffect(() => {
         checkSession().then( (data) => {
-            console.log(data);
             navigate("/home");
         });
     }, [])
@@ -30,9 +33,16 @@ export default function RegisterForm() {
             setMessage("Passwords are not the same.");
             return;
         }
-
+        const inputUsername = data.username;
+        const inputEmail = data.email; 
         signUp(data.username, data.password, data.email)
-            .then( (data) => {
+            .then((data) => {
+                let temp = userData;
+                temp.userID = data.userSub;
+                temp.USERNAME = inputUsername;
+                temp.EMAIL = inputEmail;
+                setUserData(temp);
+                props.postUserData();
                 navigate("/login");
             })
             .catch( (err) => {

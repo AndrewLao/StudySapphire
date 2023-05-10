@@ -2,7 +2,6 @@
 import { useState, useRef, useEffect, createContext, useMemo } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
-import sampleData from "./SampleTasks.json";
 
 // components
 import Banner from './components/Banner';
@@ -11,53 +10,49 @@ import Home from './components/Home/Home';
 import Register from './components/Register/Register';
 import NotFound from './NotFound';
 import Game from './components/Game/Game';
+import { SapphireUserDataJSON } from './components/SapphireUserData';
 
 // styles
 import './App.css';
 
 // temporary
 const api = axios.create({
-baseURL: `http://localhost:3001`
-})
+  baseURL: import.meta.env.VITE_API_URL
+});
 
 export const UserContext = createContext();
 
 function App() {
-  const [userData, setUserData] = useState(undefined);
+  const [userData, setUserData] = useState(SapphireUserDataJSON);
 
-
-
+  // user ID is updated in the Login and Register forms
+  // getUserData and postUserData called there 
+  // userData is passed via UserContext
   function postUserData() {
-    if (userData)
+    if (userData.userID != "")
     {
-        api.post("/dummyWrite", userData
+        api.put("/addOrUpdateUser", userData
       ).then((res) => {
-        // console.log(res);
+        console.log(res);
       })
     }
   }
   
+// load data if userID exists
   const getUserData = () => {
-    api.get("/dummyRead", { params: { fname: "test.json" } }).then(res => {
-      if (res.status == 500) {
-        console.log("uh oh!! pull from db didnt work :((")
-      }
-      else {
-        setUserData(res.data);
-      }
-    })
+    if (userData.userID != "") {
+      api.get("/getUserByID", { params: { userID: userData.userID } }).then(res => {
+        if (res.status == 400) {
+          console.log(res);
+        } else if (res.status == 500) {
+          console.log("Server error");
+        } else {
+          setUserData(res.data);
+          console.log(res.data);
+        }
+      });
+    }
   }
-
-  useEffect(() => {
-    getUserData();
-  }, []);
-  
-  // test if this useEffect causes data to be set to undefined
-  // useEffect(() => {
-  //   postUserData()
-  //   console.log("saved user data as")
-  //   console.log(userData)
-  // }, [userData])
 
   // function to add navBar to pages
   // Needed to make sure that the login and register pages does not have a navBar
@@ -76,9 +71,9 @@ function App() {
       <div className="App">
         <UserContext.Provider value={{userData, setUserData} }>
           <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={ <Register /> } />
+            <Route path="/" element={<Login getUserData={ getUserData } />} />
+            <Route path="/login" element={<Login getUserData={ getUserData } />} />
+            <Route path="/register" element={ <Register postUserData = {postUserData} /> } />
             <Route path="/home" element={wrapNavbar(<Home getUserData = {getUserData} postUserData = {postUserData}/>)} />
             <Route path="/game" element={<Game getUserData = {getUserData} postUserData = {postUserData}/>} />
             <Route path="*" element={<NotFound />}></Route>

@@ -1,4 +1,7 @@
 {
+    "UserID" : "",
+    "Email" : "",
+    "Username" : "",
     "RESPONSIBILITYORDER": ["101", "102", "100"],
     "RESPONSIBILITIES": {
         "100":{
@@ -57,5 +60,4 @@
             [40, 50, 104]
         ]
     }
-
 }

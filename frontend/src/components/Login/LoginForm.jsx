@@ -1,18 +1,16 @@
 // packages
-import {set, useForm} from "react-hook-form";
+import {useForm} from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import UserPool from "../Auth/UserPool.jsx";
-
-import {CognitoUser, CognitoUserAttribute, AuthenticationDetails} from "amazon-cognito-identity-js";
 
 // styles
 import "./LoginForm.css"
-import {useContext, useEffect} from "react";
+import {useEffect, useContext} from "react";
 import {checkSession, login} from "../Auth/Authorization.jsx";
+import { UserContext } from "../../App";
 
-export default function LoginForm() {
+export default function LoginForm(props) {
     const { register, handleSubmit } = useForm();
-    
+    const { userData, setUserData } = useContext(UserContext);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -23,9 +21,15 @@ export default function LoginForm() {
     }, [])
 
     const onSubmit = data => {
+        let inputUsername = data.username;
         login(data.username, data.password)
-            .then( (data) => {
-                console.log(data);
+            .then((data) => {
+                let temp = userData;
+                temp.userID = data.idToken.payload.sub;
+                temp.USERNAME = inputUsername;
+                temp.EMAIL = data.idToken.payload.email;
+                setUserData(temp);
+                props.getUserData();
                 navigate("/home");
             })
             .catch((err) => {

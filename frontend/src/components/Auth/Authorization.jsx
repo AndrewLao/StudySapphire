@@ -1,12 +1,18 @@
 import UserPool from "./UserPool.jsx";
-import {AuthenticationDetails, CognitoUser, CognitoUserAttribute} from "amazon-cognito-identity-js";
+import { AuthenticationDetails, CognitoUser, CognitoUserAttribute } from "amazon-cognito-identity-js";
+import axios from "axios";
 
 // registration
 
 export const signUp = async (username, password, email) => {
-    let message = "";
+    let message = "";  
 
     let attributeList = [];
+
+    // temporary
+    const api = axios.create({
+        baseURL: import.meta.env.VITE_API_URL
+    });
 
     attributeList.push(
         new CognitoUserAttribute({

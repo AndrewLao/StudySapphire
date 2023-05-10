@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import RegisterForm from "./RegisterForm";
 import RegisterHeader from "./RegisterHeader";
 import "./Register.css";
@@ -11,7 +10,7 @@ export default function Register(props) {
                 <div className="registerSpacer"></div>
                 <div className="registerLeftSide">
                     <RegisterHeader />
-                    <RegisterForm />
+                    <RegisterForm postUserData = {props.postUserData} />
                 </div>
                 <div className="registerRightSide">
                     <img src="/Icon_crystal_register.svg"></img>
