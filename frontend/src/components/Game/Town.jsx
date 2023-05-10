@@ -5,7 +5,7 @@ import { UserContext } from "../../App";
 import IDtoObject from "./IDtoObject";
 
 
-export default function Town({chosen, setChosen, cost, setCost})
+export default function Town({chosen, setChosen, cost, setCost, active})
 {  
     const canvasRef = useRef();
     const { userData, setUserData } = useContext(UserContext);
@@ -74,7 +74,7 @@ export default function Town({chosen, setChosen, cost, setCost})
             {
                 ctx.globalAlpha = 0.5; // draw an overlay around
                 if (getValid(thisX, thisY))
-                    ctx.fillStyle = "blue";
+                    ctx.fillStyle = "#0077b6";
                 else
                     ctx.fillStyle = "red";
                 ctx.fillRect((relMousePos.x * tileSize) + 1, (relMousePos.y * tileSize) + 1, tileSize - 2, tileSize - 2); //weird pixel offsets to avoid subpixel staining
@@ -90,7 +90,7 @@ export default function Town({chosen, setChosen, cost, setCost})
         if (userData)
         {
             const canvas = canvasRef.current;
-            canvas.width = window.innerWidth * 0.5
+            canvas.width = window.innerWidth * 0.45
             canvas.height = canvas.width * (2/3);
             setCanvasWidth(canvas.width)
             setCanvasHeight(canvas.height)
@@ -175,6 +175,10 @@ export default function Town({chosen, setChosen, cost, setCost})
 
       function handleClick()
       {
+        if (!active)
+        {
+            return
+        }
         let x = relMousePos.x
         let y = relMousePos.y
         const ctx = canvasRef.current.getContext("2d")
@@ -191,6 +195,7 @@ export default function Town({chosen, setChosen, cost, setCost})
                 userCopy.TOWN.MAP[thisY][thisX]= newTile
                 drawImg(newTile, ctx, thisX, thisY)
             })
+            setChosen(0)
             setUserData(userCopy)
             return
         }

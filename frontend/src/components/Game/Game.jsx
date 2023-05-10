@@ -28,6 +28,7 @@ export default function Game({ getUserData, postUserData }) {
     const [houses, setHouses] = useState(0)
 
     let [tileSize, setTileSize] = useState(0)
+    let [popup, setPopup] = useState(false)
 
     useEffect(() => {
         getUserData();
@@ -112,7 +113,13 @@ export default function Game({ getUserData, postUserData }) {
                     </div>
                     <div className="barProgress" 
                     style={{width: (percent / 2) + "%", 
-                    backgroundColor: (percent >= 100 ? "skyblue" : "red")}}></div>
+                    backgroundColor: (percent >= 100 ? "skyblue" : "red"),
+                    borderTopRightRadius: (percent >= 200 ? "20px" : "0px"),
+                    borderBottomRightRadius: (percent >= 200 ? "20px" : "0px")
+                    }}>
+
+
+                    </div>
                 </div>
                 <div></div>
                 <div className="percents">
@@ -135,8 +142,17 @@ export default function Game({ getUserData, postUserData }) {
     }
     return (
         <button className="buyButton" onClick={() => {
-            setChosen(id)
-            setCost(cost)
+            if (id == chosen)
+            {
+                setChosen(0)
+                setCost(0)
+            }
+            else
+            {
+                setChosen(id)
+                setCost(cost)
+            }
+            
         }}>Buy</button>
     )
     }
@@ -170,8 +186,9 @@ export default function Game({ getUserData, postUserData }) {
                 <Banner tokens={userData ? userData.TOKENS : 100}/>
                 <div className="gameViewport">
                 <div className="gameAndStats">
-                    <Town chosen={chosen} setChosen={setChosen} cost={cost} setCost={setCost}/>
+                    <Town chosen={chosen} setChosen={setChosen} cost={cost} setCost={setCost} active={!popup}/>
                     <div className="statsViewport">
+                        <img className="helpButton" src="/help_outline.svg" onClick={() => {setPopup(true)}}></img>
                         <p className="importantStat">Stats</p>
                         <ProgressBar name={"Food:"} percent={food} />
                         <ProgressBar name={"Water:"} percent={water} />
@@ -189,15 +206,55 @@ export default function Game({ getUserData, postUserData }) {
                     <StoreCard name={"Bakery"} imgname={"bakery"} id={60} tokens={15} stats={["+2 Happiness", "+1 Food"]} />
                     <StoreCard name={"School"} imgname={"school"} id={90} tokens={20} stats={["+4 Education", "+1 Happiness"]} />
                     <StoreCard name={"Blacksmith"} imgname={"blacksmith"} id={70} tokens={20} stats={["+4 Safety"]} />
-                    <div className="destroyButton">
+                    <div className="storeOtherOptions">
+                        <div className="makeTreeButton">
                         <button 
-                        style={{boxShadow: (chosen == -1 ? "6px 6px black" : "4px 4px gray")}}
-                        onClick={() => {setChosen(-1)}}>Destroy Building</button>
+                            style={{boxShadow: (chosen == 110 || chosen == 111 ? "6px 6px black" : "4px 4px gray")}}
+                            onClick={() => {
+                                setChosen(chosen == 110 || chosen == 111 ? 0 : 110 + Math.floor(Math.random() * 2))
+                                setCost(0)
+                                }}>Make Tree</button>
+                        
+                        </div>
+                        <div className="destroyButton">
+                            <button 
+                            style={{boxShadow: (chosen == -1 ? "6px 6px black" : "4px 4px gray")}}
+                            onClick={() => {
+                                setChosen(chosen == -1 ? 0 : -1)
+                                setCost(0)
+                                }}>Destroy Building</button>
+                        </div>
                     </div>
                 </div>
                 </div>
-                
                 <Sidebar />
+                {popup && <div className="helpPopup">
+                    <div className="helpPopupHeader">
+                        <p>Welcome to your town!</p>
+                        </div>
+                    <div className="helpPopupBody">
+                        <p>This is your town. You can make buildings to increase your stats and grow your population!</p>
+                        <p>First things first, every resident needs a house. Additionally, there are five stats to keep track of: Food, water,
+                            education, safety, and happiness. Every resident needs 1 point from each stat. You can increase how many stat points you
+                            have for a stat by creating a building that increases that stat. If you have enough stat points for a new resident, one will move in!
+                        </p>
+                        <p>In order to buy buildings, you need tokens. You earn tokens by completing tasks in your task scheduler. For every fifteen minutes of work
+                            you complete, you earn one token times your healthiness score. You can see more information about your tasks and healthiness score in your health scheduler.
+                            The more work you do, and the healthier you do it, the faster you can make new buildings
+                            to grow your town!
+                        </p>
+                        <p>Once you buy a building, you'll need to place it down. Find a spot where the building can fit in your town and click on the
+                            top left square of where you want to build it. Most buildings are 2 tiles by 2 tiles, so make sure you account for that. You can
+                            also destroy a building to make room, but this will lower your stats, and you will NOT be refunded tokens for it.
+                        </p>
+                        <p>That's pretty much all you need to know! Grow your town and have fun!</p>
+                        
+                    </div>
+                    <div className="helpPopupFooter">
+                        <button onClick={() => {setPopup(false)}}>OK</button>
+                    </div>
+                    
+                    </div>}
             </div>
         </>
     );
