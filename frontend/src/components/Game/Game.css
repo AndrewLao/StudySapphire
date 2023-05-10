@@ -28,6 +28,7 @@ canvas {
 
 .canvasViewPort img {
     user-select: none;
+    -webkit-user-select: none;
 }
 
 .gameAndStats {
@@ -59,8 +60,6 @@ canvas {
     font-size: 42px;
     font-family: "Fredoka";
 }
-
-
 
 
 .barHolder {
@@ -106,8 +105,6 @@ canvas {
 .percents div {
     margin-left: 1em;
 }
-
-
 
 .storeViewport {
     background-color: #ecf0f2;
@@ -159,6 +156,10 @@ canvas {
     width:1.2em;
 }
 
+.storeCardDescription {
+    margin-bottom: 30px
+}
+
 .storeCardDescription p {
     margin: 0;
     text-align: center;
@@ -178,6 +179,10 @@ canvas {
     padding:0em 2em;
     border:none;
     background-color: #0077b6;
+}
+
+.buyButton:hover {
+    cursor: pointer;
 }
 
 .cantBuyButton {
@@ -207,4 +212,9 @@ canvas {
     color:white;
     border:none;
     margin-bottom:2em;
+}
+
+.destroyButton button:hover {
+    background-color: rgb(134, 60, 60);
+    cursor: pointer;
 }

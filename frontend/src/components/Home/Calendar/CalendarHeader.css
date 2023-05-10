@@ -34,11 +34,16 @@
 }
 
 .calendarHeader button:active {
-    filter:brightness(70%)
+    filter:brightness(70%);
+}
+
+.calendarHeader button:hover {
+    cursor: pointer;
+    filter: brightness(70%);
 }
 
 .calendarHeader img:hover{
-    filter:brightness(60%)
+    filter:brightness(60%);
 }
 
 .calendarHeader p {

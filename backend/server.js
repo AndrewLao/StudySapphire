@@ -84,6 +84,10 @@ app.put('/addOrUpdateUser', (req, res) => {
     });
 });
 
+app.get("/getHealthiness", (req, res) => {
+    const inputData = req.query.userData;
+    console.log(inputData);
+})
 
 // - format is [start, end, id] start end inclusive
 // - ignore all task id=3

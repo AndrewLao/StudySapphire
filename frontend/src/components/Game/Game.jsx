@@ -1,5 +1,4 @@
-import { useState, useEffect, useRef } from "react";
-import { useContext } from "react";
+import { useState, useEffect, useRef, useContext, useLayoutEffect } from "react";
 import { UserContext } from "../../App";
 // import GameNavbar from "./GameNavBar";
 import IDtoObject from "./IDtoObject";
@@ -9,13 +8,13 @@ import Sidebar from "../Sidebar";
 import Town from "./Town";
 
 
-export default function Game({getUserData, postUserData}) {
+export default function Game({ getUserData, postUserData }) {
 
     const canvasRef = useRef();
     const { userData, setUserData } = useContext(UserContext);
     const [mousePos, setMousePos] = useState({});
-    const [relMousePos, setRelMousePos] = useState({x: 0, y: 0})
-    const [lastMousePos, setLastMousePos] = useState({x: 0, y: 0})
+    const [relMousePos, setRelMousePos] = useState({ x: 0, y: 0 })
+    const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 })
 
     const [chosen, setChosen] = useState(0)
     const [cost, setCost] = useState(0)
@@ -135,10 +134,10 @@ export default function Game({getUserData, postUserData}) {
         return ( <button className="cantBuyButton">Buy</button>)
     }
     return (
-    <button className="buyButton" onClick={() => {
-        setChosen(id)
-        setCost(cost)
-    }}>Buy</button>
+        <button className="buyButton" onClick={() => {
+            setChosen(id)
+            setCost(cost)
+        }}>Buy</button>
     )
     }
 

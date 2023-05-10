@@ -15,7 +15,7 @@ export default function Town({chosen, setChosen, cost, setCost})
     const [canvasWidth, setCanvasWidth] = useState(0)
     const [canvasHeight, setCanvasHeight] = useState(0)
 
-    let [tileSize, setTileSize] = useState(0)
+    let [tileSize, setTileSize] = useState(0);
 
     useEffect(() => {
     const handleMouseMove = (event) => {

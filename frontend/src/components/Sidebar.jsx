@@ -17,7 +17,6 @@ export default function Sidebar() {
       {generateButton("Task Scheduler", "calendar", () => { navigate("/home") })}
       {generateButton("My Town", "town", () => { navigate("/game") })}
       {generateButton("Profile", "profile", null)}
-      {generateButton("Account Settings", "settings", null)}
       <button className="SignOut" onClick={logOut}>
         <p>Sign Out</p>
       </button>

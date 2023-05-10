@@ -18,6 +18,8 @@ export default function RegisterForm(props) {
     useEffect(() => {
         checkSession().then( (data) => {
             navigate("/home");
+        }).catch((err) => {
+            console.log(err);
         });
     }, [])
 

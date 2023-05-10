@@ -17,6 +17,8 @@ export default function LoginForm(props) {
         checkSession().then( (data) => {
             console.log(data);
             navigate("/home");
+        }).catch((err) => {
+            console.log(err);
         });
     }, [])
 
