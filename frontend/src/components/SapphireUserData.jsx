@@ -3,7 +3,7 @@ export const SapphireUserDataJSON =
   "userID" : "",
   "EMAIL" : "",
   "USERNAME" : "",
-  "TOKENS": 473.63,
+  "TOKENS": 0,
   "AVAILABILITY": {
     "0": [],
     "1": [],

@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 
-// get user data by ID
+// functionality to get user data by ID
 const getUserById = async (userID) => {
     const params = {
         TableName: TABLE_NAME,
@@ -45,7 +45,7 @@ const getUserById = async (userID) => {
     return await dynamoClient.get(params).promise();
 }
 
-// update user data
+// functionality to update user data
 const addOrUpdateUser = async (userData) => {
     const params = {
         TableName: TABLE_NAME,
@@ -54,6 +54,7 @@ const addOrUpdateUser = async (userData) => {
     return await dynamoClient.put(params).promise();
 }
 
+// get user by ID
 app.get('/getUserById', (req, res) => {
     if (req.query.userID == undefined || req.query.userID == "") {
         res.status(400).send("Variable userID cannot be empty");
@@ -95,7 +96,7 @@ app.put('/addOrUpdateUser', (req, res) => {
 app.get("/getHealthinessScore", (req, res) => {
     let content = req.body;
     restart.status(200).send("Not implemented yet in backend");
-})
+});
 
 app.get('/', (req, res) => {
     res.send("Testing Server");
