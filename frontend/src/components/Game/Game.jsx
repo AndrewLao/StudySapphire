@@ -5,6 +5,8 @@ import { UserContext } from "../../App";
 import IDtoObject from "./IDtoObject";
 import Banner from "../Banner";
 import "./Game.css";
+import Sidebar from "../Sidebar";
+import Town from "./Town";
 
 
 export default function Game({getUserData, postUserData}) {
@@ -15,6 +17,17 @@ export default function Game({getUserData, postUserData}) {
     const [relMousePos, setRelMousePos] = useState({x: 0, y: 0})
     const [lastMousePos, setLastMousePos] = useState({x: 0, y: 0})
 
+    const [chosen, setChosen] = useState(0)
+    const [cost, setCost] = useState(0)
+
+    const [food, setFood] = useState(0)
+    const [water, setWater] = useState(0)
+    const [education, setEducation] = useState(0)
+    const [safety, setSafety] = useState(0)
+    const [happiness, setHappiness] = useState(0)
+    const [capacity, setCapacity] = useState(0)
+    const [houses, setHouses] = useState(0)
+
     let [tileSize, setTileSize] = useState(0)
 
     useEffect(() => {
@@ -22,116 +35,170 @@ export default function Game({getUserData, postUserData}) {
     }, []);
 
     useEffect(() => {
-    const handleMouseMove = (event) => {
-        setMousePos({ 
-            x: event.clientX, y: event.clientY });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => {
-        window.removeEventListener(
-        'mousemove',
-        handleMouseMove
-        );
-    };
-    }, []);
-
-    
+        if (userData)
+        {
+            postUserData();
+            console.log("saved user data as");
+            console.log(userData);
+        }
+        
+    }, [userData]);
 
     useEffect(() => {
-        if (canvasRef.current)
+        calculateStats();
+    }, [userData])
+
+    function calculateStats() {
+        if (!userData)
         {
-            let relX = Math.floor((mousePos.x - canvasRef.current.offsetLeft) / tileSize)
-            let relY = Math.floor((mousePos.y - canvasRef.current.offsetTop) / tileSize)
-            if (relX > 23 || relX < 0 || relY > 15 || relY < 0)
-            {
-                relX = -1
-                relY = -1
-                setLastMousePos({x: relMousePos.x, y: relMousePos.y})
-                setRelMousePos({x: relX, y: relY})
-            }
-            else if (relX != relMousePos.x || relY != relMousePos.y)
-            {
-                setLastMousePos({x: relMousePos.x, y: relMousePos.y})
-                setRelMousePos({x: relX, y: relY})
-            }
+            return
+        }
+            
+        let buildings = {
+            50: 0,
+            60: 0,
+            70: 0,
+            80: 0,
+            90: 0,
+            100: 0
+        }
+        userData.TOWN.MAP.forEach((row) => {
+            row.forEach(tile => {
+                if ([50, 60, 70, 80, 90, 100].includes(tile))
+                    buildings[tile] += 1
+            })
+        })
+        console.log(buildings)
+        let houses = buildings[50]
+        let bakeries = buildings[60]
+        let blacksmiths = buildings[70]
+        let farms = buildings[80]
+        let schools = buildings[90]
+        let wells = buildings[100]
+        let newFood = (2 * farms) + bakeries + 2
+        let newWater = (3 * wells + 2)
+        let newEducation = (4 * schools + 2)
+        let newSafety = (4 * blacksmiths + 2)
+        let newHappiness = ((2 * bakeries) + schools + 2)
+        let newCapacity = houses
+        let population = userData.TOWN.POPULATION
+        console.log(newFood, newWater, newEducation, newSafety, newHappiness, newCapacity)
+        if (Math.min(newFood, newWater, newEducation, newSafety, newHappiness, newCapacity) > population)
+        {
+            population += 1
+            let userCopy = JSON.parse(JSON.stringify(userData))
+            userCopy.TOWN.POPULATION = population
+            setUserData(userCopy)
+        }
+        setFood((newFood / population) * 100)
+        setWater((newWater / population) * 100)
+        setEducation((newEducation/ population) * 100)
+        setSafety((newSafety / population) * 100)
+        setHappiness((newHappiness / population) * 100)
+        setCapacity((newCapacity / population) * 100)
+        setHouses(newCapacity)
+    }
+
+
+    function ProgressBar({name, percent})
+    {
+    return (
+        <div>
+            <div className="progressBar">
+                <div style={{marginTop:"0.15em"}}>{name}</div>
                 
-            
-        }
-        
-    }, [mousePos])
+                <div className="barHolder">
+                    <div className="ticks">
+                        <div></div><div></div><div></div>
+                    </div>
+                    <div className="barProgress" 
+                    style={{width: (percent / 2) + "%", 
+                    backgroundColor: (percent >= 100 ? "skyblue" : "red")}}></div>
+                </div>
+                <div></div>
+                <div className="percents">
+                    <div>33%</div>
+                    <div>100%</div>
+                    <div>166%</div>
+                </div>
+            </div>
+        </div>
+    )
+    }
 
-    useEffect(() => {
-        if (userData)
-        {
-            console.log(relMousePos)
-            const canvas = canvasRef.current;
-            const ctx = canvas.getContext("2d")
-            let thisX = relMousePos.x
-            let thisY = relMousePos.y
-            let lastX = lastMousePos.x
-            let lastY = lastMousePos.y
-            if (!isNaN(lastX) && !isNaN(lastY) && lastX != -1 && lastY != -1) // rerender the last tile the mouse was on
-            {
-                console.log(lastX)
-                console.log(lastY)
-                drawImg(userData.TOWN.MAP[lastY][lastX], ctx, lastX, lastY)
-            }
-            if (!isNaN(thisX) && !isNaN(thisY) && thisX != -1 && thisY != -1) // render a transparent square over the new tile
-            {
-                ctx.globalAlpha = 0.5; // draw an overlay around
-                let tileObj = IDtoObject(userData.TOWN.MAP[thisY][thisX], thisX, thisY)
-                if (tileObj.BUILDABLE)
-                    ctx.fillStyle = "blue";
-                else
-                    ctx.fillStyle = "red";
-                ctx.fillRect((relMousePos.x * tileSize) + 1, (relMousePos.y * tileSize) + 1, tileSize - 2, tileSize - 2); //weird pixel offsets to avoid subpixel staining
-                ctx.globalAlpha = 1;
-            }
-            
-            
-            
-            
-        }
-        
-    }, [relMousePos])
+    function BuyButton({id, cost})
+    {
+    if (!userData)
+        return (<></>)
+    if (userData.TOKENS < cost)
+    {
+        return ( <button className="cantBuyButton">Buy</button>)
+    }
+    return (
+    <button className="buyButton" onClick={() => {
+        setChosen(id)
+        setCost(cost)
+    }}>Buy</button>
+    )
+    }
 
+    function StoreCard({name, imgname, id, tokens, stats})
+    {
+        return ( <div className="storeCard" style={{boxShadow: (chosen == id ? "6px 6px black" : "4px 4px gray")}}>
+            <div className="storeCardTop">
+                <p>{name}</p>
+                
+                <div className="tokenPrice">
+                    {tokens}
+                    <img src={"coin.svg"} />
+                </div>
+            </div>
+            <div className="storeCardDescription">
+            <img src={"src/components/Game/game-assets/buildings/" + imgname + ".png"} />
+                {stats.map((stat) => {
+                    return (<p>{stat}</p>)
+                })}
+            </div>
+            <div className="storeCardBuy">
+                <BuyButton id={id} cost={tokens} />
+            </div>
+        </div>)
+    }
 
-    useEffect(() => {
-        if (userData)
-        {
-            const canvas = canvasRef.current;
-            canvas.width = window.innerWidth * 0.5
-            canvas.height = canvas.width * (2/3);
-            const ctx = canvas.getContext("2d")
-            ctx.imageSmoothingEnabled = false;
-            setTileSize(canvas.width / 24)
-            const background = userData.TOWN.MAP
-            background.forEach((tileRow, y) => {
-                tileRow.forEach((tileID, x) => {
-                    drawImg(tileID, ctx, x, y)
-        })})
-        }
-        
-      }, [userData, tileSize])
-
-
-      function drawImg(id, ctx, x, y)
-      {
-            const image = new Image()
-            const idObj = IDtoObject(id, x, y)
-            image.src = "src/components/Game/game-assets/tiles/" + idObj.SPRITE + ".png"
-            image.onload = function() {
-              ctx.drawImage(image, x * tileSize, y * tileSize, tileSize + 2, tileSize + 2);
-            }
-      }
     return (
         <>
             <div className="game-wrapper-div">
-                <Banner includeMenu={ true } />
-                <div>
-                    <canvas ref={canvasRef}></canvas>
+                <Banner tokens={userData ? userData.TOKENS : 100}/>
+                <div className="gameViewport">
+                <div className="gameAndStats">
+                    <Town chosen={chosen} setChosen={setChosen} cost={cost} setCost={setCost}/>
+                    <div className="statsViewport">
+                        <p className="importantStat">Stats</p>
+                        <ProgressBar name={"Food:"} percent={food} />
+                        <ProgressBar name={"Water:"} percent={water} />
+                        <ProgressBar name={"Education:"} percent={education} />
+                        <ProgressBar name={"Safety:"} percent={safety} />
+                        <ProgressBar name={"Happiness:"} percent={happiness} />
+                        <p className="importantStat">Population: {userData ? userData.TOWN.POPULATION : 0} / {houses}</p>
+                    </div>
                 </div>
-
+                <div></div>
+                <div className="storeViewport">
+                    <StoreCard name={"House"} imgname={"house"} id={50} tokens={10} stats={["+1 Capacity"]} />
+                    <StoreCard name={"Farm"} imgname={"farm"} id={80} tokens={10} stats={["+2 Food"]} />
+                    <StoreCard name={"Well"} imgname={"well"} id={100} tokens={5} stats={["+3 Water"]} />
+                    <StoreCard name={"Bakery"} imgname={"bakery"} id={60} tokens={15} stats={["+2 Happiness", "+1 Food"]} />
+                    <StoreCard name={"School"} imgname={"school"} id={90} tokens={20} stats={["+4 Education", "+1 Happiness"]} />
+                    <StoreCard name={"Blacksmith"} imgname={"blacksmith"} id={70} tokens={20} stats={["+4 Safety"]} />
+                    <div className="destroyButton">
+                        <button 
+                        style={{boxShadow: (chosen == -1 ? "6px 6px black" : "4px 4px gray")}}
+                        onClick={() => {setChosen(-1)}}>Destroy Building</button>
+                    </div>
+                </div>
+                </div>
+                
+                <Sidebar />
             </div>
         </>
     );

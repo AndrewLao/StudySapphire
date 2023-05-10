@@ -51,10 +51,10 @@ export default function CalendarHeader(props) {
     return (
         <>
             <div className="calendarHeader">
-                <img src="./public/calendar/leftArrow.svg" alt="Last Week" onClick={() => {setShownDate(getWeek(shownDate, - 1))}}></img>
+                <img src="/calendar/leftArrow.svg" alt="Last Week" onClick={() => {setShownDate(getWeek(shownDate, - 1))}}></img>
                 { displayCalendarHeader(shownDate) }
                 <button onClick={() => {setSchedulingMode(!schedulingMode)}}>{schedulingModeText()}</button>
-                <img src="./public/calendar/rightArrow.svg" alt="Last Week" onClick={() => {setShownDate(getWeek(shownDate, 1))}}></img>
+                <img src="/calendar/rightArrow.svg" alt="Last Week" onClick={() => {setShownDate(getWeek(shownDate, 1))}}></img>
             </div>
         </>
     );

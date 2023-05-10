@@ -47,6 +47,7 @@
 
 .checkBox:hover {
     background-color: #dddddd;
+    cursor:pointer;
 }
 
 .checkBox:active {
