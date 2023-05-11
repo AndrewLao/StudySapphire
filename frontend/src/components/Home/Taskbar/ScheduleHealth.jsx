@@ -10,7 +10,7 @@ export default function ScheduleHealth({healthiness}) {
             <div className="healthScore">Health score: {healthiness.SCORE}%</div>
             {healthiness.PROBLEMS.map((problem) => {
                 return (<div className="scheduleProblem">
-                    <span className="pointsDeduced">{problem[1]}%</span>
+                    <span className="pointsDeduced">{problem[1]}% </span>
                     <span className="problemReason"> {problem[0]}</span>
                     </div>)
             })}

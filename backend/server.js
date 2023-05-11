@@ -5,6 +5,7 @@ import cors from "cors";
 import { stringify } from 'querystring';
 import sdk from "aws-sdk";
 import dotenv from "dotenv";
+import { time } from 'console';
 
 // -----AWS Configurations-----
 
@@ -84,11 +85,6 @@ app.put('/addOrUpdateUser', (req, res) => {
     });
 });
 
-app.get("/getHealthiness", (req, res) => {
-    const inputData = req.query.userData;
-    console.log(inputData);
-})
-
 // - format is [start, end, id] start end inclusive
 // - ignore all task id=3
 // 3 ways to lose points
@@ -96,10 +92,98 @@ app.get("/getHealthiness", (req, res) => {
 // 2: -1 pt * (days scheduled after due date inclusive) * number of slots
 // 3: more than 8 hrs of total work per day, -1 pt per slot after the 8 hr mark
 // score from 0-100
+app.get("/getHealthiness", (req, res) => {
 
-app.get("/getHealthinessScore", (req, res) => {
-    let content = req.body;
-    restart.status(200).send("Not implemented yet in backend");
+    const inputData = req.query.userData;
+    
+    const outputData = {
+        SCORE: 100,
+        PROBLEMS: []
+    }
+
+    const sortFunc = (a, b) => {
+        if (a[0] == b[0]) {
+            return 0;
+        } 
+        return (a[0] < b[0] ? -1 : 1);
+    }
+    
+    if (req.query.userData.SCHEDULEDTIME == undefined) {
+        res.status(200).send(outputData);
+    } else {
+        
+        // more than 8 hours total work per day
+        // more than 2 hours of work deductions
+        for (const key in inputData.SCHEDULEDTIME) {
+            const sortedTimeSlots = inputData.SCHEDULEDTIME[key].sort(sortFunc);
+            let scheduledDayArray = new Array(96).fill(0);
+            console.log(key);
+            for (let i = 0; i < sortedTimeSlots.length; i++) {                
+                let taskID = sortedTimeSlots[i][2];
+                let dueDate = inputData.TASKS[taskID]?.DUEDATE;
+                let taskName = inputData.TASKS[taskID]?.NAME;
+                let countSlots = 0;
+
+                console.log(sortedTimeSlots[i]);
+                let start = parseInt(sortedTimeSlots[i][0]);
+                let end = parseInt(sortedTimeSlots[i][1]);
+
+                if (taskID != 3 || dueDate != undefined) {
+                    let date1 = new Date(key);
+                    let date2 = new Date(dueDate);
+        
+                    for (let y = start; y <= end; y++) {
+                        scheduledDayArray[y] = 1;
+                        countSlots += 1;
+                    }
+
+                    if (dueDate <= key) {
+                        let differenceInDays = (date1.getTime() - date2.getTime()) / (1000 * 3600 * 24);
+                        console.log(differenceInDays);
+                        let numberOfPointsLost = 1 * (differenceInDays + 1) * countSlots;
+                        outputData.SCORE -= numberOfPointsLost;
+                        outputData.PROBLEMS.push(["You have " + taskName + " scheduled on or after its due date of " + dueDate, -numberOfPointsLost]);
+                    }
+                }
+                
+
+            }
+            console.log(scheduledDayArray);
+            let counter = 0;
+            let totalOver8 = 0;
+            let totalSlots = 0;
+            let isMoreThan8 = false;
+            for (let i = 0; i < 96; i++) {
+                if (scheduledDayArray[i] == 1) {
+                    counter += 1;
+                    totalSlots += 1;
+                } else {
+                    counter = 0;
+                }
+
+                if (counter > 8) {
+                    isMoreThan8 = true;
+                    totalOver8 += 1; 
+                }
+            }
+            if (isMoreThan8) {
+                outputData.SCORE -= totalOver8;
+                outputData.PROBLEMS.push(["You are working too much in one sitting (>2 hours) on " + key, -totalOver8]);
+            }
+            if (totalSlots >= 32) {
+                let timeOver8Hrs = totalSlots - 32;
+                outputData.SCORE -= timeOver8Hrs;
+                outputData.PROBLEMS.push(["You have too much work (> 8 hours) on " + key, -timeOver8Hrs]);
+            }
+        }
+
+        // work on or after due date deductions
+        if (outputData.SCORE < 0) {
+            outputData.SCORE = 0;
+        }
+        console.log("outputting " + JSON.stringify(outputData));
+        res.status(200).send(outputData);
+    }
 });
 
 app.get('/', (req, res) => {

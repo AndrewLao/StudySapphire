@@ -25,6 +25,7 @@ export const UserContext = createContext();
 
 function App() {
   const [userData, setUserData] = useState(SapphireUserDataJSON);
+  const [healthiness, setHealthiness] = useState(null);
   // user ID is updated in the Login and Register forms
   // getUserData and postUserData called there 
   // userData is passed via UserContext
@@ -64,13 +65,18 @@ function App() {
   const getHealthiness = () => {
     checkSession().then((res) => {
       if (res.idToken.payload.sub != "" && userData.userID != "") {
-        api.get("/getHealthiness", { params: { userData: userData } }).then(res => {
+        const toSend = {
+          TASKS: userData.TASKS,
+          SCHEDULEDTIME: userData.SCHEDULEDTIME
+        }
+        console.log("sending" + JSON.stringify(toSend));
+        api.get("/getHealthiness", { params: { userData: toSend } }).then(res => {
           if (res.status == 400) {
             console.log(res);
           } else if (res.status == 500) {
             console.log("Server error");
           } else {
-            console.log(res.data);
+            setHealthiness(res.data);
           }
         })
       } else {
@@ -78,7 +84,6 @@ function App() {
       }
     })
   }
-
   // function to add navBar to pages
   // Needed to make sure that the login and register pages does not have a navBar
   const wrapNavbar = (item) => {
@@ -98,11 +103,11 @@ function App() {
             <Route path="/" element={<Login getUserData={ getUserData } />} />
             <Route path="/login" element={<Login getUserData={ getUserData } />} />
             <Route path="/register" element={ <Register postUserData = {postUserData} /> } />
-            <Route path="/home" element={wrapNavbar(<Home getUserData={getUserData} postUserData={postUserData} />)} />
+            <Route path="/home" element={wrapNavbar(<Home getUserData={getUserData} postUserData={postUserData} getHealthiness={getHealthiness}
+              healthiness={healthiness} setHealthiness={ setHealthiness } />)} />
             <Route path="/game" element={<Game getUserData = {getUserData} postUserData = {postUserData}/>} />
             <Route path="*" element={<NotFound />}></Route>
             <Route path="/*" element={ <NotFound /> }></Route>
-
           </Routes>
         </UserContext.Provider>
         

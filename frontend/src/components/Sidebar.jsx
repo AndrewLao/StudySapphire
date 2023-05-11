@@ -16,7 +16,6 @@ export default function Sidebar() {
     <div className="Sidebar">
       {generateButton("Task Scheduler", "calendar", () => { navigate("/home") })}
       {generateButton("My Town", "town", () => { navigate("/game") })}
-      {generateButton("Profile", "profile", null)}
       <button className="SignOut" onClick={logOut}>
         <p>Sign Out</p>
       </button>

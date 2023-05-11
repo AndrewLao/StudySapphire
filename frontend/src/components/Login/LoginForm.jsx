@@ -61,7 +61,6 @@ export default function LoginForm(props) {
                 <input className = "submitLogin" type="submit" value="Login" onSubmit={ onSubmit }/>
             </form>
             <div className="buttonContainer">
-                <button className="forgotPassword">Forgot Password?</button>
                 <button onClick={ registerOnClick } className="registerButton">Register New Account</button>
             </div>
             

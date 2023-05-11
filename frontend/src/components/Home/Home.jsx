@@ -23,28 +23,8 @@ export default function Home(props) {
   const [selectedTask, setSelectedTask] = useState(0);
   const [inMenu, setInMenu] = useState("NONE");
   const [editingAvailability, setEditingAvailability] = useState(true);
-  const [healthiness, setHealthiness] = useState(null);
-
-
-  function getHealthiness(proposedData) {
-      setHealthiness({
-        "SCORE": Math.floor(Math.random() * 100),
-        "PROBLEMS": [
-          [
-            "You are working too much in one sitting (>2 hours) on 5/8/2023",
-            Math.floor(Math.random() * -5)
-          ],
-          [
-            "You have too much work on 5/10/2023",
-            Math.floor(Math.random() * -5)
-          ],
-          [
-            "You have \"Homework 1\" scheduled on or after its due date but i want this to be a really long reason so here's some text",
-            Math.floor(Math.random() * -5)
-          ]
-        ]
-      })
-    }
+  const healthiness = props.healthiness;
+  const setHealthiness = props.setHealthiness;
 
   useEffect(() => {
       if (userData.userID != "")
@@ -52,24 +32,20 @@ export default function Home(props) {
         postUserData();
         console.log("saved user data as");
         console.log(userData);
-        getHealthiness(userData);
+        props.getHealthiness();
       }
   }, [userData]);
 
   useEffect(() => {
-      if (healthiness)
-      {
-          console.log("healthiness is now")
-          console.log(healthiness)
-      }
-  }, [healthiness])
-
-
+    if (healthiness) {
+      console.log("healthiness is now")
+      console.log(healthiness)
+    }
+  }, [healthiness]);
 
   useEffect(() => {
       getUserData();
   }, []);
-
 
   if (!(userData.userID == ""))
   {
