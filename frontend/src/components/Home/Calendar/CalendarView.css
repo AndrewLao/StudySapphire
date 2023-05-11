@@ -14,6 +14,7 @@
     text-align: center;
     display:grid;
     justify-content: center;
+    -webkit-user-select: none;
     user-select: none;
 }
 
@@ -31,5 +32,6 @@
     position:fixed;
     /* Position the tooltip */
     z-index: 1;
+    -webkit-user-select: none;
     user-select: none;
   }

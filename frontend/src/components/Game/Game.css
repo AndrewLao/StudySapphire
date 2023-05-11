@@ -192,6 +192,7 @@ canvas {
     width: 100%;
     padding:0em 2em;
     border:none;
+    -webkit-user-select: none;
     user-select: none;
     background-color: #cccccc;
 }
