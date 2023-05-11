@@ -1,14 +1,20 @@
 import "./Sidebar.css";
 import { useNavigate } from "react-router-dom";
-import {logout} from "./Auth/Authorization.jsx";
+import { logout } from "./Auth/Authorization.jsx";
+import { SapphireUserDataJSON } from "./SapphireUserData";
 
 
-export default function Sidebar() {
+export default function Sidebar(props) {
 
   const navigate = useNavigate();
-
+  const userData = props.userData;
+  const setUserData = props.setUserData;
+  const setHealthiness = props.setHealthiness;
+  
   function logOut() {
     logout();
+    setUserData(SapphireUserDataJSON);
+    setHealthiness(null);
     navigate("/login");
   }
 

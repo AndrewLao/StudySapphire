@@ -227,7 +227,7 @@ export default function Game({ getUserData, postUserData }) {
                     </div>
                 </div>
                 </div>
-                <Sidebar />
+                <Sidebar setUserData={setUserData} getUserData={ getUserData } />
                 {popup && <div className="helpPopup">
                     <div className="helpPopupHeader">
                         <p>Welcome to your town!</p>

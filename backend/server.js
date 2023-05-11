@@ -170,7 +170,7 @@ app.get("/getHealthiness", (req, res) => {
                 outputData.SCORE -= totalOver8;
                 outputData.PROBLEMS.push(["You are working too much in one sitting (>2 hours) on " + key, -totalOver8]);
             }
-            if (totalSlots >= 32) {
+            if (totalSlots > 32) {
                 let timeOver8Hrs = totalSlots - 32;
                 outputData.SCORE -= timeOver8Hrs;
                 outputData.PROBLEMS.push(["You have too much work (> 8 hours) on " + key, -timeOver8Hrs]);

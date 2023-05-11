@@ -50,22 +50,22 @@ export default function Home(props) {
   if (!(userData.userID == ""))
   {
       return (
-          <>
-              <div className="homeContainer">
-                  <Calendar 
-                  schedulingMode = {schedulingMode}  setSchedulingMode = {setSchedulingMode} selectedTask = {selectedTask} 
-                  userData = {userData} setUserData = {setUserData} inMenu={inMenu} editingAvailability={editingAvailability}
-                  />
-                  <TaskView 
-                  schedulingMode = {schedulingMode} selectedTask = {selectedTask}
-                  setSelectedTask = {setSelectedTask} userData = {userData} setUserData = {setUserData} inMenu={inMenu} 
-                  setInMenu={setInMenu} editingAvailability={editingAvailability} setEditingAvailability={setEditingAvailability}
-                  healthiness={healthiness}/>
-                  <Sidebar />
-                  {inMenu == "ADDTASK" && <AddTask inMenu={inMenu} setInMenu={setInMenu}/>}
-                  {inMenu == "ADDRESPONSIBILITY" && <AddResponsibility setInMenu={setInMenu} /> }
-              </div>
-          </>
+        <>
+          <div className="homeContainer">
+            <Calendar 
+            schedulingMode = {schedulingMode}  setSchedulingMode = {setSchedulingMode} selectedTask = {selectedTask} 
+            userData = {userData} setUserData = {setUserData} inMenu={inMenu} editingAvailability={editingAvailability}
+            />
+            <TaskView 
+            schedulingMode = {schedulingMode} selectedTask = {selectedTask}
+            setSelectedTask = {setSelectedTask} userData = {userData} setUserData = {setUserData} inMenu={inMenu} 
+            setInMenu={setInMenu} editingAvailability={editingAvailability} setEditingAvailability={setEditingAvailability}
+            healthiness={healthiness}/>
+            <Sidebar setUserData={setUserData} getUserData={getUserData} setHealthiness={ setHealthiness } />
+            {inMenu == "ADDTASK" && <AddTask inMenu={inMenu} setInMenu={setInMenu}/>}
+            {inMenu == "ADDRESPONSIBILITY" && <AddResponsibility setInMenu={setInMenu} /> }
+          </div>
+        </>
       )
     }
 

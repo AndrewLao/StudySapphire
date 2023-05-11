@@ -45,6 +45,7 @@ function App() {
 
     checkSession().then((res) => {
       if (res.idToken.payload.sub != "") {
+        console.log(res.idToken.payload.sub);
         api.get("/getUserByID", { params: { userID:  res.idToken.payload.sub} }).then(res => {
           if (res.status == 400) {
             console.log(res);
