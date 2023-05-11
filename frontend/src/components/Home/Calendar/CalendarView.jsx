@@ -146,7 +146,7 @@ function CalendarChunk({userData, task, size, hoursPast, inMenu})
         {
             timerRef.current = setTimeout(() => {
                 setShowPopup(true)
-            }, 800)   
+            }, 350);
         }
         else
         {

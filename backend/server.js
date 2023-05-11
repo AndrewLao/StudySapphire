@@ -107,8 +107,9 @@ app.get("/getHealthiness", (req, res) => {
         } 
         return (a[0] < b[0] ? -1 : 1);
     }
-    
-    if (req.query.userData.SCHEDULEDTIME == undefined) {
+    if (req.query.userData == undefined) {
+        res.status(200).send(outputData);
+    } else if (req.query.userData.SCHEDULEDTIME == undefined) {
         res.status(200).send(outputData);
     } else {
         

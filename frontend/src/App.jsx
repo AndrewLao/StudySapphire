@@ -31,7 +31,7 @@ function App() {
   // userData is passed via UserContext
   function postUserData() {
     checkSession().then((res) => {
-      if (res.idToken.payload.sub != "" && userData.userID != "") {
+      if (res.idToken.payload.sub != "" && userData.userID != "" && userData.userID == res.idToken.payload.sub) {
         api.put("/addOrUpdateUser", userData
       ).then((res) => {
         console.log(res);
@@ -42,7 +42,7 @@ function App() {
   
   // load data if userID exists
   const getUserData = () => {
-
+    console.log(userData);
     checkSession().then((res) => {
       if (res.idToken.payload.sub != "") {
         console.log(res.idToken.payload.sub);
@@ -65,7 +65,7 @@ function App() {
   // get healthiness of user's schedule
   const getHealthiness = () => {
     checkSession().then((res) => {
-      if (res.idToken.payload.sub != "" && userData.userID != "") {
+      if (res.idToken.payload.sub != "" && userData.userID != "" && userData.userID == res.idToken.payload.sub) {
         const toSend = {
           TASKS: userData.TASKS,
           SCHEDULEDTIME: userData.SCHEDULEDTIME
