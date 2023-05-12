@@ -1,7 +1,9 @@
 # StudySapphire
 CMPE 195 Senior Design Project
 
-By default the frontend runs on port 3000 while the backend runs on port 3001
+By default the frontend runs on port 3000 while the backend runs on port 3001.
+
+Both must be on in order to run the application.
 
 ## To run frontend:
 
@@ -18,10 +20,3 @@ Navigate to the backend folder in the sapphire directory
 `npm install` or `npm i`
 
 `node ./server.js` or `nodemon ./server.js`
-
-### For development
-
-Use `npm install` or `npm i` first if the project was recently updated. This avoids errors with packages not existing.
-
-Check component imports within App.jsx for the main components used. The folder names within the components folder are also the same name
-as the main component used. 
