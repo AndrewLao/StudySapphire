@@ -1,4 +1,4 @@
-form {
+.registerForm {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -36,4 +36,17 @@ form {
     align-items: center;
     justify-content: center;
     margin-top: 1.7rem;
+}
+
+.accountExisting {
+    background-color: #ffffff00;
+    border-radius: 0%;
+    border-style: none;
+    color: #1CB9FF;
+    font-size: 1.3rem;
+}
+
+.accountExisting:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }

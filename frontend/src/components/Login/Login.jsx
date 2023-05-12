@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import LoginForm from "./LoginForm";
 import LoginHeader from "./LoginHeader";
 import LoginInfo from "./LoginInfo";
@@ -11,7 +10,7 @@ export default function Login(props) {
             <div className="login">
                 <div className="leftSide">
                     <LoginHeader />
-                    <LoginForm />
+                    <LoginForm getUserData={ props.getUserData } />
                 </div>
                 <div className="rightSide">
                     <LoginInfo/>

@@ -1,0 +1,92 @@
+.popup {
+    position: absolute;
+    
+    left:35%;
+    top:25%;
+    min-height:55%;
+    width:30%;
+    background-color: #cccccc;;
+    filter: drop-shadow(4px 4px 10px #111111);
+    border-radius: 10px;
+    z-index: 99;
+}
+
+.popupHeader {
+    background-color: #23466E;
+    height:10%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding-top:3%;
+    padding-left:3%;
+    color:white;
+    font-size: 30px;
+}
+
+.popupBody {
+    display:grid;
+    justify-content: center;
+    grid-template-columns: 80%;
+}
+
+.addTaskForm div {
+    margin-top:5%;
+}
+
+
+.popupBody input {
+    box-sizing: border-box;
+    padding:3%;
+    width:100%;
+}
+
+.popupBody select {
+    box-sizing: border-box;
+    padding:3%;
+    width:100%;
+}
+
+.addTaskResponsibility select option {
+    height:5%;
+    width:100%;
+}
+
+.addTaskDueDate input[type="date"] {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.popupFooter {
+    width: 100%;
+    margin-top: 5%;
+    display: grid;
+    justify-content: center;
+}
+
+.popupButtons {
+    width: 80%;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.popupButtons button {
+    margin-top: 40%;
+    width:8vw;
+    border:none;
+    height:5vh;
+    color: #eeeeee;
+    font-size: 20px;
+}
+
+.popupButtons .saveButton {
+    background-color: #23466E;
+}
+
+.popupButtons .cancelButton {
+    background-color: #7e0d05;
+}
+
+.addTaskError {
+    margin-top:5%;
+    text-align: center;
+    color:red;
+}

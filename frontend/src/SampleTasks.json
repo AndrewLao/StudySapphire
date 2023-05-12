@@ -1,0 +1,63 @@
+{
+    "UserID" : "",
+    "Email" : "",
+    "Username" : "",
+    "RESPONSIBILITYORDER": ["101", "102", "100"],
+    "RESPONSIBILITIES": {
+        "100":{
+            
+            "NAME": "Miscellaneous",
+            "COLOR": "#999999",
+            "TASKS": ["105"]
+        },
+        "101":{
+            
+            "NAME": "BIO 10",
+            "COLOR": "#39A451",
+            "TASKS": ["101", "102"]
+        },
+        "102":{
+            
+            "NAME": "BIO 11",
+            "COLOR": "#792451",
+            "TASKS": ["103", "104"]
+        }
+    },
+    "TASKS": {
+        "101": {
+            "NAME": "Homework 1",
+            "DUEDATE": "2023-04-23",
+            "RESPONSIBILITY": "101"
+        },
+        "102": {
+            "NAME": "Homework 2",
+            "DUEDATE": "2023-04-25",
+            "RESPONSIBILITY": "101"
+        },
+        "103": {
+            "NAME": "Homework 3",
+            "DUEDATE": "2023-04-28",
+            "RESPONSIBILITY": "102"
+        },
+        "104": {
+            "NAME": "Homework 4",
+            "DUEDATE": "2023-04-29",
+            "RESPONSIBILITY": "102"
+        },
+        "105": {
+            "NAME": "Homework 5",
+            "DUEDATE": "2023-04-29",
+            "RESPONSIBILITY": "100"
+        } 
+    },
+    "SCHEDULEDTIME": {
+        "2023-04-14": [
+            [12, 24, 101],
+            [30, 46, 101]
+        ],
+        "2023-04-13": [
+            [16, 28, 102],
+            [40, 50, 104]
+        ]
+    }
+}

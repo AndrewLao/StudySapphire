@@ -1,12 +1,16 @@
 import "./Banner.css"
 import { useNavigate } from "react-router-dom";
 
-export default function Banner() {
-    
+export default function Banner(props) {
+    const tokens = props.tokens;
     const navigate = useNavigate();
 
     function logoOnClick() {
         navigate("/");
+    }
+
+    function navigateHome() {
+        navigate("/home");
     }
     
     return (
@@ -16,13 +20,16 @@ export default function Banner() {
                     <img src="/icon_crystal.svg" alt="Sapphire Icon"></img>
                     <button onClick={ logoOnClick }>sapphire</button>
                 </div>
-                {/* paragraph tags temporary until navigation links are sorted in design */}
-                <div className="bannerMiddle">
-                    {/* Add Middle Items Here if needed */}
-                </div>
+
+                {props.includeMenu && 
+                    <div className="bannerMiddle">
+                        <button onClick={ navigateHome }>Return Home</button>
+                    </div>
+                }
+
                 <div className="bannerRightSide">
                     <img src="/coin.svg"></img>
-                    <p>100 Coins</p>
+                    <p>{(tokens || tokens == 0) ? tokens.toFixed(0) : 90} Tokens</p>
                 </div>
             </div>
         </>

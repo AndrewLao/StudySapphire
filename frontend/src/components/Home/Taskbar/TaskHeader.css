@@ -1,0 +1,64 @@
+.taskHeader {
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 1.5rem;
+    font-family: 'Roboto', sans-serif;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    background-color: #00B0FF;
+    color: #FFFFFF;
+}
+
+.addButtons {
+    display:flex;
+    gap:1em;
+    
+}
+
+.taskButtonContainer {
+    display: flex;
+    height: 1.5rem;
+    width: 7rem;
+    padding: 0.5rem;
+    background-color: #0054BA;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    user-select: none;
+}
+
+.taskButtonContainer:hover {
+    background-color: #004292;
+}
+
+.taskButtonContainer:active {
+    background-color: #012e66;
+}
+
+.responsibilityButtonContainer {
+    display: flex;
+    height: 1.5rem;
+    width: 10rem;
+    padding: 0.5rem;
+    background-color: #0054BA;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    user-select: none;
+}
+
+.responsibilityButtonContainer:hover {
+    background-color: #004292;
+}
+
+.responsibilityButtonContainer:active {
+    background-color: #012e66;
+}

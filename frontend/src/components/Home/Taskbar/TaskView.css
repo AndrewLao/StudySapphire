@@ -1,0 +1,54 @@
+.fullTaskview {
+    display: flex;
+    flex-direction: column;
+}
+
+.taskViewport {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-style: solid;
+    height:70vh;
+    min-width: 90%;
+    border: none;
+}
+
+/* scrollbar width */
+.taskViewport::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* track */
+.taskViewport::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+/* handle */
+.taskViewport::-webkit-scrollbar-thumb {
+    background: #737373;
+}
+
+/* Handle on hover */
+.taskViewport::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+.earnedTokensPopup {
+    position:absolute;
+    height:8%;
+    width: 10%;
+    background-color: #00B0FF;
+    left:1%;
+    top:92%;
+    z-index: 99;
+    padding: 1em;
+    text-align: center;
+    color:white;
+}
+
+.earnedTokensPopupHidden {
+    top:100%;
+}

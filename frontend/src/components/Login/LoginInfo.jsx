@@ -1,6 +1,6 @@
 import "./LoginInfo.css"
 
-export default function LoginInfo(props) {
+export default function LoginInfo() {
     return (<>
         
         <div className="loginInfo">

@@ -1,0 +1,51 @@
+.taskItemFrame {
+    width: 95%;
+}
+
+.taskItemHeader {
+    display: flex;
+    margin-top: 1em;
+    padding-bottom: 0.5em;
+    width: 100%;
+    height: 3.5rem;
+    font-size: larger;
+    background-color: black;
+    color: white;
+    border-radius: 4px 4px 0px 0px;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.taskItemWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding: 0.5em;
+    border-radius: 0px 0px 4px 4px;
+    background-color: #373737;
+    justify-content: center;
+    
+}
+
+.NoTasks {
+    color:white;
+    text-align: center;
+}
+.deleteResp {
+    display:flex;
+    justify-content: space-around;
+}
+
+.deleteResp p{
+    text-align: center;
+    width:4em;
+    border:none;
+    color: #e69494;
+    font-size: 18px;
+    cursor: pointer;
+    margin:0;
+}
+
+.deleteResp p:hover {
+    text-decoration: underline;
+} 

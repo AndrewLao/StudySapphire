@@ -1,0 +1,56 @@
+.calendarHeader {
+    background-color: black;
+    display:grid;
+    color:white;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    align-items: center;
+    grid-template-columns: 10% 50% 30% 10%;
+    width:calc(92% - 10px);
+    margin-left:8%;
+}
+.calendarHeader img {
+    height:50%;
+    margin:auto;
+    cursor: pointer;
+    transition: filter 0.12s ease-in-out
+}
+
+.scheduleMode {
+    text-align: center;
+    padding-top:0.5em;
+    font-size:22px;
+}
+
+.calendarHeader button {
+    height:75%;
+    width:60%;
+    margin-left:10%;
+    border:none;
+    background-color: #373737;
+    color:white;
+    font-size:18px;
+    border-radius: 10px;
+}
+
+.calendarHeader button:active {
+    filter:brightness(70%);
+}
+
+.calendarHeader button:hover {
+    cursor: pointer;
+    filter: brightness(70%);
+}
+
+.calendarHeader img:hover{
+    filter:brightness(60%);
+}
+
+.calendarHeader p {
+    margin:auto;
+    margin-top:2%;
+    margin-bottom:2%;
+    font-size:1.5rem;
+    font-family: 'Roboto', sans-serif;
+
+}
