@@ -8,24 +8,25 @@ import Sidebar from "../Sidebar";
 import Town from "./Town";
 
 
-export default function Game({ getUserData, postUserData }) {
+export default function Game({ getUserData, postUserData, setHealthiness, getHealthiness }) {
 
     const canvasRef = useRef();
     const { userData, setUserData } = useContext(UserContext);
     const [mousePos, setMousePos] = useState({});
-    const [relMousePos, setRelMousePos] = useState({ x: 0, y: 0 })
-    const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 })
+    const [relMousePos, setRelMousePos] = useState({ x: 0, y: 0 });
+    const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 });
 
-    const [chosen, setChosen] = useState(0)
-    const [cost, setCost] = useState(0)
+    const [chosen, setChosen] = useState(0);
+    const [cost, setCost] = useState(0);
 
-    const [food, setFood] = useState(0)
-    const [water, setWater] = useState(0)
-    const [education, setEducation] = useState(0)
-    const [safety, setSafety] = useState(0)
-    const [happiness, setHappiness] = useState(0)
-    const [capacity, setCapacity] = useState(0)
-    const [houses, setHouses] = useState(0)
+    const [food, setFood] = useState(0);
+    const [water, setWater] = useState(0);
+    const [education, setEducation] = useState(0);
+    const [safety, setSafety] = useState(0);
+    const [happiness, setHappiness] = useState(0);
+    const [capacity, setCapacity] = useState(0);
+    const [houses, setHouses] = useState(0);
+
 
     let [tileSize, setTileSize] = useState(0)
     let [popup, setPopup] = useState(false)
@@ -227,7 +228,7 @@ export default function Game({ getUserData, postUserData }) {
                     </div>
                 </div>
                 </div>
-                <Sidebar setUserData={setUserData} getUserData={ getUserData } />
+                <Sidebar setUserData={setUserData} getUserData={getUserData} setHealthiness={setHealthiness} getHealthiness={ getHealthiness } />
                 {popup && <div className="helpPopup">
                     <div className="helpPopupHeader">
                         <p>Welcome to your town!</p>

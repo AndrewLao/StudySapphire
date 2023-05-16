@@ -106,7 +106,7 @@ function App() {
             <Route path="/register" element={ <Register postUserData = {postUserData} /> } />
             <Route path="/home" element={wrapNavbar(<Home getUserData={getUserData} postUserData={postUserData} getHealthiness={getHealthiness}
               healthiness={healthiness} setHealthiness={ setHealthiness } />)} />
-            <Route path="/game" element={<Game getUserData = {getUserData} postUserData = {postUserData}/>} />
+            <Route path="/game" element={<Game getUserData={getUserData} postUserData={postUserData} getHealthiness={getHealthiness} setHealthiness={ setHealthiness } />} />
             <Route path="*" element={<NotFound />}></Route>
             <Route path="/*" element={ <NotFound /> }></Route>
           </Routes>
