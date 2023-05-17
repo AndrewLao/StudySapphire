@@ -75,8 +75,8 @@ function Calendar(props) {
       >
 
         <div className="timeSideRef">
-          {times.map((time) => {
-            return <div>{time}</div>;
+          {times.map((time, key) => {
+            return <div key={ key }>{time}</div>;
           })}
         </div>
         {schedulingMode && (

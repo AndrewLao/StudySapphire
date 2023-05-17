@@ -1,20 +1,15 @@
-import { useState, useEffect, useRef, useContext, useLayoutEffect } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { UserContext } from "../../App";
 // import GameNavbar from "./GameNavBar";
-import IDtoObject from "./IDtoObject";
 import Banner from "../Banner";
 import "./Game.css";
 import Sidebar from "../Sidebar";
 import Town from "./Town";
 
 
-export default function Game({ getUserData, postUserData, setHealthiness, getHealthiness }) {
+export default function Game({ getUserData, postUserData, setHealthiness }) {
 
-    const canvasRef = useRef();
     const { userData, setUserData } = useContext(UserContext);
-    const [mousePos, setMousePos] = useState({});
-    const [relMousePos, setRelMousePos] = useState({ x: 0, y: 0 });
-    const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 });
 
     const [chosen, setChosen] = useState(0);
     const [cost, setCost] = useState(0);
@@ -27,20 +22,23 @@ export default function Game({ getUserData, postUserData, setHealthiness, getHea
     const [capacity, setCapacity] = useState(0);
     const [houses, setHouses] = useState(0);
 
-
-    let [tileSize, setTileSize] = useState(0)
-    let [popup, setPopup] = useState(false)
+    let [popup, setPopup] = useState(false);
 
     useEffect(() => {
-        getUserData();
+        getUserData().catch((err) => {
+            console.log(err);
+        });
     }, []);
 
     useEffect(() => {
         if (userData)
         {
-            postUserData();
-            console.log("saved user data as");
-            console.log(userData);
+            postUserData().then(() => {
+                console.log("saved user data as");
+                console.log(userData);                
+            }).catch((err) => {
+                console.log(err);
+            })
         }
         
     }, [userData]);
@@ -228,7 +226,7 @@ export default function Game({ getUserData, postUserData, setHealthiness, getHea
                     </div>
                 </div>
                 </div>
-                <Sidebar setUserData={setUserData} getUserData={getUserData} setHealthiness={setHealthiness} getHealthiness={ getHealthiness } />
+                <Sidebar setUserData={setUserData} getUserData={getUserData} setHealthiness={setHealthiness} />
                 {popup && <div className="helpPopup">
                     <div className="helpPopupHeader">
                         <p>Welcome to your town!</p>

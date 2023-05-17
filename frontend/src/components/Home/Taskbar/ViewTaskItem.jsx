@@ -1,5 +1,4 @@
 import "./ViewTaskItem.css"
-import { useEffect, useState } from "react";
 import { UserContext } from "../../../App";
 import { useContext } from "react";
 import EditTask from "./EditTask";
@@ -15,10 +14,6 @@ export default function ViewTaskItem(props)
     const inMenu = props.inMenu
     const setPopupMessage = props.setPopupMessage
     const {userData, setUserData} = useContext(UserContext);
-    // useEffect(() => {
-    //     console.log(selectedStyle)
-    // }, [selectedStyle])
-
 
     function deleteTaskShortcut(giveTokens)
     {

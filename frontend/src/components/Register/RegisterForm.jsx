@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useContext } from "react";
-import { SapphireUserDataJSON } from "../SapphireUserData";
 
 import "./RegisterForm.css"
 import {checkSession, signUp} from "../Auth/Authorization.jsx";
@@ -44,7 +43,9 @@ export default function RegisterForm(props) {
                 temp.USERNAME = inputUsername;
                 temp.EMAIL = inputEmail;
                 setUserData(temp);
-                props.postUserData();
+                props.createNewUser().catch((err) => {
+                    console.log(err);
+                });
                 navigate("/login");
             })
             .catch( (err) => {
@@ -57,11 +58,9 @@ export default function RegisterForm(props) {
         document.getElementById("msgField").innerHTML = msg;
     }
 
-    
-    const onRegister = data => {
-        console.log(data);
-    }
-
+    // const onRegister = data => {
+    //     console.log(data);
+    // }
 
     return (
         <>

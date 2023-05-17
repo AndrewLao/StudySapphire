@@ -1,5 +1,5 @@
 import "./CalendarHeader.css";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 function getMonthName(month)
 {

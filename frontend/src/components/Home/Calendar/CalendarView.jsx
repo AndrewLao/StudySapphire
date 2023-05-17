@@ -91,12 +91,11 @@ export default function CalendarView(props) {
         {schedule.map((day, ind) => {
             let chunks = scheduleChunker(day)
             return (
-                <div className="calendarViewDay">
-                    {chunks.map((chunk, ind2) => {
-                        
+                <div className="calendarViewDay" key={ ind }>
+                    {chunks.map((chunk, ind2) => { 
                         return (<CalendarChunk key={ind2} userData={userData} task={chunk[0]} size={chunk[1]} hoursPast = {chunk[2]} inMenu={inMenu}/>)}    
-            )}
-            </div>
+                    )}
+                </div>
         )})}
     </div>;
 }

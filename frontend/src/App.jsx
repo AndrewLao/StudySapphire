@@ -1,6 +1,6 @@
 // packages
-import { useState, useRef, useEffect, createContext, useMemo } from 'react';
-import { BrowserRouter, Routes, Route, json } from "react-router-dom";
+import { useState, createContext } from 'react';
+import { Routes, Route } from "react-router-dom";
 import axios from "axios";
 
 // components
@@ -30,60 +30,92 @@ function App() {
   // getUserData and postUserData called there 
   // userData is passed via UserContext
   function postUserData() {
-    checkSession().then((res) => {
-      if (res.idToken.payload.sub != "" && userData.userID != "" && userData.userID == res.idToken.payload.sub) {
-        api.put("/addOrUpdateUser", userData
-      ).then((res) => {
-        console.log(res);
-      })
-      }
-    })
+    return new Promise((resolve, reject) => {
+      checkSession().then((res) => {
+        if (res.idToken.payload.sub != "" && userData.userID != "" && userData.userID == res.idToken.payload.sub) {
+          api.put("/addOrUpdateUser", userData
+          ).then((res) => {
+            console.log(res);
+            resolve();
+          }).catch((err) => {
+            reject(err);
+          });
+        }
+      }).catch((err) => {
+        reject(err);
+      });
+    });
   }
   
-  // load data if userID exists
-  const getUserData = () => {
-    console.log(userData);
-    checkSession().then((res) => {
-      if (res.idToken.payload.sub != "") {
-        console.log(res.idToken.payload.sub);
-        api.get("/getUserByID", { params: { userID:  res.idToken.payload.sub} }).then(res => {
-          if (res.status == 400) {
-            console.log(res);
-          } else if (res.status == 500) {
-            console.log("Server error");
-          } else {
-            setUserData(res.data);
-          }
+  // runs on register
+  const createNewUser = () => {
+    return new Promise((resolve, reject) => {
+      if (userData.userID != "") {
+        api.put("/addOrUpdateUser", userData
+        ).then((res) => {
+          console.log(res);
+          resolve();
+        }).catch((err) => {
+          reject(err);
         });
       }
-    }).catch((err) => {
-      console.log(err);
+    });
+  }
+
+  // load data if userID exists
+  const getUserData = () => {
+    return new Promise((resolve, reject) => {
+      checkSession().then((res) => {
+        if (res.idToken.payload.sub != "") {
+          api.get("/getUserByID", { params: { userID: res.idToken.payload.sub } }).then(res => {
+            if (res.status == 400) {
+              console.log(res);
+              reject();
+            } else if (res.status == 500) {
+              console.log("Server error");
+              reject();
+            } else {
+              setUserData(res.data);
+              resolve();
+            }
+          });
+        }
+      }).catch((err) => {
+        console.log(err);
+        reject();
       }
-    );
+      );
+    });
   }
 
   // get healthiness of user's schedule
   const getHealthiness = () => {
-    checkSession().then((res) => {
-      if (res.idToken.payload.sub != "" && userData.userID != "" && userData.userID == res.idToken.payload.sub) {
-        const toSend = {
-          TASKS: userData.TASKS,
-          SCHEDULEDTIME: userData.SCHEDULEDTIME
-        }
-        console.log("sending" + JSON.stringify(toSend));
-        api.get("/getHealthiness", { params: { userData: toSend } }).then(res => {
-          if (res.status == 400) {
-            console.log(res);
-          } else if (res.status == 500) {
-            console.log("Server error");
-          } else {
-            setHealthiness(res.data);
+    return new Promise((resolve, reject) => {
+      checkSession().then((res) => {
+        if (res.idToken.payload.sub != "" && userData.userID != "" && userData.userID == res.idToken.payload.sub) {
+          const toSend = {
+            TASKS: userData.TASKS,
+            SCHEDULEDTIME: userData.SCHEDULEDTIME
           }
-        })
-      } else {
-        console.log("Error trying to get health data");
-      }
-    })
+          api.get("/getHealthiness", { params: { userData: toSend } }).then(res => {
+            if (res.status == 400) {
+              console.log(res);
+              reject(res.status);
+            } else if (res.status == 500) {
+              console.log("Server error");
+              reject(res.status);
+            } else {
+              setHealthiness(res.data);
+              resolve(res.data);
+            }
+          })
+        } else {
+          console.log("Error trying to get health data");
+          reject("Error trying to get health data");
+        }
+      });
+    });
+
   }
   // function to add navBar to pages
   // Needed to make sure that the login and register pages does not have a navBar
@@ -103,7 +135,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Login getUserData={ getUserData } />} />
             <Route path="/login" element={<Login getUserData={ getUserData } />} />
-            <Route path="/register" element={ <Register postUserData = {postUserData} /> } />
+            <Route path="/register" element={ <Register createNewUser = {createNewUser} /> } />
             <Route path="/home" element={wrapNavbar(<Home getUserData={getUserData} postUserData={postUserData} getHealthiness={getHealthiness}
               healthiness={healthiness} setHealthiness={ setHealthiness } />)} />
             <Route path="/game" element={<Game getUserData={getUserData} postUserData={postUserData} getHealthiness={getHealthiness} setHealthiness={ setHealthiness } />} />

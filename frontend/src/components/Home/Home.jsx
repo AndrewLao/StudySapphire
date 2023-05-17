@@ -27,25 +27,30 @@ export default function Home(props) {
   const setHealthiness = props.setHealthiness;
 
   useEffect(() => {
-      if (userData.userID != "")
-      {
-        postUserData();
-        console.log("saved user data as");
-        console.log(userData);
-        props.getHealthiness();
-      }
+    getUserData().catch((err) => {
+      console.log(err);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (userData.userID != "")
+    {
+      postUserData().then(() => {
+        props.getHealthiness().catch((err) => {
+          console.log(err);
+        })
+      }).catch((err) => {
+        console.log(err);
+      })
+    }
   }, [userData]);
 
-  useEffect(() => {
-    if (healthiness) {
-      console.log("healthiness is now")
-      console.log(healthiness)
-    }
-  }, [healthiness]);
-
-  useEffect(() => {
-      getUserData();
-  }, []);
+  // useEffect(() => {
+  //   if (healthiness) {
+  //     console.log("healthiness is now")
+  //     console.log(healthiness)
+  //   }
+  // }, [healthiness]);
 
   if (!(userData.userID == ""))
   {
@@ -68,16 +73,5 @@ export default function Home(props) {
         </>
       )
     }
-
-    // return (
-    //     <>
-    //         <div className="homeContainer">
-    //             <Calendar schedulingMode = {schedulingMode}  setSchedulingMode = {setSchedulingMode} selectedTask = {selectedTask} userData = {userData} setUserData = {setUserData} />
-    //             <TaskView schedulingMode = {schedulingMode} selectedTask = {selectedTask} setSelectedTask = {setSelectedTask} userData = {userData} setUserData = {setUserData}/>
-    //             <Sidebar />
-    //         </div>
-    //     </>
-    // )
-    
     
 };

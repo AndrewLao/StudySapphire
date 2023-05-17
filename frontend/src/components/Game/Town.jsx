@@ -10,10 +10,10 @@ export default function Town({chosen, setChosen, cost, setCost, active})
     const canvasRef = useRef();
     const { userData, setUserData } = useContext(UserContext);
     const [mousePos, setMousePos] = useState({});
-    const [relMousePos, setRelMousePos] = useState({x: 0, y: 0})
-    const [lastMousePos, setLastMousePos] = useState({x: 0, y: 0})
-    const [canvasWidth, setCanvasWidth] = useState(0)
-    const [canvasHeight, setCanvasHeight] = useState(0)
+    const [relMousePos, setRelMousePos] = useState({ x: 0, y: 0 });
+    const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 });
+    const [canvasWidth, setCanvasWidth] = useState(0);
+    const [canvasHeight, setCanvasHeight] = useState(0);
 
     let [tileSize, setTileSize] = useState(0);
 

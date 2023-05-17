@@ -8,8 +8,8 @@ export default function ScheduleHealth({healthiness}) {
     return ( 
         <div className="scheduleHealth">
             <div className="healthScore">Health score: {healthiness.SCORE}%</div>
-            {healthiness.PROBLEMS.map((problem) => {
-                return (<div className="scheduleProblem">
+            {healthiness.PROBLEMS.map((problem, key) => {
+                return (<div className="scheduleProblem" key={key} >
                     <span className="pointsDeduced">{problem[1]}% </span>
                     <span className="problemReason"> {problem[0]}</span>
                     </div>)
