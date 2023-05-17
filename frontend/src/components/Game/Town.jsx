@@ -118,7 +118,7 @@ export default function Town({chosen, setChosen, cost, setCost, active})
       {
             const image = new Image()
             const idObj = IDtoObject(id, x, y)
-            image.src = "src/components/Game/game-assets/tiles/" + idObj.SPRITE + ".png"
+            image.src = "/game-assets/tiles/" + idObj.SPRITE + ".png"
             image.onload = function() {
               ctx.drawImage(image, x * tileSize, y * tileSize, tileSize + 2, tileSize + 2);
             }
@@ -241,7 +241,7 @@ export default function Town({chosen, setChosen, cost, setCost, active})
 
       return (
         <div className="canvasViewport">
-            <img src="src/components/Game/game-assets/sapphirebackground.png" style={{position:"absolute", width: canvasWidth}}></img>
+            <img src="/game-assets/sapphirebackground.png" style={{position:"absolute", width: canvasWidth}}></img>
             <canvas ref={canvasRef} onClick={() => {handleClick()}}/>
         </div>
       )

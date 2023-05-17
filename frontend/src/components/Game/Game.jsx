@@ -170,7 +170,7 @@ export default function Game({ getUserData, postUserData, setHealthiness, getHea
                 </div>
             </div>
             <div className="storeCardDescription">
-            <img src={"src/components/Game/game-assets/buildings/" + imgname + ".png"} />
+            <img src={"/game-assets/buildings/" + imgname + ".png"} />
                 {stats.map((stat) => {
                     return (<p>{stat}</p>)
                 })}

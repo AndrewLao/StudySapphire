@@ -32,7 +32,7 @@ export default function Sidebar(props) {
 function generateButton(title, icon, func) {
   return (
     <button className="SidebarOption" onClick={ func }>
-      <img src={"../../public/sidebar/" + icon + ".svg"}></img>
+      <img src={"/sidebar/" + icon + ".svg"}></img>
       <p>{title}</p>
     </button>
   );

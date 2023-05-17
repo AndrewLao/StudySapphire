@@ -9,6 +9,6 @@ export default defineConfig({
   },
 
   define: {
-    global: {},
+    _global: {},
   },
 });

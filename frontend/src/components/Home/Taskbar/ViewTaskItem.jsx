@@ -40,7 +40,7 @@ export default function ViewTaskItem(props)
                     {!task.DUEDATE && <div className="taskDueDate">No Due Date</div>}
                 </div>
                 <div className="taskRightDiv">
-                    <img src="../../public/calendar/mdi_pencil.svg" alt="Edit Task" onClick={() => {
+                    <img src="/calendar/mdi_pencil.svg" alt="Edit Task" onClick={() => {
                         setSelectedTask(taskID)
                         setInMenu("EDITTASK")
                         console.log(inMenu)
