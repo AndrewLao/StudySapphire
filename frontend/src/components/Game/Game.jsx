@@ -1,10 +1,15 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import { UserContext } from "../../App";
+import { useNavigate } from "react-router-dom";
+
 // import GameNavbar from "./GameNavBar";
-import Banner from "../Banner";
 import "./Game.css";
+
 import Sidebar from "../Sidebar";
 import Town from "./Town";
+import Banner from "../Banner";
+import { checkSession } from "../Auth/Authorization";
+
 
 
 export default function Game({ getUserData, postUserData, setHealthiness }) {
@@ -23,8 +28,12 @@ export default function Game({ getUserData, postUserData, setHealthiness }) {
     const [houses, setHouses] = useState(0);
 
     let [popup, setPopup] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
+        checkSession().catch(() => {
+            navigate("/login"); 
+        });
         getUserData().catch((err) => {
             console.log(err);
         });

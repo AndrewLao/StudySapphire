@@ -9,6 +9,8 @@ export default defineConfig({
   },
 
   define: {
-    _global: {},
+    // use global for development and _global to build for production
+    // _global: {},
+    global: {},
   },
 });

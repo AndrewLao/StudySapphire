@@ -2,10 +2,13 @@
 import TaskView from "./Taskbar/TaskView";
 import Calendar from "./Calendar/Calendar";
 import Sidebar from "../Sidebar";
+import { checkSession } from "../Auth/Authorization";
 
 // packages
 import { useEffect, useState} from "react";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 // contexts
 import { UserContext } from '../../App';
@@ -25,8 +28,12 @@ export default function Home(props) {
   const [editingAvailability, setEditingAvailability] = useState(true);
   const healthiness = props.healthiness;
   const setHealthiness = props.setHealthiness;
+  const navigate = useNavigate();
 
   useEffect(() => {
+    checkSession().catch(() => {
+      navigate("/login");
+    });
     getUserData().catch((err) => {
       console.log(err);
     });
