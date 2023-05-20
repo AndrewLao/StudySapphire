@@ -1,5 +1,5 @@
 import "./EditTask.css"
-import { useEffect, useRef } from "react"
+import { useRef } from "react"
 import { UserContext } from "../../../App";
 import { useContext, useState } from "react";
 export default function EditTask({inMenu, setInMenu, taskID, deleteTask})

@@ -36,14 +36,6 @@ function Calendar(props) {
   const editingAvailability = props.editingAvailability
   const getHealthiness = props.getHealthiness
 
-  // useEffect(() => {
-  //   console.log("Scheduled task is now task " + selectedTask);
-  // }, [selectedTask]);
-
-  // useEffect(() => {
-  //   console.log("Scheduling Mode is " + schedulingMode);
-  // }, [schedulingMode]);
-
   window.addEventListener("resize", () => {
     resizeAll();
   });
@@ -83,8 +75,8 @@ function Calendar(props) {
       >
 
         <div className="timeSideRef">
-          {times.map((time) => {
-            return <div>{time}</div>;
+          {times.map((time, key) => {
+            return <div key={ key }>{time}</div>;
           })}
         </div>
         {schedulingMode && (

@@ -1,5 +1,4 @@
 import "./ViewTaskItem.css"
-import { useEffect, useState } from "react";
 import { UserContext } from "../../../App";
 import { useContext } from "react";
 import EditTask from "./EditTask";
@@ -15,10 +14,6 @@ export default function ViewTaskItem(props)
     const inMenu = props.inMenu
     const setPopupMessage = props.setPopupMessage
     const {userData, setUserData} = useContext(UserContext);
-    // useEffect(() => {
-    //     console.log(selectedStyle)
-    // }, [selectedStyle])
-
 
     function deleteTaskShortcut(giveTokens)
     {
@@ -40,7 +35,7 @@ export default function ViewTaskItem(props)
                     {!task.DUEDATE && <div className="taskDueDate">No Due Date</div>}
                 </div>
                 <div className="taskRightDiv">
-                    <img src="../../public/calendar/mdi_pencil.svg" alt="Edit Task" onClick={() => {
+                    <img src="/calendar/mdi_pencil.svg" alt="Edit Task" onClick={() => {
                         setSelectedTask(taskID)
                         setInMenu("EDITTASK")
                         console.log(inMenu)

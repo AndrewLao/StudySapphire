@@ -7,10 +7,6 @@ import { useContext } from "react";
 // styles
 import "./Responsibility.css"
 
-import { useEffect, useState } from "react";
-import AddResponsibility from "./AddResponsibility";
-
-
 // Component for the frame containing task items
 // Uses TaskItem as a reusable component
 

@@ -1,45 +1,53 @@
-import { useState, useEffect, useRef, useContext, useLayoutEffect } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { UserContext } from "../../App";
+import { useNavigate } from "react-router-dom";
+
 // import GameNavbar from "./GameNavBar";
-import IDtoObject from "./IDtoObject";
-import Banner from "../Banner";
 import "./Game.css";
+
 import Sidebar from "../Sidebar";
 import Town from "./Town";
+import Banner from "../Banner";
+import { checkSession } from "../Auth/Authorization";
 
 
-export default function Game({ getUserData, postUserData }) {
 
-    const canvasRef = useRef();
+export default function Game({ getUserData, postUserData, setHealthiness }) {
+
     const { userData, setUserData } = useContext(UserContext);
-    const [mousePos, setMousePos] = useState({});
-    const [relMousePos, setRelMousePos] = useState({ x: 0, y: 0 })
-    const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 })
 
-    const [chosen, setChosen] = useState(0)
-    const [cost, setCost] = useState(0)
+    const [chosen, setChosen] = useState(0);
+    const [cost, setCost] = useState(0);
 
-    const [food, setFood] = useState(0)
-    const [water, setWater] = useState(0)
-    const [education, setEducation] = useState(0)
-    const [safety, setSafety] = useState(0)
-    const [happiness, setHappiness] = useState(0)
-    const [capacity, setCapacity] = useState(0)
-    const [houses, setHouses] = useState(0)
+    const [food, setFood] = useState(0);
+    const [water, setWater] = useState(0);
+    const [education, setEducation] = useState(0);
+    const [safety, setSafety] = useState(0);
+    const [happiness, setHappiness] = useState(0);
+    const [capacity, setCapacity] = useState(0);
+    const [houses, setHouses] = useState(0);
 
-    let [tileSize, setTileSize] = useState(0)
-    let [popup, setPopup] = useState(false)
+    let [popup, setPopup] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        getUserData();
+        checkSession().catch(() => {
+            navigate("/login"); 
+        });
+        getUserData().catch((err) => {
+            console.log(err);
+        });
     }, []);
 
     useEffect(() => {
         if (userData)
         {
-            postUserData();
-            console.log("saved user data as");
-            console.log(userData);
+            postUserData().then(() => {
+                console.log("saved user data as");
+                console.log(userData);                
+            }).catch((err) => {
+                console.log(err);
+            })
         }
         
     }, [userData]);
@@ -169,7 +177,7 @@ export default function Game({ getUserData, postUserData }) {
                 </div>
             </div>
             <div className="storeCardDescription">
-            <img src={"src/components/Game/game-assets/buildings/" + imgname + ".png"} />
+            <img src={"/game-assets/buildings/" + imgname + ".png"} />
                 {stats.map((stat) => {
                     return (<p>{stat}</p>)
                 })}
@@ -227,7 +235,7 @@ export default function Game({ getUserData, postUserData }) {
                     </div>
                 </div>
                 </div>
-                <Sidebar setUserData={setUserData} getUserData={ getUserData } />
+                <Sidebar setUserData={setUserData} getUserData={getUserData} setHealthiness={setHealthiness} />
                 {popup && <div className="helpPopup">
                     <div className="helpPopupHeader">
                         <p>Welcome to your town!</p>

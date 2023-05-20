@@ -10,7 +10,7 @@ export default function Register(props) {
                 <div className="registerSpacer"></div>
                 <div className="registerLeftSide">
                     <RegisterHeader />
-                    <RegisterForm postUserData = {props.postUserData} />
+                    <RegisterForm createNewUser = {props.createNewUser} />
                 </div>
                 <div className="registerRightSide">
                     <img src="/Icon_crystal_register.svg"></img>

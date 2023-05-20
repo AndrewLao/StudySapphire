@@ -2,10 +2,13 @@
 import TaskView from "./Taskbar/TaskView";
 import Calendar from "./Calendar/Calendar";
 import Sidebar from "../Sidebar";
+import { checkSession } from "../Auth/Authorization";
 
 // packages
 import { useEffect, useState} from "react";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 // contexts
 import { UserContext } from '../../App';
@@ -25,27 +28,36 @@ export default function Home(props) {
   const [editingAvailability, setEditingAvailability] = useState(true);
   const healthiness = props.healthiness;
   const setHealthiness = props.setHealthiness;
+  const navigate = useNavigate();
 
   useEffect(() => {
-      if (userData.userID != "")
-      {
-        postUserData();
-        console.log("saved user data as");
-        console.log(userData);
-        props.getHealthiness();
-      }
+    checkSession().catch(() => {
+      navigate("/login");
+    });
+    getUserData().catch((err) => {
+      console.log(err);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (userData.userID != "")
+    {
+      postUserData().then(() => {
+        props.getHealthiness().catch((err) => {
+          console.log(err);
+        })
+      }).catch((err) => {
+        console.log(err);
+      })
+    }
   }, [userData]);
 
-  useEffect(() => {
-    if (healthiness) {
-      console.log("healthiness is now")
-      console.log(healthiness)
-    }
-  }, [healthiness]);
-
-  useEffect(() => {
-      getUserData();
-  }, []);
+  // useEffect(() => {
+  //   if (healthiness) {
+  //     console.log("healthiness is now")
+  //     console.log(healthiness)
+  //   }
+  // }, [healthiness]);
 
   if (!(userData.userID == ""))
   {
@@ -68,16 +80,5 @@ export default function Home(props) {
         </>
       )
     }
-
-    // return (
-    //     <>
-    //         <div className="homeContainer">
-    //             <Calendar schedulingMode = {schedulingMode}  setSchedulingMode = {setSchedulingMode} selectedTask = {selectedTask} userData = {userData} setUserData = {setUserData} />
-    //             <TaskView schedulingMode = {schedulingMode} selectedTask = {selectedTask} setSelectedTask = {setSelectedTask} userData = {userData} setUserData = {setUserData}/>
-    //             <Sidebar />
-    //         </div>
-    //     </>
-    // )
-    
     
 };

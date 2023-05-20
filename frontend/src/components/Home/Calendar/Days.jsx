@@ -8,9 +8,9 @@ export default function Days(props) {
         <>
             <div className="DaysList">
                 {dayNames.map((day, key) => {
-                    return ( <>
+                    return (<div key={ key }>
                     {generateDay(day, date)}
-                    </>)
+                    </div>)
                 })}
             </div>
         </>

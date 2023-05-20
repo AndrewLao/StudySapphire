@@ -14,13 +14,13 @@ export default function LoginForm(props) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        checkSession().then( (data) => {
+        checkSession().then((data) => {
             console.log(data);
             navigate("/home");
         }).catch((err) => {
             console.log(err);
         });
-    }, [])
+    }, []);
 
     const onSubmit = data => {
         let inputUsername = data.username;
@@ -31,11 +31,11 @@ export default function LoginForm(props) {
                 temp.USERNAME = inputUsername;
                 temp.EMAIL = data.idToken.payload.email;
                 setUserData(temp);
-                props.getUserData();
-                navigate("/home");
+                props.getUserData().then(() => {
+                    navigate("/home");
+                });
             })
             .catch((err) => {
-                console.log(err);
                 setMessage(err.message);
             })
     }
