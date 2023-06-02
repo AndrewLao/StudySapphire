@@ -19,9 +19,11 @@ Navigate to the backend folder in the sapphire directory
 
 `node ./server.js` or `nodemon ./server.js`
 
-### For development
+## Screenshots:
 
-Use `npm install` or `npm i` first if the project was recently updated. This avoids errors with packages not existing.
 
-Check component imports within App.jsx for the main components used. The folder names within the components folder are also the same name
-as the main component used. 
+![Screenshot](images/sapphire1.JPG)
+
+![Screenshot](images/sapphire_2.JPG)
+
+![Screenshot](images/sapphire_3.JPG)
